@@ -5,7 +5,7 @@ const SCREENS = {
   //  ---- common ----
   SPLASH_SCREEN: 'SplashScreen',
   ONBOARDING: 'OnboardingScreen',
-  // LOGIN: 'LoginSCreen',
+  LOGIN: 'LoginSCreen',
   // FORGOT_PASSWORD: 'ForgotPasswordScreen',
   // OTP_SCREEN: 'OTPScreen',
   // REGISTER_SCREEN: 'RegisterScreen',

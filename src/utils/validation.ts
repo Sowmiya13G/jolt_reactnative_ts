@@ -1,5 +1,5 @@
-import { ERROR_HANDLER_TEXT } from '../constant/strings';
-import { emailValidation, mobileNumberValidation } from './codeSnippets';
+import {ERROR_HANDLER_TEXT} from '../constant/strings';
+import {emailValidation, mobileNumberValidation} from './codeSnippets';
 
 interface RegisterFormData {
   firstName?: string;
@@ -8,14 +8,20 @@ interface RegisterFormData {
   dob?: string;
   email?: string;
   phoneNo?: string;
-  [key: string]: any; 
+  [key: string]: any;
 }
 
 interface ValidationErrors {
   [key: string]: string;
 }
+interface ValidationResult {
+  isValid: boolean;
+  errors: Record<string, string>;
+}
 
-export const validateRegisterForm = (data: RegisterFormData): ValidationErrors => {
+export const validateRegisterForm = (
+  data: RegisterFormData,
+): ValidationErrors => {
   const errors: ValidationErrors = {};
 
   Object.keys(data).forEach(field => {
@@ -43,13 +49,15 @@ export const validateRegisterForm = (data: RegisterFormData): ValidationErrors =
         }
         break;
       case 'email':
-        const { isValid: isEmailValid, errors: emailErrors } = emailValidation(value);
+        const {isValid: isEmailValid, errors: emailErrors} =
+          emailValidation(value);
         if (!isEmailValid && emailErrors?.email) {
           errors.email = emailErrors.email;
         }
         break;
       case 'phoneNo':
-        const { isValid: isPhoneValid, errors: phoneErrors } = mobileNumberValidation(value);
+        const {isValid: isPhoneValid, errors: phoneErrors} =
+          mobileNumberValidation(value);
         if (!isPhoneValid && phoneErrors?.mobile) {
           errors.phoneNo = phoneErrors.mobile;
         }
@@ -61,3 +69,43 @@ export const validateRegisterForm = (data: RegisterFormData): ValidationErrors =
 
   return errors;
 };
+
+export function validateForm(data: {
+  email?: string;
+  phoneNo?: string;
+  password?: string;
+}, type: number): ValidationResult {
+  let isValid = true;
+  const errors: Record<string, string> = {};
+
+  if (type === 0) {
+    if (!data.email) {
+      errors['email'] = ERROR_HANDLER_TEXT.pleaseEnterEmail;
+      isValid = false;
+    } else {
+      const emailValidationResult = emailValidation(data.email);
+      if (!emailValidationResult.isValid) {
+        isValid = false;
+        errors['email'] = emailValidationResult.errors['email'];
+      }
+    }
+
+    if (!data.password) {
+      errors['password'] = ERROR_HANDLER_TEXT.enterPassword;
+      isValid = false;
+    }
+  } else if (type === 1) {
+    if (!data.phoneNo) {
+      errors['phoneNo'] = ERROR_HANDLER_TEXT.pleaseEnterMobileNo;
+      isValid = false;
+    } else {
+      const mobileValidationResult = mobileNumberValidation(data.phoneNo);
+      if (!mobileValidationResult.isValid) {
+        isValid = false;
+        errors['phoneNo'] = mobileValidationResult.errors['mobile'];
+      }
+    }
+  }
+
+  return { isValid, errors };
+}

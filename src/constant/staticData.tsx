@@ -1,21 +1,47 @@
-import {iconPathURL} from './iconpath';
 import {strings} from './strings';
+
+// SVG
+import ONBOARDING1 from '../assets/svg/onboarding1.svg';
+import ONBOARDING2 from '../assets/svg/onboarding2.svg';
+import ONBOARDING3 from '../assets/svg/onboarding3.svg';
+
+import CALENDER from '../assets/svg/calender.svg';
+import CALL from '../assets/svg/call.svg';
+import DROPDOWN from '../assets/svg/downArrow.svg';
+import EMAIL from '../assets/svg/mail.svg';
+import PERSON from '../assets/svg/person.svg';
+import {widthPercentageToDP} from 'react-native-responsive-screen';
 
 export const onboardingData = [
   {
     title: strings.getTicket,
     disc: strings.buyTicket,
-    image: iconPathURL.onboarding,
+    image: (
+      <ONBOARDING1
+        height={widthPercentageToDP('65%')}
+        width={widthPercentageToDP('65%')}
+      />
+    ),
   },
   {
     title: strings.planRide,
     disc: strings.selectSeat,
-    image: iconPathURL.bus,
+    image: (
+      <ONBOARDING2
+        height={widthPercentageToDP('65%')}
+        width={widthPercentageToDP('65%')}
+      />
+    ),
   },
   {
     title: strings.showScreen,
     disc: strings.digitalTicket,
-    image: iconPathURL.ticket,
+    image: (
+      <ONBOARDING3
+        height={widthPercentageToDP('65%')}
+        width={widthPercentageToDP('65%')}
+      />
+    ),
   },
 ];
 
@@ -37,32 +63,32 @@ export const genderData = [
 export const registerScreenFields = [
   {
     placeHolder: strings.firstName,
-    leftIcon: iconPathURL.person,
+    leftIcon: <PERSON />,
     key: 'firstName',
   },
   {
     placeHolder: strings.middleName,
-    leftIcon: iconPathURL.person,
+    leftIcon: <PERSON />,
     key: 'middleName',
   },
   {
     placeHolder: strings.gender,
-    rightIcon: iconPathURL.dropdown,
+    rightIcon: <DROPDOWN />,
     key: 'gender',
   },
   {
     placeHolder: strings.dob,
-    rightIcon: iconPathURL.calender,
+    rightIcon: <CALENDER />,
     key: 'dob',
   },
   {
     placeHolder: strings.email,
-    leftIcon: iconPathURL.email,
+    leftIcon: <EMAIL />,
     key: 'email',
   },
   {
     placeHolder: strings.mobileNo,
-    leftIcon: iconPathURL.call,
+    leftIcon: <CALL />,
     key: 'phoneNo',
   },
 ];

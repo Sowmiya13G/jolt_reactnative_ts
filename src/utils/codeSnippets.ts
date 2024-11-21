@@ -48,3 +48,24 @@ export function mobileNumberValidation(
 
   return {isValid, errors};
 }
+
+export function passwordValidation(
+  password: string | undefined,
+): ValidationResult {
+  const errors: Record<string, string> = {};
+  let isValid = true;
+
+  if (!password) {
+    isValid = false;
+    errors['password'] = ERROR_HANDLER_TEXT.pleaseEnterPassword;
+  } else {
+    const pattern =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,}$/;
+    if (!pattern.test(password)) {
+      isValid = false;
+      errors['password'] = ERROR_HANDLER_TEXT.pleaseEnterValidPassword;
+    }
+  }
+
+  return {isValid, errors};
+}

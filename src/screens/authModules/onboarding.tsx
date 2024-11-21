@@ -1,25 +1,32 @@
-import React, { useRef, useState } from 'react';
-import { Animated, Dimensions, FlatList, Image, Text, View } from 'react-native';
+import React, {useRef, useState} from 'react';
+import {Animated, Dimensions, FlatList, Image, Text, View} from 'react-native';
 
 // packages
 import {
-    heightPercentageToDP as hp,
-    widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 
 // navigation
+import navigationService from '../../navigation/navigationService';
+
 // components
 import Button from '../../components/button';
+import CustomSafeArea from '../../components/customSafeArea';
 import Spacer from '../../components/spacer';
 
 // constants
-import { iconPathURL } from '../../constant/iconpath';
-import { onboardingData } from '../../constant/staticData';
-import { strings } from '../../constant/strings';
-import { baseStyle, colors, sizes } from '../../constant/theme';
+import {SCREENS} from '../../constant';
+import {iconPathURL} from '../../constant/iconpath';
+import {onboardingData} from '../../constant/staticData';
+import {strings} from '../../constant/strings';
+import {baseStyle, colors, sizes} from '../../constant/theme';
 
 // styles
-import styles from './styles/onboarding';
+import styles from '../styles/onboarding';
+
+// svg
+import LOGO from '../../assets/svg/logo.svg';
 
 type OnboardingScreenProps = {
   route?: any;
@@ -54,7 +61,7 @@ const OnboardingScreen: React.FC<OnboardingScreenProps> = props => {
   };
 
   const handleCompleteSlider = () => {
-    // NavigationService.navigate(SCREENS.LOGIN);
+    navigationService.navigate(SCREENS.LOGIN);
   };
 
   const goToNextPage = () => {
@@ -80,20 +87,24 @@ const OnboardingScreen: React.FC<OnboardingScreenProps> = props => {
 
   // render UI
   return (
-    <>
+    <CustomSafeArea style={styles.container}>
       <Spacer height={hp('5%')} />
       <View style={[styles.iconView, styles.marginHorizontal]}>
-        <Image source={iconPathURL.logo} style={styles.logo} />
+        <View style={styles.logoView}>
+          <LOGO height={wp('12%')} width={wp('12%')} style={styles.logo} />
+        </View>
         <Spacer width={wp('3%')} />
         <View>
           <Text
-            style={[baseStyle.txtStyleOutInterBold(sizes.size3, colors.black)]}>
+            style={[
+              baseStyle.txtStyleOutInterBold(sizes.size3, colors.black_00),
+            ]}>
             {strings.joltBus}
           </Text>
           <Spacer height={hp('0.5%')} />
           <Text
             style={[
-              baseStyle.txtStyleOutInterRegular(sizes.size02, colors.black),
+              baseStyle.txtStyleOutInterRegular(sizes.size02, colors.black_00),
             ]}>
             {strings.futureTransportation}
           </Text>
@@ -110,11 +121,14 @@ const OnboardingScreen: React.FC<OnboardingScreenProps> = props => {
           <View style={{width, height: '100%'}}>
             <View style={[styles.wrapper, styles.marginHorizontal]}>
               <Spacer height={hp('10%')} />
-              <Image source={item.image} style={styles.imageStyle} />
+              <View style={styles.imageStyle}>{item.image}</View>
               <Spacer height={hp('3%')} />
               <Text
                 style={[
-                  baseStyle.txtStyleOutInterSemiBold(sizes.size3, colors.black),
+                  baseStyle.txtStyleOutInterSemiBold(
+                    sizes.size3,
+                    colors.black_00,
+                  ),
                   styles.textAlign,
                 ]}>
                 {item.title}
@@ -122,7 +136,10 @@ const OnboardingScreen: React.FC<OnboardingScreenProps> = props => {
               <Spacer height={hp('3%')} />
               <Text
                 style={[
-                  baseStyle.txtStyleOutInterRegular(sizes.size2, colors.black),
+                  baseStyle.txtStyleOutInterRegular(
+                    sizes.size2,
+                    colors.black_00,
+                  ),
                   styles.textAlign,
                 ]}>
                 {item.disc}
@@ -140,7 +157,7 @@ const OnboardingScreen: React.FC<OnboardingScreenProps> = props => {
         {onboardingData.map((_, index) => {
           const backgroundColor = animation.interpolate({
             inputRange: [index - 1, index, index + 1],
-            outputRange: [colors.grey, colors.lightGreen, colors.grey],
+            outputRange: [colors.grey_DD, colors.green_7D, colors.grey_DD],
             extrapolate: 'clamp',
           });
 
@@ -173,18 +190,18 @@ const OnboardingScreen: React.FC<OnboardingScreenProps> = props => {
             handleCompleteSlider();
           }}
           text={strings.skip}
-          textColor={colors.textGreyDark}
+          textColor={colors.grey_50}
           buttonStyle={styles.skipButton}
         />
         <Button
           onPress={() => goToNextPage()}
           text={pageIndex === 0 ? strings.getStart : strings.next}
-          textColor={colors.white}
+          textColor={colors.white_FF}
           buttonStyle={styles.nextButton}
         />
       </View>
       <Spacer height={hp('10%')} />
-    </>
+    </CustomSafeArea>
   );
 };
 

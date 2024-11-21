@@ -1,16 +1,16 @@
-import { StyleSheet } from 'react-native';
-import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
-import { baseStyle, colors } from '../../../constant/theme';
-
+import {StyleSheet} from 'react-native';
+import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
+import {baseStyle, colors} from '../../constant/theme';
 
 const styles = StyleSheet.create({
-  container: {flex: 1},
+  container: {
+    flex: 1,
+    backgroundColor: colors.white_FF,
+  },
   marginHorizontal: {marginHorizontal: wp('5%')},
   wrapper: {flex: 1, alignSelf: 'center'},
   textAlign: {textAlign: 'center'},
   imageStyle: {
-    width: wp('65%'),
-    height: wp('65%'),
     resizeMode: 'contain',
     alignSelf: 'center',
   },
@@ -20,17 +20,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: wp('5%'),
   },
   skipButton: {
-    backgroundColor: colors.white,
+    backgroundColor: colors.white_FF,
     borderRadius: wp('3%'),
     paddingVertical: wp('3%'),
     paddingHorizontal: wp('5%'),
     borderWidth: wp('0.1%'),
-    borderColor: colors.textGrey,
+    borderColor: colors.grey_685,
     width: wp('28%'),
     alignItems: 'center',
   },
   nextButton: {
-    backgroundColor: colors.orange,
+    backgroundColor: colors.orange_05,
     borderRadius: wp('3%'),
     paddingVertical: wp('3%'),
     paddingHorizontal: wp('5%'),
@@ -52,12 +52,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  logo: {
-    borderColor: colors.green,
+  logoView: {
+    borderColor: colors.green_2F,
     borderWidth: wp('0.5%'),
-    ...baseStyle.iconStyle(wp('3.7%')),
     borderRadius: wp('5%'),
-    padding: wp('2%'),
+    padding: wp('1%'),
+  },
+  logo: {
+    alignSelf: 'center',
+    resizeMode:"contain"
   },
 });
 

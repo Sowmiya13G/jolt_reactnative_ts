@@ -2,7 +2,7 @@
 // import AccountScreen from '../screens/account';
 // import ForgotPasswordScreen from '../screens/forgotPasswordScreen';
 // import HomeScreen from '../screens/homeScreen';
-// import LoginScreen from '../screens/loginScreen';
+import LoginScreen from '../screens/authModules/login';
 // import MyTripScreen from '../screens/myTrip';
 import OnboardingScreen from '../screens/authModules/onboarding';
 // import OTPScreen from '../screens/otpScreen';
@@ -16,7 +16,7 @@ import SplashScreen from '../screens/authModules/splash';
 interface ScreenComponents {
   SplashScreen: React.ComponentType<any>;
   OnboardingScreen: React.ComponentType<any>;
-  // LoginScreen: React.ComponentType<any>;
+  LoginScreen: React.ComponentType<any>;
   // ForgotPasswordScreen: React.ComponentType<any>;
   // OTPScreen: React.ComponentType<any>;
   // RegisterScreen: React.ComponentType<any>;
@@ -32,7 +32,7 @@ interface ScreenComponents {
 const Screens: ScreenComponents = {
   SplashScreen,
   OnboardingScreen,
-  // LoginScreen,
+  LoginScreen,
   // ForgotPasswordScreen,
   // OTPScreen,
   // RegisterScreen,

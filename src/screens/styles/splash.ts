@@ -1,12 +1,12 @@
 import { StyleSheet } from 'react-native';
-import { baseStyle, colors } from '../../../constant/theme';
+import { baseStyle, colors } from '../../constant/theme';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.splashGreen,
+    backgroundColor: colors.green_38,
   },
   splashImg: {
     ...baseStyle.iconStyle("30%"),
@@ -15,13 +15,13 @@ const styles = StyleSheet.create({
   loaderContainer: {
     width: '60%',
     height: 5,
-    backgroundColor: colors.lightGrey,
+    backgroundColor: colors.grey_80,
     borderRadius: 2.5,
     overflow: 'hidden',
   },
   progressBar: {
     height: '100%',
-    backgroundColor: colors.white,
+    backgroundColor: colors.white_FF,
   },
 });
 

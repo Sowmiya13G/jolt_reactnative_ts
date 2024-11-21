@@ -27,10 +27,10 @@ const AppStack: React.FC = () => {
       ScreenName: SCREENS.ONBOARDING,
       Component: ScreenName.OnboardingScreen,
     },
-    // {
-    //   ScreenName: SCREENS.LOGIN,
-    //   Component: ScreenName.LoginScreen,
-    // },
+    {
+      ScreenName: SCREENS.LOGIN,
+      Component: ScreenName.LoginScreen,
+    },
     // {
     //   ScreenName: SCREENS.FORGOT_PASSWORD,
     //   Component: ScreenName.ForgotPasswordScreen,

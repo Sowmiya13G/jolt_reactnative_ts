@@ -17,6 +17,8 @@ const styles = StyleSheet.create({
     width: wp('5.5%'),
     height: wp('5.5%'),
     resizeMode: 'contain',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   iconRight: {
     width: wp('8%'),

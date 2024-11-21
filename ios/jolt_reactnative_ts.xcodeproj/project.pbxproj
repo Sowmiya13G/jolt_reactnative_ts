@@ -12,12 +12,12 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		203ED3E6ED3940A1A1732BBD /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 94E619FA60724A19961B45BB /* Inter-Medium.ttf */; };
+		336A361589ED4143A40D926B /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7B8A086D0981495CB824F40C /* Inter-Bold.ttf */; };
 		7699B88040F8A987B510C191 /* libPods-jolt_reactnative_ts-jolt_reactnative_tsTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-jolt_reactnative_ts-jolt_reactnative_tsTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		336A361589ED4143A40D926B /* Inter-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7B8A086D0981495CB824F40C /* Inter-Bold.ttf */; };
-		203ED3E6ED3940A1A1732BBD /* Inter-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 94E619FA60724A19961B45BB /* Inter-Medium.ttf */; };
-		F287C05E11A84CED8E05A860 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB199F2043A4C76880AEDB6 /* Inter-Regular.ttf */; };
 		C5FA5B3844C04C3D920CC6F5 /* Inter-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 29C76479894D4F11ACB29FE4 /* Inter-SemiBold.ttf */; };
+		F287C05E11A84CED8E05A860 /* Inter-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9BB199F2043A4C76880AEDB6 /* Inter-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,17 +41,17 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = jolt_reactnative_ts/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = jolt_reactnative_ts/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-jolt_reactnative_ts-jolt_reactnative_tsTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-jolt_reactnative_ts-jolt_reactnative_tsTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		29C76479894D4F11ACB29FE4 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-SemiBold.ttf"; path = "../src/assets/fonts/Inter-SemiBold.ttf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-jolt_reactnative_ts.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-jolt_reactnative_ts.debug.xcconfig"; path = "Target Support Files/Pods-jolt_reactnative_ts/Pods-jolt_reactnative_ts.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-jolt_reactnative_ts.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-jolt_reactnative_ts.release.xcconfig"; path = "Target Support Files/Pods-jolt_reactnative_ts/Pods-jolt_reactnative_ts.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-jolt_reactnative_ts-jolt_reactnative_tsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-jolt_reactnative_ts-jolt_reactnative_tsTests.debug.xcconfig"; path = "Target Support Files/Pods-jolt_reactnative_ts-jolt_reactnative_tsTests/Pods-jolt_reactnative_ts-jolt_reactnative_tsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-jolt_reactnative_ts.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-jolt_reactnative_ts.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B8A086D0981495CB824F40C /* Inter-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Bold.ttf"; path = "../src/assets/fonts/Inter-Bold.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = jolt_reactnative_ts/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-jolt_reactnative_ts-jolt_reactnative_tsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-jolt_reactnative_ts-jolt_reactnative_tsTests.release.xcconfig"; path = "Target Support Files/Pods-jolt_reactnative_ts-jolt_reactnative_tsTests/Pods-jolt_reactnative_ts-jolt_reactnative_tsTests.release.xcconfig"; sourceTree = "<group>"; };
+		94E619FA60724A19961B45BB /* Inter-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Medium.ttf"; path = "../src/assets/fonts/Inter-Medium.ttf"; sourceTree = "<group>"; };
+		9BB199F2043A4C76880AEDB6 /* Inter-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Inter-Regular.ttf"; path = "../src/assets/fonts/Inter-Regular.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		7B8A086D0981495CB824F40C /* Inter-Bold.ttf */ = {isa = PBXFileReference; name = "Inter-Bold.ttf"; path = "../src/assets/fonts/Inter-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		94E619FA60724A19961B45BB /* Inter-Medium.ttf */ = {isa = PBXFileReference; name = "Inter-Medium.ttf"; path = "../src/assets/fonts/Inter-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		9BB199F2043A4C76880AEDB6 /* Inter-Regular.ttf */ = {isa = PBXFileReference; name = "Inter-Regular.ttf"; path = "../src/assets/fonts/Inter-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		29C76479894D4F11ACB29FE4 /* Inter-SemiBold.ttf */ = {isa = PBXFileReference; name = "Inter-SemiBold.ttf"; path = "../src/assets/fonts/Inter-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +89,18 @@
 				00E356F11AD99517003FC87E /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		02AA40B59E124F15908EC91F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7B8A086D0981495CB824F40C /* Inter-Bold.ttf */,
+				94E619FA60724A19961B45BB /* Inter-Medium.ttf */,
+				9BB199F2043A4C76880AEDB6 /* Inter-Regular.ttf */,
+				29C76479894D4F11ACB29FE4 /* Inter-SemiBold.ttf */,
+			);
+			name = Resources;
+			path = "";
 			sourceTree = "<group>";
 		};
 		13B07FAE1A68108700A75B9A /* jolt_reactnative_ts */ = {
@@ -156,18 +168,6 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
-		};
-		02AA40B59E124F15908EC91F /* Resources */ = {
-			isa = "PBXGroup";
-			children = (
-				7B8A086D0981495CB824F40C /* Inter-Bold.ttf */,
-				94E619FA60724A19961B45BB /* Inter-Medium.ttf */,
-				9BB199F2043A4C76880AEDB6 /* Inter-Regular.ttf */,
-				29C76479894D4F11ACB29FE4 /* Inter-SemiBold.ttf */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-			path = "";
 		};
 /* End PBXGroup section */
 

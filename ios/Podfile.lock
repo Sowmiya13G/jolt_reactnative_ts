@@ -449,6 +449,8 @@ PODS:
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
     - React-RCTImage
+  - RNSVG (14.2.0):
+    - React-Core
   - SocketRocket (0.6.1)
   - Yoga (1.14.0)
   - YogaKit (1.18.1):
@@ -517,6 +519,7 @@ DEPENDENCIES:
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
+  - RNSVG (from `../node_modules/react-native-svg`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
@@ -612,6 +615,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
     :path: "../node_modules/react-native-screens"
+  RNSVG:
+    :path: "../node_modules/react-native-svg"
   Yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -666,6 +671,7 @@ SPEC CHECKSUMS:
   RNGestureHandler: 0972b77a2cab0f1a61ca1a3ce348a424614f65c2
   RNReanimated: f186e85d9f28c9383d05ca39e11dd194f59093ec
   RNScreens: 50ad6e3dbea9023272b3aa753e3ee2720b0c9b8f
+  RNSVG: 963a95f1f5d512a13d11ffd50d351c87fb5c6890
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 065f0b74dba4832d6e328238de46eb72c5de9556
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a

@@ -6,19 +6,21 @@ import {
   TextStyle,
   TouchableOpacity,
   View,
-  ViewStyle
+  ViewStyle,
 } from 'react-native';
+import {SvgProps} from 'react-native-svg';
+
 // styles
 import styles from './styles';
 // component
 import Spacer from '../spacer';
 // constant
-import { baseStyle, sizes } from '../../constant/theme';
+import {baseStyle, sizes} from '../../constant/theme';
 
 interface ButtonProps {
   onPress: () => void;
   text?: string;
-  icon?: ImageSourcePropType;
+  icon?: React.ElementType<SvgProps>;
   rightIcon?: ImageSourcePropType;
   spaceBetween?: number;
   height?: number | string;
@@ -36,12 +38,13 @@ interface ButtonProps {
   buttonStyle?: ViewStyle;
   tintColor?: string;
   textStyle?: TextStyle;
+  iconStyle?: ViewStyle;
 }
 
 const Button: React.FC<ButtonProps> = ({
   onPress,
   text,
-  icon,
+  icon: Icon,
   rightIcon,
   spaceBetween,
   height,
@@ -59,6 +62,7 @@ const Button: React.FC<ButtonProps> = ({
   buttonStyle,
   tintColor,
   textStyle,
+  iconStyle
 }) => {
   return (
     <TouchableOpacity
@@ -80,9 +84,9 @@ const Button: React.FC<ButtonProps> = ({
       disabled={disabled}
       onPress={onPress}
       activeOpacity={0.65}>
-      {icon && (
+      {Icon && (
         <>
-          <Image source={icon} style={styles.icon} />
+          {Boolean(Icon) && <View style={styles.icon}>{Icon && <Icon style={iconStyle}/>}</View>}
           <Spacer width={spaceBetween} />
         </>
       )}

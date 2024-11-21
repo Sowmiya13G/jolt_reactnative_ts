@@ -90,10 +90,12 @@ const ERROR_HANDLER_TEXT: StringMap = {
   middleNameRed: 'Middle name is required',
   genderReq: 'Gender is required',
   dobReq: 'Date of birth is required',
-  pleaseEnterValidEmail: 'Please enter email',
-  pleaseEnterEmail: 'Please enter a valid email',
+  pleaseEnterEmail: 'Please enter email',
+  pleaseEnterValidEmail: 'Please enter a valid email',
   pleaseEnterMobileNo: 'Please enter phone number',
   pleaseEnterValidMobileNo: 'Please enter a valid phone number',
+  enterPassword: 'Please enter password',
+  passwordIncorrect: 'Password incorrect',
 };
 
 export {strings, dashboard, tabBar, PLACEHOLDERS, ERROR_HANDLER_TEXT};
