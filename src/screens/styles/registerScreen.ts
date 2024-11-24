@@ -32,6 +32,10 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white_FB,
     borderColor: colors.grey_DB,
   },
+  errorInput: {
+    backgroundColor: colors.white_FB,
+    borderColor: colors.red,
+  },
   inputStyle: {
     paddingLeft: wp('5%'),
   },
@@ -61,7 +65,7 @@ const styles = StyleSheet.create({
   },
   dropDown: {
     backgroundColor: colors.white_FB,
-    borderColor: colors.grey_DB,
+    borderColor: colors.red,
   },
 });
 

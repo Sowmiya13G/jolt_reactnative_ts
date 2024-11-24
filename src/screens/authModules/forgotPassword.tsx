@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import { FlatList, Text, View } from 'react-native';
+import React, {useState} from 'react';
+import {FlatList, Text, View} from 'react-native';
 
 // navigation
 import navigationService from '../../navigation/navigationService';
 
 //packages
-import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 // components
 import Button from '../../components/button';
@@ -15,13 +15,12 @@ import Spacer from '../../components/spacer';
 import TextInputComponent from '../../components/textInput';
 
 // constant
-import { SCREENS } from '../../constant';
-import { iconPathURL } from '../../constant/iconpath';
-import { strings } from '../../constant/strings';
-import { baseStyle, colors, sizes } from '../../constant/theme';
+import {SCREENS} from '../../constant';
+import {strings} from '../../constant/strings';
+import {baseStyle, colors, sizes} from '../../constant/theme';
 
 // utils
-import { validateFormPassword } from '../../utils/validation';
+import {validateFormPassword} from '../../utils/validation';
 
 // prop types
 import {
@@ -178,7 +177,6 @@ const ForgotPasswordScreen: React.FC<ForgotPasswordScreenProps> = ({route}) => {
         }}
         title={strings.forgotPasswordTitle}
         color={colors.grey_32}
-        leftIcon1={iconPathURL.backArrow}
       />
       <FlatList
         data={['FORGOT_PASSWORD']}

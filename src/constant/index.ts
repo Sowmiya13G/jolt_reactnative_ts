@@ -20,6 +20,7 @@ const SCREENS = {
   SEARCH_SCREEN: 'SearchScreen',
   SEARCH_BUS_SCREEN: 'SearchBusScreen',
   SELECT_BOARDING_POINT: 'SelectBoardingPoint',
+  SELECT_SEAT: 'SelectSeat',
 } as const; 
 
 type ScreenNames = keyof typeof SCREENS;

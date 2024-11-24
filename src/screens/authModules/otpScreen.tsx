@@ -1,5 +1,5 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {FlatList, Text, TouchableOpacity, View} from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { FlatList, Text, TouchableOpacity, View } from 'react-native';
 
 // packages
 import OTPInputView from '@twotalltotems/react-native-otp-input';
@@ -22,18 +22,17 @@ import Spacer from '../../components/spacer';
 import AnimatedSuccessIcon from '../../components/successPopup';
 
 // constants
-import {iconPathURL} from '../../constant/iconpath';
-import {ERROR_HANDLER_TEXT, strings} from '../../constant/strings';
-import {baseStyle, colors, sizes} from '../../constant/theme';
-import {SCREENS} from '../../constant';
+import { SCREENS } from '../../constant';
+import { ERROR_HANDLER_TEXT, strings } from '../../constant/strings';
+import { baseStyle, colors, sizes } from '../../constant/theme';
 
 // SVG Imports
+import BACK_ARROW from '../../assets/svg/arrowBack.svg';
 import CANCEL from '../../assets/svg/cancel.svg';
 import SUCCESS from '../../assets/svg/success1.svg';
-import BACK_ARROW from '../../assets/svg/arrowBack.svg';
 
 // prop types
-import {OTPScreenProps} from '../../propTypes/screenProps';
+import { OTPScreenProps } from '../../propTypes/screenProps';
 
 const OTPScreen: React.FC<OTPScreenProps> = ({route}) => {
   // Route params

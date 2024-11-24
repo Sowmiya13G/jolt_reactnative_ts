@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
-import {FlatList, Modal, Text, TouchableOpacity, View} from 'react-native';
+import React, { useState } from 'react';
+import { FlatList, Modal, Text, TouchableOpacity, View } from 'react-native';
 
 // navigation
 import navigationService from '../../navigation/navigationService';
 
 // packages
-import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 // components
 import ReviewCard from '../../components/cards/reviewCard';
@@ -16,9 +16,9 @@ import Header from '../../components/header';
 import Spacer from '../../components/spacer';
 
 // constant
-import {iconPathURL} from '../../constant/iconpath';
-import {filterData} from '../../constant/staticData';
-import {baseStyle, colors, sizes} from '../../constant/theme';
+import { SCREENS } from '../../constant';
+import { filterData } from '../../constant/staticData';
+import { baseStyle, colors, sizes } from '../../constant/theme';
 
 // prop types
 import {
@@ -29,10 +29,11 @@ import {
 } from '../../propTypes/screenProps';
 
 // svg imports
+import CALENDAR from '../../assets/svg/calender.svg';
 import CANCEL from '../../assets/svg/cancel.svg';
+
 // styles
 import styles from '../styles/searchBusScreen';
-import {SCREENS} from '../../constant';
 
 const listData: ListItem[] = [
   {
@@ -135,8 +136,10 @@ const SearchBusScreen: React.FC<SearchBusScreenProps> = ({route}) => {
           selectSeat={() => {
             navigationService.navigate(SCREENS.SELECT_BOARDING_POINT, {
               data: {
+                from: data?.from,
+                to: data?.to,
+                date: data?.date,
                 item: item,
-                routeAndDate: data,
               },
             });
           }}
@@ -194,7 +197,7 @@ const SearchBusScreen: React.FC<SearchBusScreenProps> = ({route}) => {
         title={`${data?.from} To ${data?.to}`}
         color={colors.black_00}
         isRightIcon={true}
-        rightIcon={iconPathURL.calender}
+        rightIcon={CALENDAR}
         date={data?.date}
       />
       <Spacer height={hp('3%')} />

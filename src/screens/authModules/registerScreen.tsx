@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
+import React, {useState} from 'react';
+import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
 import navigationService from '../../navigation/navigationService';
 
 // Packages
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP,
@@ -17,21 +17,21 @@ import Spacer from '../../components/spacer';
 import TextInputComponent from '../../components/textInput';
 
 // Constants
-import { SCREENS } from '../../constant';
-import { iconPathURL } from '../../constant/iconpath';
-import { genderData, registerScreenFields } from '../../constant/staticData';
-import { strings } from '../../constant/strings';
-import { baseStyle, colors, sizes } from '../../constant/theme';
+import {SCREENS} from '../../constant';
+import {iconPathURL} from '../../constant/iconpath';
+import {genderData, registerScreenFields} from '../../constant/staticData';
+import {strings} from '../../constant/strings';
+import {baseStyle, colors, sizes} from '../../constant/theme';
 
 // utils
-import { validateRegisterForm } from '../../utils/validation';
+import {validateRegisterForm} from '../../utils/validation';
 
 // prop types
 import {
   RegisterScreenFormData,
   RegisterScreenProps,
 } from '../../propTypes/screenProps';
-import { ValidationRegisterScreenFormErrors } from '../../propTypes/validationProps';
+import {ValidationRegisterScreenFormErrors} from '../../propTypes/validationProps';
 
 // Styles
 import styles from '../styles/registerScreen';
@@ -50,7 +50,7 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({route}) => {
   // Props from route
   const {params} = route;
 
-    // useState
+  // useState
   const [data, setData] = useState<RegisterScreenFormData>(initialData);
   const [errData, setErrData] = useState<RegisterScreenFormData>(initialData);
   const [check, setCheck] = useState<boolean>(false);
@@ -74,17 +74,17 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({route}) => {
   // ---------------------------------------- Functionalities ----------------------------------------
 
   const handleSubmit = () => {
-    // const errors: ValidationRegisterScreenFormErrors =
-    //   validateRegisterForm(data);
-    // if (Object.keys(errors).length > 0) {
-    //   setErrData(errors);
-    // } else {
-    //   navigationService.navigate(SCREENS.OTP_SCREEN, {
-    //     type: strings.forgotPasswordTitle,
-    //   });
-    // }
+    const errors: ValidationRegisterScreenFormErrors =
+      validateRegisterForm(data);
+    if (Object.keys(errors).length > 0) {
+      setErrData(errors);
+    } else {
+      navigationService.navigate(SCREENS.OTP_SCREEN, {
+        type: strings.forgotPasswordTitle,
+      });
+    }
   };
-  
+
   // ---------------------------------------- render ui ----------------------------------------
 
   const renderInputFields = () => {
@@ -100,7 +100,11 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({route}) => {
               value={genderData.find(item => item.value === data[field.key])}
               onSelectItem={item => handleInputChange(field.key, item)}
               onTypingEnd={() => {}}
-              customStyle={styles.dropDown}
+              customStyle={
+                !!errData[field.key as keyof RegisterScreenFormData]
+                  ? styles.errorInput
+                  : styles.dropDown
+              }
               showErrText={!!errData[field.key as keyof RegisterScreenFormData]}
               errText={
                 errData[field.key as keyof RegisterScreenFormData] ?? undefined
@@ -117,15 +121,18 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({route}) => {
               suffix={field.rightIcon ? true : false}
               placeholderTextColor={colors.grey_95}
               backgroundColor={colors.grey_7F}
-              CustomStyle={styles.input}
               showErrText={!!errData[field.key as keyof RegisterScreenFormData]}
-              errText={errData[field.key as keyof RegisterScreenFormData] || ''}
+              errText={errData[field.key as keyof RegisterScreenFormData]}
               onChangeText={text => handleInputChange(field.key, text)}
               customInputStyle={field.rightIcon && styles.inputStyle}
               keyboardType={field.key === 'phoneNo' ? 'numeric' : undefined}
               maxLength={field.key === 'phoneNo' ? 10 : undefined}
+              CustomStyle={[
+                styles.input,
+                !!errData[field.key as keyof RegisterScreenFormData] &&
+                  styles.errorInput,
+              ]}
             />
-
             <Spacer height={hp('2%')} />
           </>
         )}

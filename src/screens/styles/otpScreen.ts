@@ -1,10 +1,10 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 import {
   heightPercentageToDP,
   widthPercentageToDP as hp,
   heightPercentageToDP as wp,
 } from 'react-native-responsive-screen';
-import {baseStyle, colors, fontFamily} from '../../constant/theme';
+import { colors, fontFamily } from '../../constant/theme';
 
 const styles = StyleSheet.create({
   container: {

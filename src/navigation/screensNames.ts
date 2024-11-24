@@ -14,6 +14,7 @@ import HomeScreen from '../screens/commonModules/homeScreen';
 import SearchBusScreen from '../screens/commonModules/searchBusScreen';
 import SearchScreen from '../screens/commonModules/searchScreen';
 import SelectBoardingPoint from '../screens/commonModules/selectBoardingPoints';
+import SelectSeat from '../screens/commonModules/selectSeat';
 
 import AccountScreen from '../screens/commonModules/account';
 import MyTripScreen from '../screens/commonModules/myTrip';
@@ -32,6 +33,7 @@ interface ScreenComponents {
   SearchScreen: React.ComponentType<any>;
   SearchBusScreen: React.ComponentType<any>;
   SelectBoardingPoint: React.ComponentType<any>;
+  SelectSeat: React.ComponentType<any>;
 
   MyTripScreen: React.ComponentType<any>;
   WalletScreen: React.ComponentType<any>;
@@ -51,6 +53,7 @@ const Screens: ScreenComponents = {
   SelectBoardingPoint,
   SearchScreen,
   SearchBusScreen,
+  SelectSeat,
   
   MyTripScreen,
   WalletScreen,

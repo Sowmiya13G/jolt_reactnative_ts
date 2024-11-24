@@ -60,7 +60,6 @@ interface DropDownProps {
 const DropDown: React.FC<DropDownProps> = ({
   title,
   placeholder,
-  dropdownIcon = iconPathURL.dropdown,
   value = null,
   onTypingEnd,
   dropdownData,
@@ -207,7 +206,7 @@ const DropDown: React.FC<DropDownProps> = ({
           <TouchableOpacity
             disabled={!editable}
             onPress={() => setShowDropdown(!showDropdown)}>
-            {isIcon && <DROPDOWN style={styles.dropdownIcon}/>}
+            {isIcon && <DROPDOWN style={styles.dropdownIcon} />}
           </TouchableOpacity>
         </TouchableOpacity>
         {showDropdown && (

@@ -80,6 +80,11 @@ const dashboard: StringMap = {
   city: 'City',
   ok: 'Ok',
   cancel: 'Cancel',
+  changeBoarding:"Change Boarding",
+  changeDropping:"Change Dropping",
+  droppingPoints:"Dropping Points",
+  boardingPoints:"Boarding Points",
+  selectSeat:"Select Seat"
 };
 
 const PLACEHOLDERS: StringMap = {

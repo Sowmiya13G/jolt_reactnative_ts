@@ -1,36 +1,34 @@
-import React, { useState } from 'react';
-import { FlatList, Platform, Text, TouchableOpacity } from 'react-native';
+import React, {useState} from 'react';
+import {FlatList, Platform, Text, TouchableOpacity} from 'react-native';
 
 // packages
-import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 
 // components
 import CalenderComponent from '../calender';
 import Spacer from '../spacer';
 
 // constants
-import { baseStyle, colors, sizes } from '../../constant/theme';
+import {baseStyle, colors, sizes} from '../../constant/theme';
 
 import ARROW from '../../assets/svg/arrow.svg';
 import CALENDAR from '../../assets/svg/calender.svg';
 import CANCEL from '../../assets/svg/cancel.svg';
-// styles
 
+// styles
 interface DateItem {
   id?: string | number;
   date: string;
   label: string;
   index?: string | number;
 }
-
 interface TripItem {
   id: string | number;
   from: string;
   to: string;
 }
-
 interface RenderDatesProps {
-  data: DateItem[] | TripItem[];
+  data: (DateItem | TripItem)[];
   isDates?: boolean;
   isTrips?: boolean;
   onTripSelect?: (from: string, to: string) => void;
@@ -42,15 +40,25 @@ const RenderDates: React.FC<RenderDatesProps> = ({
   isTrips = false,
   onTripSelect,
 }) => {
-  const [tripsData, setTripsData] = useState<TripItem[]>(data as TripItem[]);
+  const [tripsData, setTripsData] = useState<TripItem[]>(
+    data.filter(item => 'from' in item) as TripItem[],
+  );
   const [selectedDate, setSelectedDate] = useState<DateItem | null>(null);
   const [showCalendar, setShowCalendar] = useState<boolean>(false);
   const [modalDate, setModalDate] = useState<string | null>(null);
+  const [dataList, setDataList] = useState<DateItem[]>(data as DateItem[]);
 
   const handleCalendarSelect = (selectedDate: string) => {
     setModalDate(selectedDate);
-    setShowCalendar(false);
-    setSelectedDate({date: selectedDate, label: selectedDate});
+    setSelectedDate({ date: selectedDate, label: selectedDate });
+    const updatedData = dataList.map(item => {
+      if (item.date === selectedDate) {
+        return { ...item, date: selectedDate };
+      }
+      return item;
+    });
+    
+    setDataList(updatedData);
   };
 
   const handleSelect = (item: DateItem | TripItem) => {
@@ -66,129 +74,127 @@ const RenderDates: React.FC<RenderDatesProps> = ({
     );
   };
 
-  const renderItem = ({item}: {item: DateItem}) => {
-    const isSelected = selectedDate?.date === item.date;
-    const isLastItem = data.length - 1 === item.index;
-
-    return (
-      <TouchableOpacity
-        onPress={() => handleSelect(item)}
-        style={{
-          marginHorizontal: Platform?.OS == 'ios' ? wp('1%') : wp('0.6%'),
-          paddingVertical: wp('2%'),
-          paddingHorizontal: Platform?.OS == 'ios' ? wp('2.5%') : wp('2%'),
-          backgroundColor: isSelected ? colors.green_2F : colors.white_FF,
-          borderColor: isSelected ? colors.green_2F : colors.black_00,
-          borderRadius: wp('6%'),
-          flexDirection: 'row',
-          alignItems: 'center',
-          borderWidth: wp('0.1%'),
-          marginBottom: wp('2.5%'),
-        }}>
-        {isLastItem && (
-          <>
-            <TouchableOpacity onPress={() => setShowCalendar(true)}>
-              <CALENDAR
-                width={wp('4%')}
-                height={wp('4%')}
-                fill={isSelected ? colors.white_FF : colors.black_00}
-              />
-              {/* <Image
-                source={iconPathURL.calender}
-                style={{
-                  ...baseStyle.iconStyle('4%'),
-                  resizeMode: 'contain',
-                  tintColor: isSelected ? colors.white_FF : colors.black_00,
-                }}
-              /> */}
-            </TouchableOpacity>
-            <Spacer width={wp('1%')} />
-          </>
-        )}
-        <Text
-          style={[
-            baseStyle.txtStyleOutInterRegular(
-              sizes.size011,
-              isSelected ? colors.white_FF : colors.black_22,
-            ),
-          ]}>
-          {item.label}
-        </Text>
-      </TouchableOpacity>
-    );
+  const isDateItem = (item: DateItem | TripItem): item is DateItem => {
+    return (item as DateItem).date !== undefined;
   };
 
-  const renderTrips = ({item}: {item: TripItem}) => {
-    const isSelected = selectedDate?.id === item.id;
+  const resultDate = (data: (DateItem | TripItem)[]) => {
+    return data.map(item => {
+      if ('date' in item) {
+        return {
+          ...item,
+          date: item.date || '',
+        };
+      }
+      return item;
+    });
+  };
 
-    return (
-      <TouchableOpacity
-        onPress={() => handleSelect(item)}
-        style={{
-          marginHorizontal: Platform?.OS == 'ios' ? wp('1%') : wp('0.5%'),
-          paddingVertical: wp('2%'),
-          paddingHorizontal: Platform?.OS == 'ios' ? wp('2.5%') : wp('1.7%'),
-          backgroundColor: isSelected ? colors.green_2F : colors.white_FF,
-          borderColor: isSelected ? colors.green_2F : colors.black_00,
-          borderRadius: wp('6%'),
-          flexDirection: 'row',
-          alignItems: 'center',
-          borderWidth: wp('0.2%'),
-          marginBottom: wp('2.5%'),
-        }}>
-        <Text
-          style={[
-            baseStyle.txtStyleOutInterRegular(
-              sizes.size011,
-              isSelected ? colors.white_FF : colors.black_22,
-            ),
-          ]}>
-          {item.from}
-        </Text>
-        <Spacer width={wp('1%')} />
-        <ARROW
-          width={wp('4%')}
-          height={wp('4%')}
-          fill={isSelected ? colors.white_FF : colors.black_00}
-        />
+  const renderItem = ({item}: {item: DateItem | TripItem}) => {
+    if ('from' in item && 'to' in item) {
+      const isSelected = selectedDate?.id === item.id;
 
-        <Spacer width={wp('1%')} />
-        <Text
-          style={[
-            baseStyle.txtStyleOutInterRegular(
-              sizes.size011,
-              isSelected ? colors.white_FF : colors.black_22,
-            ),
-          ]}>
-          {item.to}
-        </Text>
-        <Spacer width={wp('1%')} />
-        <TouchableOpacity onPress={() => handleRemoveTrip(item)}>
-          <CANCEL
-            width={wp('2%')}
+      return (
+        <TouchableOpacity
+          onPress={() => handleSelect(item)}
+          style={{
+            marginHorizontal: Platform?.OS == 'ios' ? wp('1%') : wp('0.5%'),
+            paddingVertical: wp('2%'),
+            paddingHorizontal: Platform?.OS == 'ios' ? wp('2.5%') : wp('1.7%'),
+            backgroundColor: isSelected ? colors.green_2F : colors.white_FF,
+            borderColor: isSelected ? colors.green_2F : colors.black_00,
+            borderRadius: wp('6%'),
+            flexDirection: 'row',
+            alignItems: 'center',
+            borderWidth: wp('0.2%'),
+            marginBottom: wp('2.5%'),
+          }}>
+          <Text
+            style={[
+              baseStyle.txtStyleOutInterRegular(
+                sizes.size011,
+                isSelected ? colors.white_FF : colors.black_22,
+              ),
+            ]}>
+            {item.from}
+          </Text>
+          <Spacer width={wp('1%')} />
+          <ARROW
+            width={wp('4%')}
             height={wp('4%')}
             fill={isSelected ? colors.white_FF : colors.black_00}
           />
+
+          <Spacer width={wp('1%')} />
+          <Text
+            style={[
+              baseStyle.txtStyleOutInterRegular(
+                sizes.size011,
+                isSelected ? colors.white_FF : colors.black_22,
+              ),
+            ]}>
+            {item.to}
+          </Text>
+          <Spacer width={wp('1%')} />
+          <TouchableOpacity onPress={() => handleRemoveTrip(item)}>
+            <CANCEL
+              width={wp('2%')}
+              height={wp('4%')}
+              fill={isSelected ? colors.white_FF : colors.black_00}
+            />
+          </TouchableOpacity>
         </TouchableOpacity>
-      </TouchableOpacity>
-    );
+      );
+    } else {
+      const isSelected = isDateItem(item) && selectedDate?.date === item.date;
+      const isLastItem = Number(data.length) - 1 === Number(item.index);
+
+      return (
+        <TouchableOpacity
+          onPress={() => handleSelect(item)}
+          style={{
+            marginHorizontal: Platform?.OS == 'ios' ? wp('1%') : wp('0.6%'),
+            paddingVertical: wp('2%'),
+            paddingHorizontal: Platform?.OS == 'ios' ? wp('2.5%') : wp('2%'),
+            backgroundColor: isSelected ? colors.green_2F : colors.white_FF,
+            borderColor: isSelected ? colors.green_2F : colors.black_00,
+            borderRadius: wp('6%'),
+            flexDirection: 'row',
+            alignItems: 'center',
+            borderWidth: wp('0.1%'),
+            marginBottom: wp('2.5%'),
+          }}>
+          {isLastItem && (
+            <>
+              <TouchableOpacity onPress={() => setShowCalendar(true)}>
+                <CALENDAR
+                  width={wp('4%')}
+                  height={wp('4%')}
+                  fill={isSelected ? colors.white_FF : colors.black_00}
+                />
+              </TouchableOpacity>
+              <Spacer width={wp('2%')} />
+            </>
+          )}
+          <Text
+            style={[
+              baseStyle.txtStyleOutInterRegular(
+                sizes.size011,
+                isSelected ? colors.white_FF : colors.black_22,
+              ),
+            ]}>
+            {isDateItem(item) ? item.label : 'Date'}
+          </Text>
+        </TouchableOpacity>
+      );
+    }
   };
 
   return (
     <>
       <FlatList
-        data={
-          isDates
-            ? (data as DateItem[]).map((item, index) => ({
-                ...item,
-                date:
-                  index === data.length - 1
-                    ? modalDate || item.date
-                    : item.date,
-              }))
-            : tripsData
-        }
-        renderItem={isDates ? renderItem : renderTrips}
+        data={resultDate(isDates ? dataList : tripsData)}
+        renderItem={renderItem}
         keyExtractor={(item: DateItem | TripItem) =>
           (item as DateItem).id?.toString() ||
           (item as DateItem).date ||

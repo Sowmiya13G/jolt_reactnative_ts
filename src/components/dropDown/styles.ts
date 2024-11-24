@@ -83,8 +83,7 @@ const styles = StyleSheet.create({
   },
   errorField: {
     borderColor: colors.red,
-    borderRadius: wp('2.5%'),
-    borderWidth: wp('0.2%'),
+    borderRadius: wp('2%'),
     padding: '2%',
   },
   marginHorizontal: {marginHorizontal: wp('0.5%')},

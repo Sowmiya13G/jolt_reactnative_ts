@@ -7,3 +7,11 @@ export interface ValidationRegisterScreenFormErrors {
   email?: string;
   phoneNo?: string;
 }
+
+export interface ValidationErrors {
+  [key: string]: string;
+}
+export interface ValidationResult {
+  isValid: boolean;
+  errors: Record<string, string>;
+}

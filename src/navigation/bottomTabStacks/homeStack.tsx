@@ -1,6 +1,6 @@
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import {SCREENS} from '../../constant';
+import { SCREENS } from '../../constant';
 import ScreenName from '../screensNames';
 interface ScreenComponent {
   ScreenName: string;
@@ -27,19 +27,23 @@ const DashboardStack: React.FC = () => {
       ScreenName: SCREENS.SELECT_BOARDING_POINT,
       Component: ScreenName.SelectBoardingPoint,
     },
+    {
+      ScreenName: SCREENS.SELECT_SEAT,
+      Component: ScreenName.SelectSeat,
+    },
   ];
 
   return (
-    <Stack.Navigator initialRouteName={SCREENS.SPLASH_SCREEN}>
-      {ScreensComponentArr.map(({ScreenName, Component}) => (
-        <Stack.Screen
-          key={ScreenName}
-          name={ScreenName}
-          component={Component}
-          options={{headerShown: false}}
-        />
-      ))}
-    </Stack.Navigator>
+        <Stack.Navigator initialRouteName={SCREENS.SPLASH_SCREEN}>
+          {ScreensComponentArr.map(({ScreenName, Component}) => (
+            <Stack.Screen
+              key={ScreenName}
+              name={ScreenName}
+              component={Component}
+              options={{headerShown: false}}
+            />
+          ))}
+        </Stack.Navigator>
   );
 };
 

@@ -1,9 +1,6 @@
-import {ERROR_HANDLER_TEXT, strings} from '../constant/strings';
-import {
-  RegisterFormData,
-  ValidationErrors,
-  ValidationResult,
-} from '../propTypes/formProps';
+import { ERROR_HANDLER_TEXT, strings } from '../constant/strings';
+import { RegisterScreenFormData } from '../propTypes/screenProps';
+import { ValidationErrors, ValidationResult } from '../propTypes/validationProps';
 import {
   emailValidation,
   mobileNumberValidation,
@@ -11,7 +8,7 @@ import {
 } from './codeSnippets';
 
 export const validateRegisterForm = (
-  data: RegisterFormData,
+  data: RegisterScreenFormData,
 ): ValidationErrors => {
   const errors: ValidationErrors = {};
 

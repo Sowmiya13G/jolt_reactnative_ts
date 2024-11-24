@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Image,
-  Text,
-  TouchableOpacity,
-  View,
-  ImageSourcePropType,
-} from 'react-native';
+import {Text, TouchableOpacity, View, ViewStyle} from 'react-native';
 
 // packages
 import {heightPercentageToDP} from 'react-native-responsive-screen';
@@ -17,14 +11,14 @@ import styles from './styles';
 import Spacer from '../spacer';
 
 // constants
-import {iconPathURL} from '../../constant/iconpath';
 import {baseStyle, colors, sizes} from '../../constant/theme';
 
 // utils
-import {formatDateLabel} from '../../utils/helperFunctions';
 import {SvgProps} from 'react-native-svg';
+import {formatDateLabel} from '../../utils/helperFunctions';
 
 import BACK_ARROW from '../../assets/svg/arrowBack.svg';
+import NOTIFICATION from '../../assets/svg/notification.svg';
 
 type HeaderProps = {
   title?: string;
@@ -42,16 +36,19 @@ type HeaderProps = {
 
   // Right icon props
   isRightIcon?: boolean;
-  rightIcon?: ImageSourcePropType;
+  rightIcon?: React.ElementType<SvgProps>;
   rightIconPress?: () => void;
   rightTintColor?: string;
 
   // Date props
   date?: string | null;
+  titleDisc?: string;
+  headerStyle?: ViewStyle | ViewStyle[];
 };
 
 const Header: React.FC<HeaderProps> = ({
   title,
+  titleDisc,
   color = colors.black_00,
   tintColor = colors.white_FF,
   isHomeHeader = false,
@@ -66,9 +63,11 @@ const Header: React.FC<HeaderProps> = ({
 
   // Right icon props
   isRightIcon,
-  rightIcon = iconPathURL.backArrow,
+  rightIcon = BACK_ARROW,
   rightIconPress = () => {},
   rightTintColor = colors.black_00,
+
+  headerStyle,
 
   // Date props
   date = null,
@@ -95,7 +94,7 @@ const Header: React.FC<HeaderProps> = ({
 
       {/* ---------------------------- COMMON HEADER ---------------------------- */}
       {Boolean(isCommonHeader) && (
-        <View style={styles.titleText}>
+        <View style={[styles.titleText, headerStyle]}>
           <Text
             style={[
               baseStyle.txtStyleOutInterBold(sizes.size3, color),
@@ -103,6 +102,18 @@ const Header: React.FC<HeaderProps> = ({
             ]}>
             {title}
           </Text>
+          {Boolean(titleDisc) && (
+            <>
+              <Spacer height={heightPercentageToDP('0.5%')} />
+              <Text
+                style={[
+                  baseStyle.txtStyleOutInterRegular(sizes.size1, color),
+                  {textAlign: 'center'},
+                ]}>
+                {titleDisc}
+              </Text>
+            </>
+          )}
         </View>
       )}
 
@@ -128,12 +139,7 @@ const Header: React.FC<HeaderProps> = ({
               </Text>
             </View>
             <TouchableOpacity style={styles.notificationView}>
-              {Boolean(iconPathURL.notification) && (
-                <Image
-                  source={iconPathURL.notification}
-                  style={styles.notificationIcon}
-                />
-              )}
+              <NOTIFICATION />
             </TouchableOpacity>
           </View>
           <Spacer height={heightPercentageToDP('1.5%')} />
@@ -167,19 +173,25 @@ const Header: React.FC<HeaderProps> = ({
               );
             })()}
 
-          <TouchableOpacity
-            onPress={() => {
-              rightIconPress();
-            }}
-            style={styles.rightIconView}>
-            {Boolean(rightIcon) && (
-              <Image
-                resizeMode="contain"
-                style={[styles.rightIcon, {tintColor: rightTintColor}]}
-                source={rightIcon}
-              />
-            )}
-          </TouchableOpacity>
+          {Boolean(isRightIcon) && (
+            <TouchableOpacity
+              onPress={() => {
+                rightIconPress?.();
+              }}
+              style={styles.leftIconView}>
+              {Boolean(rightIcon) ? (
+                React.createElement(rightIcon, {
+                  fill: rightTintColor,
+                  style: [styles.imageOnboarding],
+                })
+              ) : (
+                <BACK_ARROW
+                  fill={rightTintColor}
+                  style={[styles.imageOnboarding]}
+                />
+              )}
+            </TouchableOpacity>
+          )}
         </>
       )}
     </View>

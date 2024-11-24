@@ -1,6 +1,8 @@
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 
+import { useIsFocused } from '@react-navigation/native';
+
 // package
 import { SvgProps } from 'react-native-svg';
 
@@ -34,6 +36,10 @@ interface ScreenItem {
 
 const BottomNavigation: React.FC = () => {
   const [activeTab, setActiveTab] = React.useState<string>(SCREENS.DASHBOARD);
+
+  const isFocused = useIsFocused();
+  const noTabScreens = [SCREENS.SELECT_SEAT];
+  const shouldHideTabBar = isFocused && SCREENS.SELECT_SEAT;
 
   // Tab items
   const screenItem: ScreenItem[] = [
@@ -85,42 +91,44 @@ const BottomNavigation: React.FC = () => {
   return (
     <>
       {renderScreen()}
-      <View style={styles.tabBarContainer}>
-        {screenItem.map(tab => {
-          const isActive = activeTab === tab.name;
-          const IconComponent = tab.icon;
-          return (
-            <TouchableOpacity
-              key={tab.id}
-              style={styles.tabItem}
-              onPress={() => setActiveTab(tab.name)}>
-              <View
-                style={[styles.iconContainer, isActive && styles.activeTab]}>
-                {IconComponent && (
-                  <IconComponent
-                    style={[baseStyle.iconStyle(isActive ? '7%' : '5%')]}
-                  />
-                )}
-                <Text
-                  style={[
-                    styles.tabLabel,
-                    isActive
-                      ? baseStyle.txtStyleOutInterMedium(
-                          sizes.size011,
-                          colors.orange_05,
-                        )
-                      : baseStyle.txtStyleOutInterRegular(
-                          sizes.size01,
-                          colors.grey_DD,
-                        ),
-                  ]}>
-                  {tab.title}
-                </Text>
-              </View>
-            </TouchableOpacity>
-          );
-        })}
-      </View>
+      {shouldHideTabBar && (
+        <View style={styles.tabBarContainer}>
+          {screenItem.map(tab => {
+            const isActive = activeTab === tab.name;
+            const IconComponent = tab.icon;
+            return (
+              <TouchableOpacity
+                key={tab.id}
+                style={styles.tabItem}
+                onPress={() => setActiveTab(tab.name)}>
+                <View
+                  style={[styles.iconContainer, isActive && styles.activeTab]}>
+                  {IconComponent && (
+                    <IconComponent
+                      style={[baseStyle.iconStyle(isActive ? '7%' : '5%')]}
+                    />
+                  )}
+                  <Text
+                    style={[
+                      styles.tabLabel,
+                      isActive
+                        ? baseStyle.txtStyleOutInterMedium(
+                            sizes.size011,
+                            colors.orange_05,
+                          )
+                        : baseStyle.txtStyleOutInterRegular(
+                            sizes.size01,
+                            colors.grey_DD,
+                          ),
+                    ]}>
+                    {tab.title}
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+      )}
     </>
   );
 };

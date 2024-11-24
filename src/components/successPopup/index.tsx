@@ -49,7 +49,7 @@ const AnimatedSuccessIcon: React.FC<PopUpProps> = ({
           <View style={[styles.image]}>{Icon && <Icon />}</View>
         )}
       </Animated.View>
-      <Spacer height={heightPercentageToDP('3%')} />
+      <Spacer height={heightPercentageToDP('10%')} />
       <Text
         style={[baseStyle.txtStyleOutInterMedium(sizes.size4, colors.grey_32)]}>
         {title}

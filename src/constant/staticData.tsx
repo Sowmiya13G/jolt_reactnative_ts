@@ -1,11 +1,11 @@
-import {strings} from './strings';
+import { strings } from './strings';
 
 // packages
-import {widthPercentageToDP} from 'react-native-responsive-screen';
-import {SvgProps} from 'react-native-svg';
+import { widthPercentageToDP } from 'react-native-responsive-screen';
+import { SvgProps } from 'react-native-svg';
 
 // propTypes
-import {FormData} from '../propTypes/formProps';
+import { RegisterScreenFormData } from '../propTypes/screenProps';
 
 // SVG
 import ONBOARDING1 from '../assets/svg/onboarding1.svg';
@@ -69,7 +69,7 @@ export const genderData = [
 export const registerScreenFields: {
   placeHolder: string;
   leftIcon?: React.FC<SvgProps>;
-  key: keyof FormData;
+  key: keyof RegisterScreenFormData;
   rightIcon?: React.FC<SvgProps>;
 }[] = [
   {

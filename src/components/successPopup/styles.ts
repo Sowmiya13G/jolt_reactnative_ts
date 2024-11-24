@@ -1,10 +1,8 @@
 import {StyleSheet} from 'react-native';
-import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
 import {baseStyle, colors} from '../../constant/theme';
 
 const styles = StyleSheet.create({
   subContainer: {
-    marginHorizontal: wp('5%'),
     flex: 0.8,
     backgroundColor: colors.white_FF,
     justifyContent: 'center',
@@ -14,8 +12,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   image: {
-    ...baseStyle.iconStyle('23%'),
-    resizeMode: 'contain',
+    ...baseStyle.iconStyle('20%'),
+  },
+  imageView: {
+    alignSelf: 'center',
   },
 });
 

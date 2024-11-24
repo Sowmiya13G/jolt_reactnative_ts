@@ -115,7 +115,7 @@ const HomeScreen = () => {
         <Text
           onPress={() =>
             navigationService.navigate(SCREENS.SEARCH_BUS_SCREEN, {
-              data: {from: 'Chennai', to: 'Bangalore', date: '20244-11-15'},
+              data: {from: 'Chennai', to: 'Bangalore', date: '2024-11-15'},
             })
           }
           style={[

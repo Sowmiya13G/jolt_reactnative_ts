@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import {
   FlatList,
-  Image,
   Text,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  View,
+  View
 } from 'react-native';
 
 // navigation
@@ -25,7 +24,6 @@ import SearchComponent from '../../components/searchComponent';
 import Spacer from '../../components/spacer';
 
 // constants
-import { iconPathURL } from '../../constant/iconpath';
 import { dashboard, PLACEHOLDERS } from '../../constant/strings';
 import { baseStyle, colors, sizes } from '../../constant/theme';
 
@@ -35,6 +33,7 @@ import styles from '../styles/searchScreen';
 // prop types
 import { City, searchScreenData, Trip } from '../../propTypes/screenProps';
 
+import LOCATION from '../../assets/svg/location.svg';
 
 const SearchScreen: React.FC = () => {
   // local states
@@ -113,7 +112,7 @@ const SearchScreen: React.FC = () => {
           onPress={() => handleCitySelect(item.city)}
           style={styles.view}>
           <View style={styles.row}>
-            <Image source={iconPathURL.location} style={styles.location} />
+            <LOCATION />
             <Spacer width={wp('3%')} />
             <Text
               style={[
@@ -146,7 +145,7 @@ const SearchScreen: React.FC = () => {
           swapLocation={swapLocation}
           onChangeFromLocation={onChangeFromLocation}
           onChangeToLocation={onChangeToLocation}
-          onFocusChange={handleFocusChange} 
+          onFocusChange={handleFocusChange}
         />
         {Boolean(focusedInput) ? (
           <FlatList

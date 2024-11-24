@@ -58,12 +58,13 @@ export interface RegisterScreenProps {
 }
 // data
 export interface RegisterScreenFormData {
-  firstName: string;
-  middleName: string;
-  gender?: string | null;
-  dob: string | null;
-  email: string;
-  phoneNo: string;
+  firstName?: string;
+  middleName?: string;
+  gender?: string| null;
+  dob?: string| null;
+  email?: string;
+  phoneNo?: string;
+  [key: string]: any;
 }
 
 // SEARCH SCREEN 
@@ -136,6 +137,15 @@ export interface BoardingPointRouteParams {
         from: string;
         to: string;
         date: string;
+        item:{
+          label: string[];
+          name: string;
+          seatsLeft: number;
+          timePeriod: string[];
+          duration: string;
+          types: { type: string; seats: string; price: string }[];
+          review: string;
+        };
       };
     };
   };
@@ -145,3 +155,16 @@ export interface BoardingPoint {
   id: string | number;
   name: string;
 }
+
+// SELECT BOARDING POINTS 
+export type BoardingPointType = {
+  id: number;
+  place: string;
+  time: string;
+  address: string;
+};
+
+export type SelectedPointsType = {
+  boarding: BoardingPointType | null;
+  dropping: BoardingPointType | null;
+};

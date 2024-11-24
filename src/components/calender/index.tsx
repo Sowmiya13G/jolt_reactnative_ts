@@ -1,18 +1,16 @@
-import React, {useState} from 'react';
-import {Image, Modal, Text, TouchableOpacity, View} from 'react-native';
+import React, { useState } from 'react';
+import { Modal, Text, TouchableOpacity, View } from 'react-native';
 
 // Packages
-import PropTypes from 'prop-types';
-import {Calendar} from 'react-native-calendars';
+import { Calendar } from 'react-native-calendars';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
 
 // constants
-import {iconPathURL} from '../../constant/iconpath';
-import {dashboard} from '../../constant/strings';
-import {baseStyle, colors, sizes} from '../../constant/theme';
+import { dashboard } from '../../constant/strings';
+import { baseStyle, colors, sizes } from '../../constant/theme';
 
 // components
 import Button from '../button';
@@ -21,21 +19,32 @@ import Spacer from '../spacer';
 // styles
 import styles from './styles';
 
-const CalenderComponent = ({
+// SVG imports
+import NEXT from '../../assets/svg/next.svg';
+import PREVIOUS from '../../assets/svg/previous.svg';
+
+interface CalenderComponentProps {
+  date: string | null;
+  setDate: (date: string) => void;
+  showCalenderModal: boolean;
+  setShowCalenderModal: (show: boolean) => void;
+}
+
+const CalenderComponent: React.FC<CalenderComponentProps> = ({
   date,
   setDate,
   showCalenderModal,
   setShowCalenderModal,
 }) => {
-  const [currentMonth, setCurrentMonth] = useState(
+  const [currentMonth, setCurrentMonth] = useState<string>(
     new Date().toISOString().split('T')[0],
   );
 
-  const getTodayDate = () => new Date().toISOString().split('T')[0];
+  const getTodayDate = (): string => new Date().toISOString().split('T')[0];
 
   const today = getTodayDate();
 
-  const renderCustomHeader = date => {
+  const renderCustomHeader = (date: string | null): JSX.Element => {
     const currentMonthLabel = new Date(currentMonth).toLocaleDateString(
       'en-US',
       {
@@ -58,7 +67,7 @@ const CalenderComponent = ({
               const updatedMonth = prevMonth.toISOString().split('T')[0];
               setCurrentMonth(updatedMonth);
             }}>
-            <Image source={iconPathURL.previous} style={styles.leftArrow} />
+            <PREVIOUS />
           </TouchableOpacity>
           <Spacer width={widthPercentageToDP('5%')} />
 
@@ -68,7 +77,7 @@ const CalenderComponent = ({
               nextMonth.setMonth(nextMonth.getMonth() + 1);
               setCurrentMonth(nextMonth.toISOString().split('T')[0]);
             }}>
-            <Image source={iconPathURL.next} style={styles.rightArrow} />
+            <NEXT />
           </TouchableOpacity>
         </View>
       </View>
@@ -107,11 +116,23 @@ const CalenderComponent = ({
           <Calendar
             key={currentMonth}
             current={currentMonth}
-            onDayPress={day => setDate(day.dateString)}
+            onDayPress={(day: any) => setDate(day.dateString)}
             markingType={'custom'}
             dayNamesShort={['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']}
-            theme={styles.calendarThemeStyles}
-            // minDate={today}
+            // theme={styles.calendarThemeStyles}
+            theme={{
+              todayTextColor: colors.black_00,
+              dayTextColor: colors.black_00,
+              textDisabledColor: colors.grey_DD,
+              arrowColor: colors.black_00,
+              monthTextColor: colors.black_00,
+              textDayFontWeight: '300',
+              textMonthFontWeight: 'bold',
+              textDayHeaderFontWeight: '400',
+              textDayFontSize: sizes.size2,
+              textMonthFontSize: sizes.size2,
+              textDayHeaderFontSize: sizes.size2,
+            }}
             renderHeader={() => renderCustomHeader(date)}
             hideArrows={true}
             markedDates={{
@@ -129,7 +150,7 @@ const CalenderComponent = ({
                   },
                 },
               },
-              [date]: {
+              [date || '']: {
                 selected: true,
                 customStyles: {
                   container: {
@@ -171,13 +192,6 @@ const CalenderComponent = ({
       </View>
     </Modal>
   );
-};
-
-CalenderComponent.propTypes = {
-  date: PropTypes.string.isRequired,
-  setDate: PropTypes.func.isRequired,
-  showCalenderModal: PropTypes.bool.isRequired,
-  setShowCalenderModal: PropTypes.func.isRequired,
 };
 
 export default CalenderComponent;
