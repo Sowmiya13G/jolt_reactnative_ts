@@ -61,7 +61,8 @@ const OnboardingScreen: React.FC<OnboardingScreenProps> = props => {
   };
 
   const handleCompleteSlider = () => {
-    navigationService.navigate(SCREENS.LOGIN);
+    // navigationService.navigate(SCREENS.LOGIN);
+    navigationService.navigate(SCREENS.HOME_SCREEN);
   };
 
   const goToNextPage = () => {
@@ -185,10 +186,7 @@ const OnboardingScreen: React.FC<OnboardingScreenProps> = props => {
       <Spacer height={hp('10%')} />
       <View style={[styles.buttonView, styles.marginHorizontal]}>
         <Button
-          onPress={() => {
-            // NavigationService.navigate(SCREENS.BOTTOM_TAB_NAV);
-            handleCompleteSlider();
-          }}
+          onPress={() => handleCompleteSlider()}
           text={strings.skip}
           textColor={colors.grey_50}
           buttonStyle={styles.skipButton}

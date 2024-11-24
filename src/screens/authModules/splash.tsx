@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import {Animated, Image, Text, View} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Animated, Text, View } from 'react-native';
 
 // package
-import {heightPercentageToDP} from 'react-native-responsive-screen';
+import { heightPercentageToDP } from 'react-native-responsive-screen';
 
 // components
 import Spacer from '../../components/spacer';
@@ -14,10 +14,9 @@ import styles from '../styles/splash';
 import NavigationService from '../../navigation/navigationService';
 
 // constants
-import {SCREENS} from '../../constant';
-import {iconPathURL} from '../../constant/iconpath';
-import {strings} from '../../constant/strings';
-import {baseStyle, colors, sizes} from '../../constant/theme';
+import { SCREENS } from '../../constant';
+import { strings } from '../../constant/strings';
+import { baseStyle, colors, sizes } from '../../constant/theme';
 
 import LOGO from '../../assets/svg/logo.svg';
 
@@ -41,9 +40,8 @@ const SplashScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      {/* <Image source={iconPathURL.logo} style={styles.splashImg} /> */}
       <LOGO />
-      <Text style={[baseStyle.txtStyleOutInterBold(sizes.size4, colors.white)]}>
+      <Text style={[baseStyle.txtStyleOutInterBold(sizes.size4, colors.white_FF)]}>
         {strings.joltBus}
       </Text>
       <Spacer height={heightPercentageToDP('10%')} />

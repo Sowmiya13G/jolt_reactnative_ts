@@ -106,6 +106,7 @@ const colors = {
 
   white_FF: '#FFFFFF',
   white_FB: '#F9FAFB',
+  white_F8:"#F8F8F8",
 
 
   orange_05: '#FD6905',
@@ -138,6 +139,7 @@ const colors = {
   green_D6: '#CDEED6',
   green_63C: '#20463C',
   green_38: '#129C38',
+  green_C1:"#BEE0C1",
 
   // blue variants
   blue_F4: '#0056F4',

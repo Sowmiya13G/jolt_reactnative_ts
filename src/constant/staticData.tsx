@@ -1,16 +1,22 @@
 import {strings} from './strings';
 
+// packages
+import {widthPercentageToDP} from 'react-native-responsive-screen';
+import {SvgProps} from 'react-native-svg';
+
+// propTypes
+import {FormData} from '../propTypes/formProps';
+
 // SVG
 import ONBOARDING1 from '../assets/svg/onboarding1.svg';
 import ONBOARDING2 from '../assets/svg/onboarding2.svg';
 import ONBOARDING3 from '../assets/svg/onboarding3.svg';
 
-import CALENDER from '../assets/svg/calender.svg';
+import CALENDAR from '../assets/svg/calender.svg';
 import CALL from '../assets/svg/call.svg';
 import DROPDOWN from '../assets/svg/downArrow.svg';
 import EMAIL from '../assets/svg/mail.svg';
 import PERSON from '../assets/svg/person.svg';
-import {widthPercentageToDP} from 'react-native-responsive-screen';
 
 export const onboardingData = [
   {
@@ -60,35 +66,40 @@ export const genderData = [
   },
 ];
 
-export const registerScreenFields = [
+export const registerScreenFields: {
+  placeHolder: string;
+  leftIcon?: React.FC<SvgProps>;
+  key: keyof FormData;
+  rightIcon?: React.FC<SvgProps>;
+}[] = [
   {
     placeHolder: strings.firstName,
-    leftIcon: <PERSON />,
+    leftIcon: PERSON,
     key: 'firstName',
   },
   {
     placeHolder: strings.middleName,
-    leftIcon: <PERSON />,
+    leftIcon: PERSON,
     key: 'middleName',
   },
   {
     placeHolder: strings.gender,
-    rightIcon: <DROPDOWN />,
+    rightIcon: DROPDOWN,
     key: 'gender',
   },
   {
     placeHolder: strings.dob,
-    rightIcon: <CALENDER />,
+    rightIcon: CALENDAR,
     key: 'dob',
   },
   {
     placeHolder: strings.email,
-    leftIcon: <EMAIL />,
+    leftIcon: EMAIL,
     key: 'email',
   },
   {
     placeHolder: strings.mobileNo,
-    leftIcon: <CALL />,
+    leftIcon: CALL,
     key: 'phoneNo',
   },
 ];

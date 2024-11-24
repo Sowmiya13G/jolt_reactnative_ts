@@ -96,6 +96,11 @@ const ERROR_HANDLER_TEXT: StringMap = {
   pleaseEnterValidMobileNo: 'Please enter a valid phone number',
   enterPassword: 'Please enter password',
   passwordIncorrect: 'Password incorrect',
+  enterNewPassword:"Please enter new password",
+  enterConfirmPassword:"Please enter confirm password",
+  passwordsShouldBeSame:"Passwords should be same",
+  enterOtp:"Please Enter OTP",
+  enterValidPassword:"Please enter valid password"
 };
 
 export {strings, dashboard, tabBar, PLACEHOLDERS, ERROR_HANDLER_TEXT};

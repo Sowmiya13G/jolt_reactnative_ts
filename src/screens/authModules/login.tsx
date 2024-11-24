@@ -27,6 +27,8 @@ import styles from '../styles/loginScreen';
 import BANNER from '../../assets/svg/banner.svg';
 import GOOGLE from '../../assets/svg/google.svg';
 import {validateForm} from '../../utils/validation';
+import navigationService from '../../navigation/navigationService';
+import {SCREENS} from '../../constant';
 
 interface LoginScreenProps {
   route?: Record<string, unknown>;
@@ -61,14 +63,11 @@ const LoginScreen: React.FC<LoginScreenProps> = props => {
   // Functions
   const login = (): void => {
     const validationResult = validateForm(data, type);
-    console.log('🚀 ~ login ~ validationResult:', validationResult);
 
     if (validationResult.isValid) {
-      console.log('🚀 ~ login ~ isValid:', validationResult.isValid);
-      // Proceed with login or navigation
-      // NavigationService.navigate(SCREENS.FORGOT_PASSWORD, {
-      //   type: strings.forgotPasswordTitle,
-      // });
+      navigationService.navigate(SCREENS.FORGOT_PASSWORD, {
+        type: strings.forgotPasswordTitle,
+      });
     } else {
       setErrData({
         email: validationResult.errors.email || '',
@@ -181,7 +180,12 @@ const LoginScreen: React.FC<LoginScreenProps> = props => {
                     colors.orange_05,
                   ),
                   styles.textAlign,
-                ]}>
+                ]}
+                onPress={() => {
+                  navigationService.navigate(SCREENS.FORGOT_PASSWORD, {
+                    type: strings.forgotPasswordTitle,
+                  });
+                }}>
                 {strings.forgotPassword}
               </Text>
               <Spacer height={hp('2%')} />
@@ -258,7 +262,10 @@ const LoginScreen: React.FC<LoginScreenProps> = props => {
           <Text
             style={[
               baseStyle.txtStyleOutInterMedium(sizes.size2, colors.orange_05),
-            ]}>
+            ]}
+            onPress={() => {
+              navigationService.navigate(SCREENS.REGISTER_SCREEN);
+            }}>
             {strings.createAcc}
           </Text>
         </Text>

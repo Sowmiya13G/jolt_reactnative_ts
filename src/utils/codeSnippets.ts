@@ -57,13 +57,13 @@ export function passwordValidation(
 
   if (!password) {
     isValid = false;
-    errors['password'] = ERROR_HANDLER_TEXT.pleaseEnterPassword;
+    errors['password'] = ERROR_HANDLER_TEXT.enterPassword;
   } else {
     const pattern =
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,}$/;
     if (!pattern.test(password)) {
       isValid = false;
-      errors['password'] = ERROR_HANDLER_TEXT.pleaseEnterValidPassword;
+      errors['password'] = ERROR_HANDLER_TEXT.enterValidPassword;
     }
   }
 

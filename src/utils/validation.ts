@@ -1,23 +1,14 @@
-import {ERROR_HANDLER_TEXT} from '../constant/strings';
-import {emailValidation, mobileNumberValidation} from './codeSnippets';
-
-interface RegisterFormData {
-  firstName?: string;
-  middleName?: string;
-  gender?: string;
-  dob?: string;
-  email?: string;
-  phoneNo?: string;
-  [key: string]: any;
-}
-
-interface ValidationErrors {
-  [key: string]: string;
-}
-interface ValidationResult {
-  isValid: boolean;
-  errors: Record<string, string>;
-}
+import {ERROR_HANDLER_TEXT, strings} from '../constant/strings';
+import {
+  RegisterFormData,
+  ValidationErrors,
+  ValidationResult,
+} from '../propTypes/formProps';
+import {
+  emailValidation,
+  mobileNumberValidation,
+  passwordValidation,
+} from './codeSnippets';
 
 export const validateRegisterForm = (
   data: RegisterFormData,
@@ -70,11 +61,14 @@ export const validateRegisterForm = (
   return errors;
 };
 
-export function validateForm(data: {
-  email?: string;
-  phoneNo?: string;
-  password?: string;
-}, type: number): ValidationResult {
+export function validateForm(
+  data: {
+    email?: string;
+    phoneNo?: string;
+    password?: string;
+  },
+  type: number,
+): ValidationResult {
   let isValid = true;
   const errors: Record<string, string> = {};
 
@@ -107,5 +101,60 @@ export function validateForm(data: {
     }
   }
 
-  return { isValid, errors };
+  return {isValid, errors};
+}
+
+export function validateFormPassword(
+  data: {
+    email?: string;
+    newPassword?: string;
+    confirmPassword?: string;
+  },
+  type: string,
+): ValidationResult {
+  let isValid = true;
+  const errors: Record<string, string> = {};
+
+  const isForgotPasswordScreen = type === strings.forgotPasswordTitle;
+  const isNewPasswordScreen = type === strings.createNewPassword;
+
+  console.log("🚀 ~ data:", data)
+  if (isForgotPasswordScreen) {
+    if (!data.email) {
+      errors['email'] = ERROR_HANDLER_TEXT.pleaseEnterEmail;
+      isValid = false;
+    } else {
+      const emailValidationResult = emailValidation(data.email);
+      if (!emailValidationResult.isValid) {
+        isValid = false;
+        errors['email'] = emailValidationResult.errors['email'];
+      }
+    }
+  } else if (isNewPasswordScreen) {
+    if (!data.newPassword) {
+      errors['newPassword'] = ERROR_HANDLER_TEXT.enterNewPassword;
+      isValid = false;
+    } else {
+      const passwordValidationResult = passwordValidation(data.newPassword);
+      if (!passwordValidationResult.isValid) {
+        isValid = false;
+        errors['newPassword'] = passwordValidationResult.errors['newPassword'];
+      }
+    }
+
+    if (!data?.confirmPassword) {
+      errors['confirmPassword'] = ERROR_HANDLER_TEXT.enterConfirmPassword;
+      isValid = false;
+    }
+    if (
+      data.newPassword &&
+      data.confirmPassword &&
+      data.newPassword !== data.confirmPassword
+    ) {
+      errors['confirmPassword'] = ERROR_HANDLER_TEXT.passwordsShouldBeSame;
+      isValid = false;
+    }
+  }
+
+  return {isValid, errors};
 }

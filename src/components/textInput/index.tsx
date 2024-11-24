@@ -35,6 +35,7 @@ interface TextInputComponentProps
   label?: string;
   error?: boolean;
   verification?: boolean;
+  backgroundColor?: string;
   labelColor?: string;
   labelTextSize?: string;
   placeholder?: string;
@@ -48,6 +49,7 @@ interface TextInputComponentProps
   secureTextEntry?: boolean;
   editable?: boolean;
   CustomStyle?: object;
+  customIconStyle?:object;
   textAlignVertical?: 'auto' | 'top' | 'bottom' | 'center' | undefined;
   suffix?: boolean;
   autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters' | undefined;
@@ -69,6 +71,7 @@ const TextInputComponent: React.FC<TextInputComponentProps> = props => {
     label,
     error,
     verification,
+    backgroundColor,
     labelColor = colors.grey_32,
     labelTextSize = '1.8%',
     placeholder = strings.enterHere,
@@ -82,6 +85,7 @@ const TextInputComponent: React.FC<TextInputComponentProps> = props => {
     secureTextEntry = false,
     editable = true,
     CustomStyle,
+    customIconStyle,
     textAlignVertical,
     suffix = false,
     autoCapitalize,
@@ -124,11 +128,12 @@ const TextInputComponent: React.FC<TextInputComponentProps> = props => {
             ...(Boolean(errText)
               ? {borderColor: colors.red}
               : {borderColor: colors.grey_DD}),
+            backgroundColor: backgroundColor,
           },
           CustomStyle,
         ]}>
         {Boolean(Icon) && !suffix && (
-          <View style={styles.icon}>{Icon && <Icon />}</View>
+          <View style={[styles.icon]}>{Icon && <Icon style={customIconStyle}/>}</View>
         )}
 
         <TextInput
