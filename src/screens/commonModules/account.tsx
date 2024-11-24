@@ -29,9 +29,10 @@ const AccountScreen: React.FC<AccountScreenProps> = () => {
       />
       <FlatList
         data={['MY_ACCOUNT']}
-        showsHorizontalScrollIndicator={false}
-        keyExtractor={(item, index) => index.toString()}
         renderItem={renderBody}
+        keyExtractor={(item, index)  => index.toString()}
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
       />
     </CustomSafeArea>
   );

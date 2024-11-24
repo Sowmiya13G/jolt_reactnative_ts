@@ -12,15 +12,17 @@ const SCREENS = {
 
   // // bottom tabs
   HOME_SCREEN: 'HomeScreen',
-  DASHBOARD: 'Dashboard',
+  DASHBOARD: 'HomeScreen',
   MY_TRIP: 'MyTripScreen',
   ACCOUNT_SCREEN: 'AccountScreen',
   WALLET_SCREEN: 'WalletScreen',
   BOTTOM_TAB_NAV: 'BottomTabNavigator',
   SEARCH_SCREEN: 'SearchScreen',
   SEARCH_BUS_SCREEN: 'SearchBusScreen',
+  SELECT_BOARDING_POINT: 'SelectBoardingPoint',
 } as const; 
 
 type ScreenNames = keyof typeof SCREENS;
 
-export {SCREENS, iconPath, theme};
+export { SCREENS, iconPath, theme };
+

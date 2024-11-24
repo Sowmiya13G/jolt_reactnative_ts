@@ -1,12 +1,5 @@
 import React, {useState} from 'react';
-import {
-  FlatList,
-  Image,
-  Modal,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {FlatList, Modal, Text, TouchableOpacity, View} from 'react-native';
 
 // navigation
 import navigationService from '../../navigation/navigationService';
@@ -23,50 +16,23 @@ import Header from '../../components/header';
 import Spacer from '../../components/spacer';
 
 // constant
-import {baseStyle, colors, sizes} from '../../constant/theme';
-
-// styles
 import {iconPathURL} from '../../constant/iconpath';
 import {filterData} from '../../constant/staticData';
-import {FilterListItem} from '../../propTypes/formProps';
-import styles from '../styles/searchBusScreen';
+import {baseStyle, colors, sizes} from '../../constant/theme';
 
+// prop types
+import {
+  FilterListItem,
+  ListItem,
+  ReviewContent,
+  SearchBusScreenProps,
+} from '../../propTypes/screenProps';
+
+// svg imports
 import CANCEL from '../../assets/svg/cancel.svg';
-
-interface TicketType {
-  type: string;
-  seats: string;
-  price: string;
-}
-
-interface ListItem {
-  label: string[];
-  name: string;
-  seatsLeft: number;
-  timePeriod: string[];
-  duration: string;
-  types: TicketType[];
-  review: string;
-}
-
-interface ReviewContent {
-  name: string;
-  comment: string;
-  date: string;
-  points: number;
-}
-
-interface SearchBusScreenProps {
-  route: {
-    params: {
-      data: {
-        from: string;
-        to: string;
-        date: string;
-      };
-    };
-  };
-}
+// styles
+import styles from '../styles/searchBusScreen';
+import {SCREENS} from '../../constant';
 
 const listData: ListItem[] = [
   {
@@ -151,16 +117,15 @@ const SearchBusScreen: React.FC<SearchBusScreenProps> = ({route}) => {
   const [selectedFilters, setSelectedFilters] = useState<FilterListItem[]>([]);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
 
-  // ------------------ FUNCTIONALITIES ----------------------
+  // ---------------------------------------- Functionalities ----------------------------------------
 
-  // ------------------ FUNCTIONALITIES ----------------------
+  // ---------------------------------------- set data functions ----------------------------------------
 
   const handleFilterSelect = (selectedItems: FilterListItem[]) => {
     setSelectedFilters(selectedItems);
   };
 
-  // ------------------ RENDER UI ----------------------
-
+  // ---------------------------------------- render ui ----------------------------------------
   const renderBody = ({item}: {item: ListItem}) => {
     return (
       <View style={styles.subContainer}>
@@ -168,12 +133,12 @@ const SearchBusScreen: React.FC<SearchBusScreenProps> = ({route}) => {
         <TicketCard
           data={item}
           selectSeat={() => {
-            // navigationService.navigate(SCREENS.SELECT_BOARDING_POINTS, {
-            //   data: {
-            //     item: item,
-            //     routeAndDate: data,
-            //   },
-            // })
+            navigationService.navigate(SCREENS.SELECT_BOARDING_POINT, {
+              data: {
+                item: item,
+                routeAndDate: data,
+              },
+            });
           }}
           viewReview={() => setModalVisible(true)}
         />
@@ -210,6 +175,7 @@ const SearchBusScreen: React.FC<SearchBusScreenProps> = ({route}) => {
               data={reviewContent}
               renderItem={({item}) => <ReviewCard data={item} />}
               keyExtractor={(item, index) => index.toString()}
+              showsHorizontalScrollIndicator={false}
               showsVerticalScrollIndicator={false}
             />
             <Spacer height={hp('1%')} />

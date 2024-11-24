@@ -31,9 +31,10 @@ const WalletScreen: React.FC<WalletScreenProps> = () => {
       />
       <FlatList
         data={['MY_TRIP']}
-        showsHorizontalScrollIndicator={false}
-        keyExtractor={(item, index) => index.toString()}
         renderItem={renderBody}
+        keyExtractor={(item, index) => index.toString()}
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
       />
     </CustomSafeArea>
   );

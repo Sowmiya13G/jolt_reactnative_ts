@@ -52,10 +52,10 @@ const AppStack: React.FC = () => {
       ScreenName: SCREENS.SEARCH_SCREEN,
       Component: ScreenName.SearchScreen,
     },
-    // {
-    //   ScreenName: SCREENS.BOTTOM_TAB_NAV,
-    //   Component: BottomNavigation,
-    // },
+    {
+      ScreenName: SCREENS.BOTTOM_TAB_NAV,
+      Component: BottomNavigation,
+    },
   ];
 
   return (

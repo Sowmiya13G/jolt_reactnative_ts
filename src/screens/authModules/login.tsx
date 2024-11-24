@@ -1,12 +1,14 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {Animated, Easing, FlatList, Text, View} from 'react-native';
-// navigation
+import React, { useEffect, useRef, useState } from 'react';
+import { Animated, Easing, FlatList, Text, View } from 'react-native';
 
 // packages
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP,
 } from 'react-native-responsive-screen';
+
+// navigation
+import navigationService from '../../navigation/navigationService';
 
 // components
 import Button from '../../components/button';
@@ -15,59 +17,76 @@ import Spacer from '../../components/spacer';
 import TextInputComponent from '../../components/textInput';
 
 // constants
-import {strings} from '../../constant/strings';
-import {baseStyle, colors, sizes} from '../../constant/theme';
+import { SCREENS } from '../../constant';
+import { strings } from '../../constant/strings';
+import { baseStyle, colors, sizes } from '../../constant/theme';
 
-// styles
+// prop types
+import {
+  LoginScreenDataState,
+  LoginScreenErrorState,
+  LoginScreenProps,
+} from '../../propTypes/screenProps';
+
+// utils
+import { validateForm } from '../../utils/validation';
+
+// svg imports
+import BANNER from '../../assets/svg/banner.svg';
+import GOOGLE from '../../assets/svg/google.svg';
 
 // styles
 import styles from '../styles/loginScreen';
 
-// svg
-import BANNER from '../../assets/svg/banner.svg';
-import GOOGLE from '../../assets/svg/google.svg';
-import {validateForm} from '../../utils/validation';
-import navigationService from '../../navigation/navigationService';
-import {SCREENS} from '../../constant';
-
-interface LoginScreenProps {
-  route?: Record<string, unknown>;
-}
-
-interface DataState {
-  email: string;
-  password: string;
-  phoneNo: string;
-}
-
-interface ErrorState {
-  email: string;
-  password: string;
-  phoneNo: string;
-}
-
 const LoginScreen: React.FC<LoginScreenProps> = props => {
+  // route props
+
   // useState
-  const [data, setData] = useState<DataState>({
+  const [data, setData] = useState<LoginScreenDataState>({
     email: '',
     password: '',
     phoneNo: '',
   });
-  const [errData, setErrData] = useState<ErrorState>({
+  const [errData, setErrData] = useState<LoginScreenErrorState>({
     email: '',
     password: '',
     phoneNo: '',
   });
   const [type, setType] = useState<number>(0);
 
-  // Functions
+  // ref
+  const moveAnim = useRef(new Animated.Value(-300)).current;
+
+  // variables (screen type)
+  const isEmailLogin = type == 0;
+  const isPhoneNoLogin = type == 1;
+
+  // ---------------------------------------- set data functions ----------------------------------------
+  const handleInputChange =
+    (field: keyof LoginScreenDataState) => (value: string) => {
+      setErrData(prevErrData => ({
+        ...prevErrData,
+        [field]: '',
+      }));
+
+      setData(prevData => ({
+        ...prevData,
+        [field]: value,
+      }));
+    };
+
+  // ---------------------------------------- Functionalities ----------------------------------------
   const login = (): void => {
     const validationResult = validateForm(data, type);
 
     if (validationResult.isValid) {
-      navigationService.navigate(SCREENS.FORGOT_PASSWORD, {
-        type: strings.forgotPasswordTitle,
-      });
+      if (isEmailLogin) {
+        navigationService.navigate(SCREENS.BOTTOM_TAB_NAV);
+      } else {
+        navigationService.navigate(SCREENS.OTP_SCREEN, {
+          type: strings.phoneVerification,
+        });
+      }
     } else {
       setErrData({
         email: validationResult.errors.email || '',
@@ -81,7 +100,7 @@ const LoginScreen: React.FC<LoginScreenProps> = props => {
     type == 0 ? setType(1) : setType(0);
   };
 
-  const moveAnim = useRef(new Animated.Value(-300)).current;
+  // ---------------------------------------- Use effects ----------------------------------------
 
   useEffect(() => {
     Animated.timing(moveAnim, {
@@ -91,18 +110,8 @@ const LoginScreen: React.FC<LoginScreenProps> = props => {
       useNativeDriver: true,
     }).start();
   }, []);
-
-  const handleInputChange = (field: keyof DataState) => (value: string) => {
-    setErrData(prevErrData => ({
-      ...prevErrData,
-      [field]: '',
-    }));
-
-    setData(prevData => ({
-      ...prevData,
-      [field]: value,
-    }));
-  };
+  
+  // ---------------------------------------- render ui ----------------------------------------
 
   const renderBody = (): JSX.Element => {
     return (
@@ -249,9 +258,10 @@ const LoginScreen: React.FC<LoginScreenProps> = props => {
     <CustomSafeArea style={styles.container} statusBarBGColor={colors.green_3C}>
       <FlatList
         data={['LOGIN_SCREEN']}
-        showsHorizontalScrollIndicator={false}
-        keyExtractor={(_, index) => index.toString()}
         renderItem={renderBody}
+        keyExtractor={(_, index) => index.toString()}
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
       />
       <View style={styles.alignSelf}>
         <Text

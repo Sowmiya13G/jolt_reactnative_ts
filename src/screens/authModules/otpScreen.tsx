@@ -18,24 +18,22 @@ import navigationService from '../../navigation/navigationService';
 import Button from '../../components/button';
 import CustomSafeArea from '../../components/customSafeArea';
 import Header from '../../components/header';
-import PopUp from '../../components/popUp';
 import Spacer from '../../components/spacer';
+import AnimatedSuccessIcon from '../../components/successPopup';
 
 // constants
 import {iconPathURL} from '../../constant/iconpath';
 import {ERROR_HANDLER_TEXT, strings} from '../../constant/strings';
 import {baseStyle, colors, sizes} from '../../constant/theme';
-
-import CANCEL from '../../assets/svg/cancel.svg';
 import {SCREENS} from '../../constant';
 
-interface OTPScreenProps {
-  route: {
-    params: {
-      type: string;
-    };
-  };
-}
+// SVG Imports
+import CANCEL from '../../assets/svg/cancel.svg';
+import SUCCESS from '../../assets/svg/success1.svg';
+import BACK_ARROW from '../../assets/svg/arrowBack.svg';
+
+// prop types
+import {OTPScreenProps} from '../../propTypes/screenProps';
 
 const OTPScreen: React.FC<OTPScreenProps> = ({route}) => {
   // Route params
@@ -51,9 +49,10 @@ const OTPScreen: React.FC<OTPScreenProps> = ({route}) => {
   const [errTxt, setErrTxt] = useState<string>('');
   const [isPopup, setIsPopup] = useState<boolean>(false);
 
-  // Screen types
+  // variables (screen type)
   const isForgotPassword = type === strings.forgotPasswordTitle;
   const isNewPassword = type === strings.createNewPassword;
+  const isVerification = type == strings.phoneVerification;
 
   // ---------------- useEffects ------------------
   useEffect(() => {
@@ -70,10 +69,8 @@ const OTPScreen: React.FC<OTPScreenProps> = ({route}) => {
     if (isPopup) {
       const timeoutId = setTimeout(() => {
         setIsPopup(false);
-        navigationService.navigate(SCREENS.FORGOT_PASSWORD, {
-          type: strings.createNewPassword,
-        });
-      }, 300);
+        navigationService.navigate(SCREENS.BOTTOM_TAB_NAV);
+      }, 1300);
 
       return () => clearTimeout(timeoutId);
     }
@@ -82,11 +79,9 @@ const OTPScreen: React.FC<OTPScreenProps> = ({route}) => {
   // -------------- API Calls -----------------------
   const verifyOTP = () => {
     if (validate()) {
-      if (isForgotPassword) {
-        setErr(false);
-        setErrTxt('');
-        setIsPopup(true);
-      }
+      setErr(false);
+      setErrTxt('');
+      setIsPopup(true);
     }
   };
 
@@ -111,21 +106,35 @@ const OTPScreen: React.FC<OTPScreenProps> = ({route}) => {
     <>
       <Spacer height={hp('10%')} />
       <View>
+        {isForgotPassword && (
+          <>
+            <Text
+              style={[
+                baseStyle.txtStyleOutInterSemiBold(
+                  sizes.size4,
+                  colors.black_00,
+                ),
+                styles.texAlign,
+              ]}>
+              {strings.forgotPasswordTitle}
+            </Text>
+            <Spacer height={hp('2%')} />
+          </>
+        )}
+
         <Text
           style={[
-            baseStyle.txtStyleOutInterSemiBold(sizes.size4, colors.black_00),
-            styles.texAlign,
-          ]}>
-          {strings.forgotPasswordTitle}
-        </Text>
-        <Spacer height={hp('2%')} />
-        <Text
-          style={[
-            baseStyle.txtStyleOutInterRegular(sizes.size2, colors.grey_32),
+            isForgotPassword
+              ? baseStyle.txtStyleOutInterRegular(sizes.size2, colors.grey_32)
+              : baseStyle.txtStyleOutInterSemiBold(sizes.size3, colors.grey_32),
             styles.texAlign,
             styles.titleMargin,
           ]}>
-          {strings.forgotPasswordDisc}
+          {isForgotPassword
+            ? strings.forgotPasswordDisc
+            : isVerification
+            ? strings.enterCodeDisc
+            : ''}
         </Text>
         <Spacer height={hp('2%')} />
       </View>
@@ -156,12 +165,14 @@ const OTPScreen: React.FC<OTPScreenProps> = ({route}) => {
         />
         <Spacer height={hp('3%')} />
         <View style={styles.alreadyTextView}>
-          <Text
-            style={[
-              baseStyle.txtStyleOutInterRegular(sizes.size2, colors.grey_80),
-            ]}>
-            {strings.didNtGetCode}{' '}
-          </Text>
+          {isForgotPassword && (
+            <Text
+              style={[
+                baseStyle.txtStyleOutInterRegular(sizes.size2, colors.grey_80),
+              ]}>
+              {strings.didNtGetCode}{' '}
+            </Text>
+          )}
           <Text
             onPress={() => {
               seconds === 0 && resendOTP();
@@ -204,8 +215,8 @@ const OTPScreen: React.FC<OTPScreenProps> = ({route}) => {
     <CustomSafeArea style={styles.container}>
       {isPopup ? (
         <>
-          <PopUp
-            icon={iconPathURL.success}
+          <AnimatedSuccessIcon
+            icon={SUCCESS}
             title={strings.verified}
             disc={strings.verifiedDisc}
           />
@@ -214,15 +225,22 @@ const OTPScreen: React.FC<OTPScreenProps> = ({route}) => {
         <View style={styles.subContainer}>
           <Header
             goBack={() => navigationService.goBack()}
-            title={strings.forgotPasswordTitle}
+            title={
+              isVerification
+                ? strings.phoneVerification
+                : isForgotPassword
+                ? strings.forgotPasswordTitle
+                : ''
+            }
             color={colors.grey_32}
-            leftIcon1={iconPathURL.backArrow}
+            leftIcon1={BACK_ARROW}
           />
           <FlatList
             data={['OTP_SCREEN']}
-            showsHorizontalScrollIndicator={false}
-            keyExtractor={(item, index) => index.toString()}
             renderItem={renderBody}
+            keyExtractor={(item, index) => index.toString()}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
           />
         </View>
       )}

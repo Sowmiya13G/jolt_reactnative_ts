@@ -1,38 +1,42 @@
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { SCREENS } from '../../constant';
+import {SCREENS} from '../../constant';
 import ScreenName from '../screensNames';
-
-type DashboardStackParamList = {
-  [key in keyof typeof SCREENS]: undefined;
-};
-
-const Stack = createNativeStackNavigator<DashboardStackParamList>();
+interface ScreenComponent {
+  ScreenName: string;
+  Component: React.ComponentType<any>;
+}
 
 const DashboardStack: React.FC = () => {
-  const ScreensComponentArr = [
+  const Stack = createNativeStackNavigator();
+
+  const ScreensComponentArr: ScreenComponent[] = [
     {
-      ScreenName: SCREENS.HOME_SCREEN,
-      Component: ScreenName.WalletScreen,
+      ScreenName: SCREENS.DASHBOARD,
+      Component: ScreenName.HomeScreen,
     },
-    // {
-    //   ScreenName: SCREENS.SEARCH_SCREEN,
-    //   Component: ScreenName.SearchScreen,
-    // },
-    // {
-    //   ScreenName: SCREENS.SEARCH_BUS_SCREEN,
-    //   Component: ScreenName.SearchBusScreen,
-    // },
+    {
+      ScreenName: SCREENS.SEARCH_SCREEN,
+      Component: ScreenName.SearchScreen,
+    },
+    {
+      ScreenName: SCREENS.SEARCH_BUS_SCREEN,
+      Component: ScreenName.SearchBusScreen,
+    },
+    {
+      ScreenName: SCREENS.SELECT_BOARDING_POINT,
+      Component: ScreenName.SelectBoardingPoint,
+    },
   ];
 
   return (
-    <Stack.Navigator initialRouteName={SCREENS.HOME_SCREEN}>
-      {ScreensComponentArr.map(({ ScreenName, Component }) => (
+    <Stack.Navigator initialRouteName={SCREENS.SPLASH_SCREEN}>
+      {ScreensComponentArr.map(({ScreenName, Component}) => (
         <Stack.Screen
           key={ScreenName}
-          name={ScreenName as keyof DashboardStackParamList} 
+          name={ScreenName}
           component={Component}
-          options={{ headerShown: false }}
+          options={{headerShown: false}}
         />
       ))}
     </Stack.Navigator>

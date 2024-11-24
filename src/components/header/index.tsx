@@ -22,6 +22,9 @@ import {baseStyle, colors, sizes} from '../../constant/theme';
 
 // utils
 import {formatDateLabel} from '../../utils/helperFunctions';
+import {SvgProps} from 'react-native-svg';
+
+import BACK_ARROW from '../../assets/svg/arrowBack.svg';
 
 type HeaderProps = {
   title?: string;
@@ -34,7 +37,7 @@ type HeaderProps = {
 
   // Left icon props
   isLeftIcon?: boolean;
-  leftIcon1?: ImageSourcePropType;
+  leftIcon1?: React.ElementType<SvgProps>;
   goBack?: () => void;
 
   // Right icon props
@@ -58,7 +61,7 @@ const Header: React.FC<HeaderProps> = ({
 
   // Left icon props
   isLeftIcon = true,
-  leftIcon1 = iconPathURL.backArrow,
+  leftIcon1 = BACK_ARROW,
   goBack,
 
   // Right icon props
@@ -79,12 +82,13 @@ const Header: React.FC<HeaderProps> = ({
             goBack?.();
           }}
           style={styles.leftIconView}>
-          {Boolean(leftIcon1) && (
-            <Image
-              resizeMode="contain"
-              style={[styles.imageOnboarding, {tintColor: tintColor}]}
-              source={leftIcon1}
-            />
+          {Boolean(leftIcon1) ? (
+            React.createElement(leftIcon1, {
+              fill: tintColor,
+              style: [styles.imageOnboarding],
+            })
+          ) : (
+            <BACK_ARROW fill={tintColor} style={[styles.imageOnboarding]} />
           )}
         </TouchableOpacity>
       )}

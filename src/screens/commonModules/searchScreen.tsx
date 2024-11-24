@@ -32,31 +32,17 @@ import { baseStyle, colors, sizes } from '../../constant/theme';
 // styles
 import styles from '../styles/searchScreen';
 
-// Types
-interface Trip {
-  id: number;
-  from: string;
-  to: string;
-}
+// prop types
+import { City, searchScreenData, Trip } from '../../propTypes/screenProps';
 
-interface City {
-  id: number;
-  city: string;
-}
-
-interface Data {
-  fromLocation: string;
-  toLocation: string;
-}
 
 const SearchScreen: React.FC = () => {
   // local states
-  const [data, setData] = useState<Data>({
+  const [data, setData] = useState<searchScreenData>({
     fromLocation: '',
     toLocation: '',
   });
   const [focusedInput, setFocusedInput] = useState<'from' | 'to' | null>(null);
-  console.log("🚀 ~ focusedInput:", focusedInput)
 
   // data
   const trips: Trip[] = [
@@ -73,7 +59,8 @@ const SearchScreen: React.FC = () => {
     {id: 4, city: 'Mumbai'},
   ];
 
-  // ------------------ FUNCTIONALITIES ----------------------
+  // ---------------------------------------- set data functions ----------------------------------------
+  // ---------------------------------------- Functionalities ----------------------------------------
 
   const swapLocation = () => {
     setData(prevData => ({
@@ -116,7 +103,7 @@ const SearchScreen: React.FC = () => {
     });
   };
 
-  // ------------------ RENDER UI ----------------------
+  // ---------------------------------------- render ui ----------------------------------------
 
   const renderCityList = ({item}: {item: City}) => {
     return (
@@ -166,6 +153,8 @@ const SearchScreen: React.FC = () => {
             data={cityList}
             renderItem={renderCityList}
             keyExtractor={item => item.id.toString()}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
           />
         ) : (
           <>

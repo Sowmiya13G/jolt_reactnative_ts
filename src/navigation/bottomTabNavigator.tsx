@@ -1,14 +1,13 @@
 import React from 'react';
-import {Platform, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
 
 // package
-import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
-import {SvgProps} from 'react-native-svg';
+import { SvgProps } from 'react-native-svg';
 
 // constant
-import {SCREENS} from '../constant';
-import {tabBar} from '../constant/strings';
-import {baseStyle, colors, sizes} from '../constant/theme';
+import { SCREENS } from '../constant';
+import { tabBar } from '../constant/strings';
+import { baseStyle, colors, sizes } from '../constant/theme';
 import ScreenName from './screensNames';
 
 import HOME_ACTIVE from '../assets/svg/homeActive.svg';
@@ -22,6 +21,7 @@ import {
   default as WALLET_IN_ACTIVE,
 } from '../assets/svg/walletInActive.svg';
 import DashboardStack from './bottomTabStacks/homeStack';
+import styles from './styles';
 
 // Define types for screen item
 interface ScreenItem {
@@ -124,36 +124,5 @@ const BottomNavigation: React.FC = () => {
     </>
   );
 };
-
-const styles = StyleSheet.create({
-  tabBarContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: colors.white_FF,
-    height: Platform.OS === 'android' ? hp('7%') : hp('9%'),
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-  },
-  tabItem: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  iconContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: Platform.OS === 'android' ? hp('7%') : hp('9%'),
-  },
-  activeTab: {
-    borderTopWidth: 3,
-    borderColor: colors.orange_05,
-  },
-  tabLabel: {
-    marginTop: hp('0.5%'),
-  },
-});
 
 export default BottomNavigation;

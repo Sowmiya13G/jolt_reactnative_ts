@@ -1,5 +1,5 @@
-import React, {useRef, useState} from 'react';
-import {Animated, Dimensions, FlatList, Image, Text, View} from 'react-native';
+import React, { useRef, useState } from 'react';
+import { Animated, Dimensions, FlatList, Text, View } from 'react-native';
 
 // packages
 import {
@@ -16,11 +16,10 @@ import CustomSafeArea from '../../components/customSafeArea';
 import Spacer from '../../components/spacer';
 
 // constants
-import {SCREENS} from '../../constant';
-import {iconPathURL} from '../../constant/iconpath';
-import {onboardingData} from '../../constant/staticData';
-import {strings} from '../../constant/strings';
-import {baseStyle, colors, sizes} from '../../constant/theme';
+import { SCREENS } from '../../constant';
+import { onboardingData } from '../../constant/staticData';
+import { strings } from '../../constant/strings';
+import { baseStyle, colors, sizes } from '../../constant/theme';
 
 // styles
 import styles from '../styles/onboarding';
@@ -28,20 +27,22 @@ import styles from '../styles/onboarding';
 // svg
 import LOGO from '../../assets/svg/logo.svg';
 
-type OnboardingScreenProps = {
-  route?: any;
-};
-
-const OnboardingScreen: React.FC<OnboardingScreenProps> = props => {
+const OnboardingScreen: React.FC = props => {
+  // ref
   const flatListRef = useRef<FlatList<any>>(null);
+  const animation = useRef(new Animated.Value(0)).current;
+
+  // local states
   const [sliderState, setSliderState] = useState<{currentPage: number}>({
     currentPage: 0,
   });
+
+  // variables
   const {width, height} = Dimensions.get('window');
   const {currentPage: pageIndex} = sliderState;
-  const animation = useRef(new Animated.Value(0)).current;
 
-  // Functions
+  // ---------------------------------------- Functionalities ----------------------------------------
+
   const setSliderPage = (event: any) => {
     const {x} = event.nativeEvent.contentOffset;
     const indexOfNextScreen = Math.floor(x / width);
@@ -61,8 +62,7 @@ const OnboardingScreen: React.FC<OnboardingScreenProps> = props => {
   };
 
   const handleCompleteSlider = () => {
-    // navigationService.navigate(SCREENS.LOGIN);
-    navigationService.navigate(SCREENS.HOME_SCREEN);
+    navigationService.navigate(SCREENS.LOGIN);
   };
 
   const goToNextPage = () => {
@@ -86,7 +86,8 @@ const OnboardingScreen: React.FC<OnboardingScreenProps> = props => {
     }
   };
 
-  // render UI
+  // ---------------------------------------- render ui ----------------------------------------
+
   return (
     <CustomSafeArea style={styles.container}>
       <Spacer height={hp('5%')} />
@@ -113,11 +114,7 @@ const OnboardingScreen: React.FC<OnboardingScreenProps> = props => {
       </View>
       <FlatList
         data={onboardingData}
-        horizontal
-        pagingEnabled
         ref={flatListRef}
-        showsHorizontalScrollIndicator={false}
-        keyExtractor={(item, index) => index.toString()}
         renderItem={({item}) => (
           <View style={{width, height: '100%'}}>
             <View style={[styles.wrapper, styles.marginHorizontal]}>
@@ -148,9 +145,14 @@ const OnboardingScreen: React.FC<OnboardingScreenProps> = props => {
             </View>
           </View>
         )}
+        keyExtractor={(item, index) => index.toString()}
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
         onScroll={event => {
           setSliderPage(event);
         }}
+        horizontal
+        pagingEnabled
         scrollEventThrottle={16}
       />
       <Spacer height={hp('2%')} />
@@ -186,7 +188,7 @@ const OnboardingScreen: React.FC<OnboardingScreenProps> = props => {
       <Spacer height={hp('10%')} />
       <View style={[styles.buttonView, styles.marginHorizontal]}>
         <Button
-          onPress={() => handleCompleteSlider()}
+          onPress={() => navigationService.navigate(SCREENS.BOTTOM_TAB_NAV)}
           text={strings.skip}
           textColor={colors.grey_50}
           buttonStyle={styles.skipButton}

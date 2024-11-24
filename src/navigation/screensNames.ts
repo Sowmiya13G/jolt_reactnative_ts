@@ -9,11 +9,14 @@ import RegisterScreen from '../screens/authModules/registerScreen';
 import SplashScreen from '../screens/authModules/splash';
 
 // common modules
-import AccountScreen from '../screens/commonModules/account';
+// dashboard stack
 import HomeScreen from '../screens/commonModules/homeScreen';
-import MyTripScreen from '../screens/commonModules/myTrip';
 import SearchBusScreen from '../screens/commonModules/searchBusScreen';
 import SearchScreen from '../screens/commonModules/searchScreen';
+import SelectBoardingPoint from '../screens/commonModules/selectBoardingPoints';
+
+import AccountScreen from '../screens/commonModules/account';
+import MyTripScreen from '../screens/commonModules/myTrip';
 import WalletScreen from '../screens/commonModules/wallet';
 
 // Define the type for screen components
@@ -26,11 +29,13 @@ interface ScreenComponents {
   RegisterScreen: React.ComponentType<any>;
 
   HomeScreen: React.ComponentType<any>;
+  SearchScreen: React.ComponentType<any>;
+  SearchBusScreen: React.ComponentType<any>;
+  SelectBoardingPoint: React.ComponentType<any>;
+
   MyTripScreen: React.ComponentType<any>;
   WalletScreen: React.ComponentType<any>;
   AccountScreen: React.ComponentType<any>;
-  SearchScreen: React.ComponentType<any>;
-  SearchBusScreen: React.ComponentType<any>;
 }
 
 // Exporting the screens as a typed object
@@ -43,11 +48,13 @@ const Screens: ScreenComponents = {
   RegisterScreen,
   
   HomeScreen,
+  SelectBoardingPoint,
+  SearchScreen,
+  SearchBusScreen,
+  
   MyTripScreen,
   WalletScreen,
   AccountScreen,
-  SearchScreen,
-  SearchBusScreen,
 };
 
 export default Screens;

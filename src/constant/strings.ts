@@ -58,6 +58,8 @@ const strings: StringMap = {
   terms: 'Terms of service',
   verified: 'Phone Number Verified',
   verifiedDisc: 'You will be redirected to the main page in a few moments',
+  phoneVerification: 'Phone Verification',
+  enterCodeDisc: 'Enter 4 digit verification code sent to your phone number',
 };
 
 const tabBar: StringMap = {
@@ -96,11 +98,11 @@ const ERROR_HANDLER_TEXT: StringMap = {
   pleaseEnterValidMobileNo: 'Please enter a valid phone number',
   enterPassword: 'Please enter password',
   passwordIncorrect: 'Password incorrect',
-  enterNewPassword:"Please enter new password",
-  enterConfirmPassword:"Please enter confirm password",
-  passwordsShouldBeSame:"Passwords should be same",
-  enterOtp:"Please Enter OTP",
-  enterValidPassword:"Please enter valid password"
+  enterNewPassword: 'Please enter new password',
+  enterConfirmPassword: 'Please enter confirm password',
+  passwordsShouldBeSame: 'Passwords should be same',
+  enterOtp: 'Please Enter OTP',
+  enterValidPassword: 'Please enter valid password',
 };
 
 export {strings, dashboard, tabBar, PLACEHOLDERS, ERROR_HANDLER_TEXT};

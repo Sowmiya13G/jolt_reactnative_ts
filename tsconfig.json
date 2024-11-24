@@ -9,10 +9,11 @@
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "isolatedModules": true,
-    "jsx": "react-native"
+    "jsx": "react-native",
+    "resolveJsonModule": true 
   },
   "include": [
-    "index.js",
+    "index.tsx",
     "App.js",
     "declaration.d.ts",
     "src/**/*"

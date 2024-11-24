@@ -12,6 +12,7 @@ import Button from '../../components/button';
 import CustomSafeArea from '../../components/customSafeArea';
 import Header from '../../components/header';
 import PersonCount from '../../components/personCount';
+import RenderDates from '../../components/renderDates';
 import SearchComponent from '../../components/searchComponent';
 import Spacer from '../../components/spacer';
 
@@ -25,9 +26,8 @@ import { getNextDates, getSessionText } from '../../utils/helperFunctions';
 
 // styles
 import styles from '../styles/homeScreen';
-
+// svg imports
 import SEARCH from "../../assets/svg/search.svg";
-import RenderDates from '../../components/renderDates';
 
 const HomeScreen = () => {
   //props
@@ -144,9 +144,10 @@ const HomeScreen = () => {
       />
       <FlatList
         data={['HOME_SCREEN']}
-        showsHorizontalScrollIndicator={false}
-        keyExtractor={(item, index) => index.toString()}
         renderItem={renderBody}
+        keyExtractor={(item, index) => index.toString()}
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
       />
     </CustomSafeArea>
   );

@@ -1,45 +1,42 @@
-import React, {useState} from 'react';
-import {FlatList, View} from 'react-native';
+import React from 'react';
+import { FlatList, View, ViewStyle } from 'react-native';
 
 // navigation
-import NavigationService from '../../navigation/NavigationService';
+import navigationService from '../../navigation/navigationService';
 
-//packages
-import PropTypes from 'prop-types';
-import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
+// packages
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 // components
 import CustomSafeArea from '../../components/customSafeArea';
 import Header from '../../components/header';
 import Spacer from '../../components/spacer';
 
-// constant
-import {colors} from '../../constant/theme';
+// constants
+import { iconPathURL } from '../../constant/iconpath';
+import { colors } from '../../constant/theme';
 
+// prop types
+import {
+  BoardingPoint,
+  BoardingPointRouteParams,
+} from '../../propTypes/screenProps';
 // styles
-import {iconPathURL} from '../../constant/iconpath';
-
 import styles from '../styles/selectBoardingPoints';
 
-const SelectBoardingPoints = props => {
-  //props
+const SelectBoardingPoint: React.FC<BoardingPointRouteParams> = props => {
+  // props
   const {data} = props.route.params;
 
   // local states
-  const [selectedFilters, setSelectedFilters] = useState([]);
-  const [modalVisible, setModalVisible] = useState(false);
 
-  // use effects
+  // ---------------------------------------- Functionalities ----------------------------------------
 
-  // ------------------ FUNCTIONALITIES ----------------------
+  // ---------------------------------------- set data functions ----------------------------------------
 
-  const handleFilterSelect = selectedItems => {
-    setSelectedFilters(selectedItems);
-  };
+  // ---------------------------------------- render ui ----------------------------------------
 
-  // ------------------ RENDER UI ----------------------
-
-  const renderBody = ({item}) => {
+  const renderBody = ({item}: {item: BoardingPoint}): JSX.Element => {
     return (
       <View style={styles.subContainer}>
         <Spacer height={hp('3%')} />
@@ -48,11 +45,11 @@ const SelectBoardingPoints = props => {
   };
 
   return (
-    <CustomSafeArea style={styles.container} statusBarBGColor={colors.grey_F1}>
+    <CustomSafeArea
+      style={styles.container as ViewStyle}
+      statusBarBGColor={colors.grey_F1}>
       <Header
-        goBack={() => {
-          NavigationService.goBack();
-        }}
+        goBack={() => navigationService.goBack()}
         title={`${data?.from} To ${data?.to}`}
         color={colors.black_00}
         isRightIcon={true}
@@ -71,8 +68,4 @@ const SelectBoardingPoints = props => {
   );
 };
 
-SelectBoardingPoints.propTypes = {
-  route: PropTypes.shape({}),
-};
-
-export default SelectBoardingPoints;
+export default SelectBoardingPoint;

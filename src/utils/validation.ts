@@ -118,7 +118,6 @@ export function validateFormPassword(
   const isForgotPasswordScreen = type === strings.forgotPasswordTitle;
   const isNewPasswordScreen = type === strings.createNewPassword;
 
-  console.log("🚀 ~ data:", data)
   if (isForgotPasswordScreen) {
     if (!data.email) {
       errors['email'] = ERROR_HANDLER_TEXT.pleaseEnterEmail;

@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
-import {FlatList, Text, View} from 'react-native';
+import React, { useState } from 'react';
+import { FlatList, Text, View } from 'react-native';
 
 // navigation
 import navigationService from '../../navigation/navigationService';
 
 //packages
-import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 // components
 import Button from '../../components/button';
@@ -15,60 +15,68 @@ import Spacer from '../../components/spacer';
 import TextInputComponent from '../../components/textInput';
 
 // constant
-import {SCREENS} from '../../constant';
-import {iconPathURL} from '../../constant/iconpath';
-import {strings} from '../../constant/strings';
-import {baseStyle, colors, sizes} from '../../constant/theme';
+import { SCREENS } from '../../constant';
+import { iconPathURL } from '../../constant/iconpath';
+import { strings } from '../../constant/strings';
+import { baseStyle, colors, sizes } from '../../constant/theme';
 
-// styles
+// utils
+import { validateFormPassword } from '../../utils/validation';
+
+// prop types
 import {
-  DataState,
-  ErrorState,
+  ForgotPasswordScreenDataState,
+  ForgotPasswordScreenErrorState,
   ForgotPasswordScreenProps,
-} from '../../propTypes/formProps';
-import styles from '../styles/forgotPassword';
+} from '../../propTypes/screenProps';
 
+// SVG imports
 import LOCK from '../../assets/svg/lock.svg';
 import EMAIL from '../../assets/svg/mail.svg';
-import {validateFormPassword} from '../../utils/validation';
+
+// styles
+import styles from '../styles/forgotPassword';
 
 const ForgotPasswordScreen: React.FC<ForgotPasswordScreenProps> = ({route}) => {
+  // route props
   const {type} = route.params;
 
-  const [data, setData] = useState<DataState>({
+  // local states
+  const [data, setData] = useState<ForgotPasswordScreenDataState>({
     email: '',
     newPassword: '',
     confirmPassword: '',
   });
 
-  const [errData, setErrData] = useState<ErrorState>({
+  const [errData, setErrData] = useState<ForgotPasswordScreenErrorState>({
     email: '',
     newPassword: '',
     confirmPassword: '',
   });
 
+  // variables (screen type)
   const isForgotPasswordScreen = type === strings.forgotPasswordTitle;
   const isNewPasswordScreen = type === strings.createNewPassword;
 
-  const handleChange = (field: keyof DataState) => (text: string) => {
-    setErrData(prevErrData => ({
-      ...prevErrData,
-      [field]: '',
-    }));
+  // ---------------------------------------- set data functions ----------------------------------------
+  const handleChange =
+    (field: keyof ForgotPasswordScreenDataState) => (text: string) => {
+      setErrData(prevErrData => ({
+        ...prevErrData,
+        [field]: '',
+      }));
 
-    setData(prevData => ({
-      ...prevData,
-      [field]: text,
-    }));
-  };
+      setData(prevData => ({
+        ...prevData,
+        [field]: text,
+      }));
+    };
 
-  // Functions
+  // ---------------------------------------- Functionalities ----------------------------------------
   const handleSubmit = (): void => {
     const validationResult = validateFormPassword(data, type);
-    console.log("🚀 ~ handleSubmit ~ validationResult:", validationResult)
 
     if (validationResult.isValid) {
-      console.log("🚀 ~ handleSubmit ~ validationResult.isValid:", validationResult.isValid)
       isForgotPasswordScreen
         ? navigationService.navigate(SCREENS.OTP_SCREEN, {
             type: strings.forgotPasswordTitle,
@@ -83,6 +91,7 @@ const ForgotPasswordScreen: React.FC<ForgotPasswordScreenProps> = ({route}) => {
     }
   };
 
+  // ---------------------------------------- render ui ----------------------------------------
   const renderBody = () => (
     <View style={styles.subContainer}>
       <Spacer height={hp('10%')} />
@@ -173,9 +182,10 @@ const ForgotPasswordScreen: React.FC<ForgotPasswordScreenProps> = ({route}) => {
       />
       <FlatList
         data={['FORGOT_PASSWORD']}
-        showsHorizontalScrollIndicator={false}
-        keyExtractor={(item, index) => index.toString()}
         renderItem={renderBody}
+        keyExtractor={(item, index) => index.toString()}
+        showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
       />
     </CustomSafeArea>
   );
