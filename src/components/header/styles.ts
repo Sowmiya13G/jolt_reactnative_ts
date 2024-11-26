@@ -1,6 +1,9 @@
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 //package
-import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 import {baseStyle, colors} from '../../constant/theme';
 
 const styles = StyleSheet.create({
@@ -10,6 +13,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: wp('3%'),
     alignItems: 'center',
     alignContent: 'center',
+    marginTop: Platform.OS == 'android' ? heightPercentageToDP('2%') : 0,
   },
   leftContainer_type2: {},
   titleText: {
@@ -45,7 +49,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'flex-start',
   },
-
+  rightIconView1: {
+    ...baseStyle.iconStyle(wp('1%')),
+    padding: wp('4%'),
+    borderRadius: wp('5%'),
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+  },
   rightIcon: {
     ...baseStyle.iconStyle('5.5%'),
     justifyContent: 'center',

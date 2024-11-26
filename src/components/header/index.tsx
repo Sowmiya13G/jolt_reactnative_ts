@@ -2,7 +2,10 @@ import React from 'react';
 import {Text, TouchableOpacity, View, ViewStyle} from 'react-native';
 
 // packages
-import {heightPercentageToDP} from 'react-native-responsive-screen';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
 
 // styles
 import styles from './styles';
@@ -174,23 +177,26 @@ const Header: React.FC<HeaderProps> = ({
             })()}
 
           {Boolean(isRightIcon) && (
-            <TouchableOpacity
-              onPress={() => {
-                rightIconPress?.();
-              }}
-              style={styles.leftIconView}>
-              {Boolean(rightIcon) ? (
-                React.createElement(rightIcon, {
-                  fill: rightTintColor,
-                  style: [styles.imageOnboarding],
-                })
-              ) : (
-                <BACK_ARROW
-                  fill={rightTintColor}
-                  style={[styles.imageOnboarding]}
-                />
-              )}
-            </TouchableOpacity>
+            <>
+              <Spacer width={widthPercentageToDP('1%')} />
+              <TouchableOpacity
+                onPress={() => {
+                  rightIconPress?.();
+                }}
+                style={styles.rightIconView1}>
+                {Boolean(rightIcon) ? (
+                  React.createElement(rightIcon, {
+                    fill: rightTintColor,
+                    style: [styles.imageOnboarding],
+                  })
+                ) : (
+                  <BACK_ARROW
+                    fill={rightTintColor}
+                    style={[styles.imageOnboarding]}
+                  />
+                )}
+              </TouchableOpacity>
+            </>
           )}
         </>
       )}

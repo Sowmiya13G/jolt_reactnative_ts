@@ -1,20 +1,20 @@
-// screens/selectSeat.tsx
-
 import React, {useState} from 'react';
-import {FlatList, ViewStyle, Text} from 'react-native';
+import {Animated, FlatList, ViewStyle} from 'react-native';
 
 // navigation
 import navigationService from '../../navigation/navigationService';
 
 // packages
-import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 
 // components
-import Button from '../../components/button';
 import CustomSafeArea from '../../components/customSafeArea';
+import DraggableView from '../../components/draggableView';
 import Header from '../../components/header';
 import Spacer from '../../components/spacer';
-import DraggableView from '../../components/draggableView';
 
 // constants
 import {colors} from '../../constant/theme';
@@ -39,26 +39,77 @@ const SelectSeat: React.FC<BoardingPointRouteParams> = props => {
   });
   const disc = `${name} - ${timePeriod[0]}, ${formattedDate}`;
 
-  const [rbsheetHeight, setRbsheetHeight] = useState(hp('10%'));
-  const [borderRadius, setBorderRadius] = useState(0);
+  // use state
+  const [rbsheetHeight, setRbsheetHeight] = useState<string | number>(
+    hp('10%'),
+  );
+  const [borderRadius, setBorderRadius] = useState<string | number>(wp('0%'));
 
+  const shadowOpacity = useState(new Animated.Value(0))[0];
+  const shadowOpacitySafeArea = useState(new Animated.Value(1))[0];
   // ---------------------------------------- render ui ----------------------------------------
 
   const renderBody = () => {
-    return (
-      <>
-        <Button
-          text="Open RBSheet"
-          onPress={() => setRbsheetHeight(hp('80%'))}
-        />
-      </>
-    );
+    return <></>;
   };
+
+  // const updateShadowOpacity = (height: string | number) => {
+  //   if (Number(height) > hp('50%')) {
+  //     Animated.timing(shadowOpacity, {
+  //       toValue: 0.4,
+  //       duration: 300,
+  //       useNativeDriver: true,
+  //     }).start();
+  //     Animated.timing(shadowOpacitySafeArea, {
+  //       toValue: 0.3,
+  //       duration: 300,
+  //       useNativeDriver: true,
+  //     }).start();
+  //   } else {
+  //     Animated.timing(shadowOpacity, {
+  //       toValue: 0,
+  //       duration: 300,
+  //       useNativeDriver: true,
+  //     }).start();
+  //     Animated.timing(shadowOpacitySafeArea, {
+  //       toValue: 1,
+  //       duration: 300,
+  //       useNativeDriver: true,
+  //     }).start();
+  //   }
+  // };
+
+  const updateShadowOpacity = (height: string | number) => {
+    const opacityValue = Number(height) > hp('50%') ? 0.4 : 0;
+    const safeAreaOpacityValue = Number(height) > hp('50%') ? 0.3 : 1;
+  
+    Animated.timing(shadowOpacity, {
+      toValue: opacityValue,
+      duration: 300,
+      useNativeDriver: true, 
+    }).start();
+  
+    Animated.timing(shadowOpacitySafeArea, {
+      toValue: safeAreaOpacityValue,
+      duration: 300,
+      useNativeDriver: true, 
+    }).start();
+  };
+  
+
+  React.useEffect(() => {
+    updateShadowOpacity(rbsheetHeight);
+  }, [rbsheetHeight]);
 
   return (
     <CustomSafeArea
       style={styles.container as ViewStyle}
-      statusBarBGColor={colors.white_FF}>
+      opacity={shadowOpacitySafeArea}
+      statusBarBGColor={
+        Number(rbsheetHeight) > hp('70%')
+          ? 'rgba(0, 0, 0, 0.5)'
+          : colors.white_FF
+      }>
       <Header
         goBack={() => navigationService.goBack()}
         title={`${data?.from} To ${data?.to}`}
@@ -74,17 +125,18 @@ const SelectSeat: React.FC<BoardingPointRouteParams> = props => {
         showsVerticalScrollIndicator={false}
       />
 
+      <Animated.View
+        style={[
+          styles.shadowOverlay,
+          {
+            opacity: shadowOpacity,
+          },
+        ]}
+      />
       <DraggableView
         rbsheetHeight={rbsheetHeight}
         setRbsheetHeight={setRbsheetHeight}
-        customStyle={{
-          backgroundColor: 'lightblue', // Custom background color
-          shadowColor: '#000',
-          shadowOpacity: 0.5,
-          shadowRadius: 10,
-          elevation: 5, // Shadow for Android
-          position: 'relative',
-        }}
+        customStyle={[styles.dragView]}
         setBorderRadius={setBorderRadius}></DraggableView>
     </CustomSafeArea>
   );

@@ -1,7 +1,5 @@
-import { Platform, StyleSheet } from 'react-native';
-import {
-    heightPercentageToDP as hp
-} from 'react-native-responsive-screen';
+import { StyleSheet } from 'react-native';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { colors } from '../constant/theme';
 
 const styles = StyleSheet.create({
@@ -10,11 +8,13 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: colors.white_FF,
-    height: Platform.OS === 'android' ? hp('7%') : hp('9%'),
+    height: hp('9%'),
     position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
+    elevation:3
+    // ...baseStyle.cardElevationStyle(),
   },
   tabItem: {
     flex: 1,
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   iconContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: Platform.OS === 'android' ? hp('7%') : hp('9%'),
+    height:  hp('9%'),
   },
   activeTab: {
     borderTopWidth: 3,

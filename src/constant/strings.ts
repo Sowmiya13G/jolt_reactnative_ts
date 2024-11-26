@@ -80,11 +80,30 @@ const dashboard: StringMap = {
   city: 'City',
   ok: 'Ok',
   cancel: 'Cancel',
-  changeBoarding:"Change Boarding",
-  changeDropping:"Change Dropping",
-  droppingPoints:"Dropping Points",
-  boardingPoints:"Boarding Points",
-  selectSeat:"Select Seat"
+  changeBoarding: 'Change Boarding',
+  changeDropping: 'Change Dropping',
+  droppingPoints: 'Dropping Points',
+  boardingPoints: 'Boarding Points',
+  selectSeat: 'Select Seat',
+};
+
+const account: StringMap = {
+  myAcc: 'My Account',
+  addRoute: 'Add Route',
+  addPassenger: 'Add Passenger',
+  help: 'Help Center',
+  rateApp: 'Rate Our App',
+  yourName: 'Your name',
+  name: 'Olivia Rhye',
+  email: 'Email',
+  mail: 'oliviarhye@gmail.com',
+  gender: 'Gender',
+  genderValue: 'Male',
+  phoneNo: 'Phone Number',
+  number: '+6282198761234',
+ passengerList: "Passenger list",
+ fullName:"Full Name",
+ age:"Age"
 };
 
 const PLACEHOLDERS: StringMap = {
@@ -110,4 +129,4 @@ const ERROR_HANDLER_TEXT: StringMap = {
   enterValidPassword: 'Please enter valid password',
 };
 
-export {strings, dashboard, tabBar, PLACEHOLDERS, ERROR_HANDLER_TEXT};
+export {strings, dashboard, tabBar, account, PLACEHOLDERS, ERROR_HANDLER_TEXT};

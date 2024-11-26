@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     borderRadius: wp('5%'),
   },
   input: {
-    height: hp('5%'),
+    height: Platform.OS == 'android' ? hp('6%') : hp('5%'),
     marginHorizontal: wp('2%'),
     borderColor: colors.transparent,
   },
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginHorizontal: wp('4%'),
     height: hp('3%'),
-    zIndex:100
+    zIndex: 100,
   },
   horizontalLine: {
     height: wp('0.3%'),

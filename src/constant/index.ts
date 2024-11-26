@@ -11,16 +11,21 @@ const SCREENS = {
   REGISTER_SCREEN: 'RegisterScreen',
 
   // // bottom tabs
-  HOME_SCREEN: 'HomeScreen',
-  DASHBOARD: 'HomeScreen',
-  MY_TRIP: 'MyTripScreen',
-  ACCOUNT_SCREEN: 'AccountScreen',
-  WALLET_SCREEN: 'WalletScreen',
   BOTTOM_TAB_NAV: 'BottomTabNavigator',
+  DASHBOARD: 'HomeScreen',
+  HOME_SCREEN: 'HomeScreen',
   SEARCH_SCREEN: 'SearchScreen',
   SEARCH_BUS_SCREEN: 'SearchBusScreen',
   SELECT_BOARDING_POINT: 'SelectBoardingPoint',
   SELECT_SEAT: 'SelectSeat',
+
+  MY_TRIP_STACK: 'MyTripScreen',
+  MY_TRIP: 'MyTripScreen',
+
+  ACCOUNT_SCREEN: 'AccountScreen',
+
+  WALLET_STACK: 'WalletScreen',
+  WALLET_SCREEN: 'WalletScreen',
 } as const; 
 
 type ScreenNames = keyof typeof SCREENS;

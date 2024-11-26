@@ -1,22 +1,23 @@
 import React from 'react';
-import { StatusBar, View, ViewStyle } from 'react-native';
+import {Animated, StatusBar, View, ViewStyle} from 'react-native';
 
 // packages
 import {
-    SafeAreaProvider,
-    useSafeAreaInsets,
+  SafeAreaProvider,
+  useSafeAreaInsets,
 } from 'react-native-safe-area-context';
 
 // constants
-import { colors } from '../../constant/theme';
+import {colors} from '../../constant/theme';
 
 interface CustomSafeAreaProps {
-  style?: ViewStyle; 
-  backgroundColor?: string; 
+  style?: ViewStyle;
+  backgroundColor?: string;
   statusBarBGColor?: string;
-  isCustomFooter?: boolean; 
-  footerComp?: () => JSX.Element; 
-  children: React.ReactNode; 
+  isCustomFooter?: boolean;
+  footerComp?: () => JSX.Element;
+  children: React.ReactNode;
+  opacity?: Animated.Value;
 }
 
 const CustomSafeArea: React.FC<CustomSafeAreaProps> = ({
@@ -30,31 +31,32 @@ const CustomSafeArea: React.FC<CustomSafeAreaProps> = ({
   isCustomFooter,
   footerComp = () => <></>,
   children,
+  opacity = new Animated.Value(1),
 }) => {
-
-  const CustomStatusBar: React.FC<{ backgroundColor: string; barStyle?: 'light-content' | 'dark-content' }> = ({
-    backgroundColor,
-    barStyle = 'dark-content',
-  }) => {
+  const CustomStatusBar: React.FC<{
+    backgroundColor: string;
+    barStyle?: 'light-content' | 'dark-content';
+    opacity: Animated.Value;
+  }> = ({backgroundColor, barStyle = 'dark-content', opacity}) => {
     const insets = useSafeAreaInsets();
 
     return (
-      <View style={{ height: insets.top, backgroundColor }}>
+      <Animated.View style={{height: insets.top, backgroundColor, opacity}}>
         <StatusBar
           animated={true}
           backgroundColor={backgroundColor}
           barStyle={barStyle}
         />
-      </View>
+      </Animated.View>
     );
   };
 
   return (
     <SafeAreaProvider>
-      <CustomStatusBar backgroundColor={statusBarBGColor} />
-        <View pointerEvents="auto" style={style}>
-          {children}
-        </View>
+      <CustomStatusBar backgroundColor={statusBarBGColor} opacity={opacity} />
+      <View pointerEvents="auto" style={style}>
+        {children}
+      </View>
       {isCustomFooter && footerComp && footerComp()}
     </SafeAreaProvider>
   );

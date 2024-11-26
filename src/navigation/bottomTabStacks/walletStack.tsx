@@ -2,39 +2,24 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import {SCREENS} from '../../constant';
 import ScreenName from '../screensNames';
+
 interface ScreenComponent {
   ScreenName: string;
   Component: React.ComponentType<any>;
 }
 
-const DashboardStack: React.FC = () => {
+const WalletStack: React.FC = () => {
   const Stack = createNativeStackNavigator();
 
   const ScreensComponentArr: ScreenComponent[] = [
     {
-      ScreenName: SCREENS.DASHBOARD,
-      Component: ScreenName.HomeScreen,
-    },
-    {
-      ScreenName: SCREENS.SEARCH_SCREEN,
-      Component: ScreenName.SearchScreen,
-    },
-    {
-      ScreenName: SCREENS.SEARCH_BUS_SCREEN,
-      Component: ScreenName.SearchBusScreen,
-    },
-    {
-      ScreenName: SCREENS.SELECT_BOARDING_POINT,
-      Component: ScreenName.SelectBoardingPoint,
-    },
-    {
-      ScreenName: SCREENS.SELECT_SEAT,
-      Component: ScreenName.SelectSeat,
+      ScreenName: SCREENS.WALLET_SCREEN,
+      Component: ScreenName?.WalletScreen,
     },
   ];
 
   return (
-    <Stack.Navigator initialRouteName={SCREENS.DASHBOARD}>
+    <Stack.Navigator initialRouteName={SCREENS.WALLET_SCREEN}>
       {ScreensComponentArr.map(({ScreenName, Component}) => (
         <Stack.Screen
           key={ScreenName}
@@ -47,4 +32,4 @@ const DashboardStack: React.FC = () => {
   );
 };
 
-export default DashboardStack;
+export default WalletStack;

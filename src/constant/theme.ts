@@ -4,6 +4,8 @@ import {
   widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 
+const isIOS = Platform.OS == 'ios';
+
 type ColorPalette = Record<string, string>;
 type FontFamily = Record<string, string>;
 type Sizes = Record<string, number>;
@@ -29,18 +31,18 @@ const sizes: Sizes = {
   mediumFontText: hp('1.5%'),
   mediumFontTwoText: hp('2.5%'),
 
-  size0: Platform.OS === 'ios' ? hp('1%') : hp('1.2%'),
-  size01: Platform.OS === 'ios' ? hp('1.3%') : hp('1.5%'),
-  size11: Platform.OS === 'ios' ? hp('1.35%') : hp('1.55%'),
-  size1: Platform.OS === 'ios' ? hp('1.5%') : hp('1.7%'),
-  size2: Platform.OS === 'ios' ? hp('1.8%') : hp('1.9%'),
-  size3: Platform.OS === 'ios' ? hp('2%') : hp('2.2%'),
-  size4: Platform.OS === 'ios' ? hp('2.3%') : hp('2.5%'),
-  size5: Platform.OS === 'ios' ? hp('2.5%') : hp('2.7%'),
-  size6: Platform.OS === 'ios' ? hp('2.8%') : hp('3%'),
-  size7: Platform.OS === 'ios' ? hp('3%') : hp('3.2%'),
-  size011: Platform.OS === 'ios' ? hp('1.4%') : hp('1.6%'),
-  size02: Platform.OS === 'ios' ? hp('1.6%') : hp('1.8%'),
+  size0: isIOS ? hp('1%') : hp('1.2%'),
+  size01: isIOS ? hp('1.3%') : hp('1.5%'),
+  size11: isIOS ? hp('1.35%') : hp('1.55%'),
+  size1: isIOS ? hp('1.5%') : hp('1.7%'),
+  size2: isIOS ? hp('1.8%') : hp('1.9%'),
+  size3: isIOS ? hp('2%') : hp('2.2%'),
+  size4: isIOS ? hp('2.3%') : hp('2.5%'),
+  size5: isIOS ? hp('2.5%') : hp('2.7%'),
+  size6: isIOS ? hp('2.8%') : hp('3%'),
+  size7: isIOS ? hp('3%') : hp('3.2%'),
+  size011: isIOS ? hp('1.4%') : hp('1.6%'),
+  size02: isIOS ? hp('1.6%') : hp('1.8%'),
 };
 
 // Font families
@@ -75,7 +77,7 @@ const baseStyle: BaseStyle = {
   }),
   cardElevationStyle: () => ({
     elevation: 3,
-    ...(Platform.OS === 'ios' && {
+    ...(isIOS && {
       shadowColor: colors.black_00,
       shadowOpacity: 0.26,
       shadowOffset: {width: 1, height: 2},
@@ -106,8 +108,7 @@ const colors = {
 
   white_FF: '#FFFFFF',
   white_FB: '#F9FAFB',
-  white_F8:"#F8F8F8",
-
+  white_F8: '#F8F8F8',
 
   orange_05: '#FD6905',
   red: '#D92D20',
@@ -131,7 +132,8 @@ const colors = {
   grey_085: '#667085',
   grey_685: '#868685',
   grey_5DD: '#D0D5DD',
-  
+  grey_054:"#344054",
+
   // green variants
   green_7D: '#24DD7D',
   green_2F: '#3AB72F',
@@ -139,7 +141,7 @@ const colors = {
   green_D6: '#CDEED6',
   green_63C: '#20463C',
   green_38: '#129C38',
-  green_C1:"#BEE0C1",
+  green_C1: '#BEE0C1',
 
   // blue variants
   blue_F4: '#0056F4',

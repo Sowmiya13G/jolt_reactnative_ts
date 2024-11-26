@@ -1,6 +1,9 @@
 // Select boarding points screen styles
 import {StyleSheet} from 'react-native';
-import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
+import {
+  heightPercentageToDP,
+  widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 import {baseStyle, colors, sizes} from '../../constant/theme';
 
 const styles = StyleSheet.create({
@@ -76,6 +79,19 @@ const styles = StyleSheet.create({
   },
   textView: {width: '55%'},
   address: {width: '40%'},
+  dragView: {
+    position: 'relative',
+  },
+  shadowOverlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    zIndex: 0,
+    height: heightPercentageToDP('100%'),
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    pointerEvents: 'none',
+  },
 });
 
 export default styles;
