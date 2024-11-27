@@ -101,14 +101,19 @@ const account: StringMap = {
   genderValue: 'Male',
   phoneNo: 'Phone Number',
   number: '+6282198761234',
- passengerList: "Passenger list",
- fullName:"Full Name",
- age:"Age"
+  passengerList: 'Passenger list',
+  fullName: 'Full Name',
+  age: 'Age',
+  route: 'Route',
+  addRouteDisc: 'Add your route for recommendations & instant booking',
+  suggestions: 'Suggestions for you',
 };
 
 const PLACEHOLDERS: StringMap = {
   yourCurrentLocation: 'Your current location',
   searchForDestination: 'Search for a destination',
+  fromCity: 'From City',
+  toCity: 'To City',
 };
 
 const ERROR_HANDLER_TEXT: StringMap = {

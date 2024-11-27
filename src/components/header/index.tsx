@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, TouchableOpacity, View, ViewStyle} from 'react-native';
+import { Text, TouchableOpacity, View, ViewStyle } from 'react-native';
 
 // packages
 import {
@@ -14,11 +14,11 @@ import styles from './styles';
 import Spacer from '../spacer';
 
 // constants
-import {baseStyle, colors, sizes} from '../../constant/theme';
+import { baseStyle, colors, sizes } from '../../constant/theme';
 
 // utils
-import {SvgProps} from 'react-native-svg';
-import {formatDateLabel} from '../../utils/helperFunctions';
+import { SvgProps } from 'react-native-svg';
+import { formatDateLabel } from '../../utils/helperFunctions';
 
 import BACK_ARROW from '../../assets/svg/arrowBack.svg';
 import NOTIFICATION from '../../assets/svg/notification.svg';
@@ -36,12 +36,14 @@ type HeaderProps = {
   isLeftIcon?: boolean;
   leftIcon1?: React.ElementType<SvgProps>;
   goBack?: () => void;
+  leftIconView?: ViewStyle;
 
   // Right icon props
   isRightIcon?: boolean;
   rightIcon?: React.ElementType<SvgProps>;
   rightIconPress?: () => void;
   rightTintColor?: string;
+  rightIconView?:ViewStyle;
 
   // Date props
   date?: string | null;
@@ -63,12 +65,14 @@ const Header: React.FC<HeaderProps> = ({
   isLeftIcon = true,
   leftIcon1 = BACK_ARROW,
   goBack,
+  leftIconView,
 
   // Right icon props
   isRightIcon,
   rightIcon = BACK_ARROW,
   rightIconPress = () => {},
   rightTintColor = colors.black_00,
+  rightIconView,
 
   headerStyle,
 
@@ -83,7 +87,7 @@ const Header: React.FC<HeaderProps> = ({
           onPress={() => {
             goBack?.();
           }}
-          style={styles.leftIconView}>
+          style={[styles.leftIconView, leftIconView]}>
           {Boolean(leftIcon1) ? (
             React.createElement(leftIcon1, {
               fill: tintColor,
@@ -183,7 +187,7 @@ const Header: React.FC<HeaderProps> = ({
                 onPress={() => {
                   rightIconPress?.();
                 }}
-                style={styles.rightIconView1}>
+                style={[styles.rightIconView1,rightIconView]}>
                 {Boolean(rightIcon) ? (
                   React.createElement(rightIcon, {
                     fill: rightTintColor,

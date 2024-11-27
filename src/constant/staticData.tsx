@@ -1,11 +1,11 @@
-import { strings } from './strings';
+import { account, strings } from './strings';
 
 // packages
 import { widthPercentageToDP } from 'react-native-responsive-screen';
 import { SvgProps } from 'react-native-svg';
 
 // propTypes
-import { RegisterScreenFormData } from '../propTypes/screenProps';
+import { ProfileData, RegisterScreenFormData } from '../propTypes/screenProps';
 
 // SVG
 import ONBOARDING1 from '../assets/svg/onboarding1.svg';
@@ -114,3 +114,10 @@ export const filterData = [
   {id: 7, label: 'Complimentary', value: 'Complimentary'},
   {id: 8, label: 'Low price', value: 'Low price'},
 ];
+
+export const profileData: ProfileData = {
+  name: account.name,
+  mail: account.mail,
+  gender: account.genderValue,
+  number: account.number,
+};

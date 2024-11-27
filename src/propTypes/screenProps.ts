@@ -1,4 +1,7 @@
+import { account } from "../constant/strings";
 // LOGIN
+
+
 // props
 export interface LoginScreenProps {
   route?: Record<string, unknown>;
@@ -178,3 +181,10 @@ export interface Passenger {
   age: string;
   gender: string;
 }
+
+export type ProfileData = {
+  name: string;
+  mail: string;
+  gender: string;
+  number: string;
+};

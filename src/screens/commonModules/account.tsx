@@ -7,28 +7,43 @@ import {
   View,
 } from 'react-native';
 
+// packages
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP,
+} from 'react-native-responsive-screen';
+
 // navigation
 import navigationService from '../../navigation/navigationService';
 
 // components
+import AccDetails from '../../components/accountDetailsComp';
+import AddRoute from '../../components/addRoute';
 import CustomSafeArea from '../../components/customSafeArea';
 import Header from '../../components/header';
+import PassengerList from '../../components/passengerListData';
+import Spacer from '../../components/spacer';
 
 // constants
+import {profileData} from '../../constant/staticData';
+import {account} from '../../constant/strings';
 import {baseStyle, colors, sizes} from '../../constant/theme';
-import styles from '../styles/account';
 
-import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
+// prop types
+import {
+  AccountScreenProps,
+  Passenger,
+  ProfileData,
+} from '../../propTypes/screenProps';
+
+// SVG Imports
 import DOWNARROW from '../../assets/svg/downArrow.svg';
 import EDIT from '../../assets/svg/edit.svg';
+import GREY_ARROW from '../../assets/svg/greyArrowBack.svg';
 import TICK from '../../assets/svg/tick.svg';
 
-import Spacer from '../../components/spacer';
-import {account} from '../../constant/strings';
-
-import PassengerList from '../../components/passengerListData';
-import {AccountScreenProps, Passenger} from '../../propTypes/screenProps';
-import AccDetails from '../../components/accountDetailsComp';
+// styles
+import styles from '../styles/account';
 
 const data = [
   account.myAcc,
@@ -36,29 +51,10 @@ const data = [
   account.addPassenger,
   account.help || account.rateApp,
 ];
-type ProfileData = {
-  name: string;
-  mail: string;
-  gender: string;
-  number: string;
-};
-
-const profileDataTitle: ProfileData = {
-  name: account.yourName,
-  mail: account.email,
-  gender: account.gender,
-  number: account.phoneNo,
-};
-
-const profileData: ProfileData = {
-  name: account.name,
-  mail: account.mail,
-  gender: account.genderValue,
-  number: account.number,
-};
 
 const AccountScreen: React.FC<AccountScreenProps> = () => {
   // props
+
   // use state
   const [selectedType, setSelectedType] = useState<string | null>(null);
   const [enableEdit, setEnableEdit] = useState<boolean>(false);
@@ -91,40 +87,6 @@ const AccountScreen: React.FC<AccountScreenProps> = () => {
 
   // ---------------------------------------- render ui ----------------------------------------
 
-  const accDetails = () => {
-    return (
-      <>
-        {Object.keys(profileDataTitle).map(key => {
-          const typedKey = key as keyof ProfileData;
-          return (
-            <React.Fragment key={typedKey}>
-              <Text
-                style={[
-                  baseStyle.txtStyleOutInterMedium(
-                    sizes.size02,
-                    colors.grey_7C,
-                  ),
-                ]}>
-                {profileDataTitle[typedKey]}
-              </Text>
-              <Spacer height={hp('1%')} />
-              <Text
-                style={[
-                  baseStyle.txtStyleOutInterRegular(
-                    sizes.size2,
-                    colors.black_00,
-                  ),
-                ]}>
-                {profileData[typedKey]}
-              </Text>
-              <Spacer height={hp('2%')} />
-            </React.Fragment>
-          );
-        })}
-      </>
-    );
-  };
-
   const expandedView = (item: string) => {
     const isMyAcc = item == account.myAcc;
     const isAddRoute = item == account.addRoute;
@@ -144,23 +106,22 @@ const AccountScreen: React.FC<AccountScreenProps> = () => {
     return (
       <View>
         {Boolean(isMyAcc) ? (
-          <>
-            <AccDetails
-              profileData={editableProfileData}
-              profileDataTitle={profileDataTitle}
-              enableEdit={enableEdit}
-              onChangeText={handleProfileChange}
-            />
-          </>
+          <AccDetails
+            profileData={editableProfileData}
+            profileDataTitle={profileData}
+            enableEdit={enableEdit}
+            onChangeText={handleProfileChange}
+          />
         ) : Boolean(isAddRoute) ? (
-          <>{Boolean(isAddRouteEdit) ? <></> : <></>}</>
+          <AddRoute
+            enableEdit={enableEdit}
+            onEdit={() => setEnableEdit(true)}
+          />
         ) : (
-          <View>
-            <PassengerList
-              passengerData={passengerData}
-              onRemovePassenger={removePassenger}
-            />
-          </View>
+          <PassengerList
+            passengerData={passengerData}
+            onRemovePassenger={removePassenger}
+          />
         )}
       </View>
     );
@@ -250,8 +211,11 @@ const AccountScreen: React.FC<AccountScreenProps> = () => {
         rightIcon={Boolean(enableEdit) ? TICK : EDIT}
         title="Olivia Rhye"
         titleDisc="+6282198761234"
-        headerStyle={{}}
-        rightIconPress={() => setEnableEdit(true)}
+        headerStyle={styles.header}
+        rightIconPress={() => setEnableEdit(!enableEdit)}
+        leftIconView={styles.leftIconView}
+        leftIcon1={GREY_ARROW}
+        rightIconView={styles.rightIconView}
       />
       <FlatList
         data={data}
