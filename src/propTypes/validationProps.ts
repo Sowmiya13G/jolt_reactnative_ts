@@ -6,6 +6,7 @@ export interface ValidationRegisterScreenFormErrors {
   dob?: string;
   email?: string;
   phoneNo?: string;
+  check?: boolean;
 }
 
 export interface ValidationErrors {

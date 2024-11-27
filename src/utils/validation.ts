@@ -1,6 +1,6 @@
-import { ERROR_HANDLER_TEXT, strings } from '../constant/strings';
-import { RegisterScreenFormData } from '../propTypes/screenProps';
-import { ValidationErrors, ValidationResult } from '../propTypes/validationProps';
+import {ERROR_HANDLER_TEXT, strings} from '../constant/strings';
+import {RegisterScreenFormData} from '../propTypes/screenProps';
+import {ValidationErrors, ValidationResult} from '../propTypes/validationProps';
 import {
   emailValidation,
   mobileNumberValidation,
@@ -48,6 +48,11 @@ export const validateRegisterForm = (
           mobileNumberValidation(value);
         if (!isPhoneValid && phoneErrors?.mobile) {
           errors.phoneNo = phoneErrors.mobile;
+        }
+        break;
+      case 'check':
+        if (!value) {
+          errors.check = ERROR_HANDLER_TEXT.acceptTC;
         }
         break;
       default:

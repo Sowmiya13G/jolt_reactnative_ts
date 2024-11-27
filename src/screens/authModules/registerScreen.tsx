@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
-import {FlatList, Image, Text, TouchableOpacity, View} from 'react-native';
+import {FlatList, Text, TouchableOpacity, View} from 'react-native';
 import navigationService from '../../navigation/navigationService';
 
 // Packages
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {
   heightPercentageToDP as hp,
-  widthPercentageToDP,
+  widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 
 // Components
@@ -15,10 +15,10 @@ import CustomSafeArea from '../../components/customSafeArea';
 import DropDown from '../../components/dropDown';
 import Spacer from '../../components/spacer';
 import TextInputComponent from '../../components/textInput';
+import DatePickerField from '../../components/datePickerField';
 
 // Constants
 import {SCREENS} from '../../constant';
-import {iconPathURL} from '../../constant/iconpath';
 import {genderData, registerScreenFields} from '../../constant/staticData';
 import {strings} from '../../constant/strings';
 import {baseStyle, colors, sizes} from '../../constant/theme';
@@ -33,6 +33,10 @@ import {
 } from '../../propTypes/screenProps';
 import {ValidationRegisterScreenFormErrors} from '../../propTypes/validationProps';
 
+// SVG Imports
+import CHECK from '../../assets/svg/check.svg';
+import UN_CHECK from '../../assets/svg/unCheck.svg';
+
 // Styles
 import styles from '../styles/registerScreen';
 
@@ -41,9 +45,10 @@ const initialData: RegisterScreenFormData = {
   firstName: '',
   middleName: '',
   gender: null,
-  dob: null,
+  dob: '',
   email: '',
   phoneNo: '',
+  check: undefined,
 };
 
 const RegisterScreen: React.FC<RegisterScreenProps> = ({route}) => {
@@ -53,13 +58,12 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({route}) => {
   // useState
   const [data, setData] = useState<RegisterScreenFormData>(initialData);
   const [errData, setErrData] = useState<RegisterScreenFormData>(initialData);
-  const [check, setCheck] = useState<boolean>(false);
 
   // ---------------------------------------- set data functions ----------------------------------------
 
   const handleInputChange = (
     fieldName: keyof RegisterScreenFormData,
-    value: string | object | null,
+    value: string | object | null | boolean,
   ) => {
     setErrData({
       ...errData,
@@ -79,9 +83,7 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({route}) => {
     if (Object.keys(errors).length > 0) {
       setErrData(errors);
     } else {
-      navigationService.navigate(SCREENS.OTP_SCREEN, {
-        type: strings.forgotPasswordTitle,
-      });
+      navigationService.navigate(SCREENS.BOTTOM_TAB_NAV);
     }
   };
 
@@ -90,11 +92,9 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({route}) => {
   const renderInputFields = () => {
     return registerScreenFields.map((field, index) => (
       <View key={index}>
-        {field.placeHolder === 'Gender' ? (
+        {field.placeHolder == 'Gender' ? (
           <>
             <DropDown
-              editable
-              enableLocalSearch
               placeholder={field.placeHolder}
               dropdownData={genderData}
               value={genderData.find(item => item.value === data[field.key])}
@@ -109,6 +109,17 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({route}) => {
               errText={
                 errData[field.key as keyof RegisterScreenFormData] ?? undefined
               }
+            />
+            <Spacer height={hp('2%')} />
+          </>
+        ) : field.key == 'dob' ? (
+          <>
+            <DatePickerField
+              date={data[field.key as keyof RegisterScreenFormData] as string}
+              placeholder={field.placeHolder}
+              showErrText={!!errData[field.key as keyof RegisterScreenFormData]}
+              errText={errData[field.key as keyof RegisterScreenFormData]}
+              onChange={date => handleInputChange('dob', date)}
             />
             <Spacer height={hp('2%')} />
           </>
@@ -160,47 +171,60 @@ const RegisterScreen: React.FC<RegisterScreenProps> = ({route}) => {
       </Text>
       <Spacer height={hp('4%')} />
       {renderInputFields()}
+      <Spacer height={hp('3%')} />
+      <View style={styles.row}>
+        <TouchableOpacity
+          onPress={() => handleInputChange('check', !data?.check)}>
+          {Boolean(data?.check) ? (
+            <CHECK height={wp('4.5%')} width={wp('4.5%')} />
+          ) : (
+            <UN_CHECK height={wp('4.5%')} width={wp('4.5%')} />
+          )}
+        </TouchableOpacity>
+        <Spacer width={wp('2%')} />
+        <Text
+          style={[
+            baseStyle.txtStyleOutInterRegular(sizes.size02, colors.grey_37),
+            styles.texAlign,
+          ]}>
+          {strings.iAgree}{' '}
+          <Text
+            style={[
+              baseStyle.txtStyleOutInterRegular(sizes.size02, colors.blue_F4),
+            ]}>
+            {strings.policy}{' '}
+          </Text>
+          <Text
+            style={[
+              baseStyle.txtStyleOutInterRegular(sizes.size02, colors.grey_37),
+            ]}>
+            {strings.and}{' '}
+          </Text>
+          <Text
+            style={[
+              baseStyle.txtStyleOutInterRegular(sizes.size02, colors.blue_F4),
+            ]}>
+            {strings.terms}
+          </Text>
+        </Text>
+      </View>
+      {Boolean(errData?.check) && (
+        <>
+          <Spacer height={hp('1%')} />
+          <Text
+            style={[
+              baseStyle.txtStyleOutInterRegular(sizes.size011, colors.red),
+            ]}>
+            {errData?.check}
+          </Text>
+        </>
+      )}
     </KeyboardAwareScrollView>
   );
 
   const renderFooter = () => {
     return (
       <View style={styles.footerContainer}>
-        <Spacer height={hp('3%')} />
-        <View style={styles.row}>
-          <TouchableOpacity onPress={() => setCheck(!check)}>
-            <Image
-              source={check ? iconPathURL.check : iconPathURL?.unCheck}
-              style={check ? styles.check : styles?.unCheck}
-            />
-          </TouchableOpacity>
-          <Spacer width={widthPercentageToDP('2%')} />
-          <Text
-            style={[
-              baseStyle.txtStyleOutInterRegular(sizes.size02, colors.grey_37),
-              styles.texAlign,
-            ]}>
-            {strings.iAgree}{' '}
-            <Text
-              style={[
-                baseStyle.txtStyleOutInterRegular(sizes.size02, colors.blue_F4),
-              ]}>
-              {strings.policy}{' '}
-            </Text>
-            <Text
-              style={[
-                baseStyle.txtStyleOutInterRegular(sizes.size02, colors.grey_37),
-              ]}>
-              {strings.and}{' '}
-            </Text>
-            <Text
-              style={[
-                baseStyle.txtStyleOutInterRegular(sizes.size02, colors.blue_F4),
-              ]}>
-              {strings.terms}
-            </Text>
-          </Text>
-        </View>
         <Spacer height={hp('2%')} />
         <Button
           onPress={handleSubmit}

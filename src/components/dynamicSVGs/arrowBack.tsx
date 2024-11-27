@@ -6,7 +6,6 @@ interface ArrowIconProps {
 }
 
 const ArrowIcon: React.FC<ArrowIconProps> = ({fill = 'white'}) => {
-  console.log('🚀 ~ fill:', fill);
   return (
     <Svg width="16" height="16" viewBox="0 0 16 16" fill="none">
       <G clipPath="url(#clip0_4140_1572)">

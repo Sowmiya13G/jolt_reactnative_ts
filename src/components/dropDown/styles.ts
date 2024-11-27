@@ -84,7 +84,11 @@ const styles = StyleSheet.create({
   errorField: {
     borderColor: colors.red,
     borderRadius: wp('2%'),
-    padding: '2%',
+  },
+  errorFieldView: {
+    width: '100%',
+    borderColor: colors.red,
+    borderRadius: wp('2%'),
   },
   marginHorizontal: {marginHorizontal: wp('0.5%')},
   errTextInput: {

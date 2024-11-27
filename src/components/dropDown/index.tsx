@@ -137,13 +137,14 @@ const DropDown: React.FC<DropDownProps> = ({
 
     if (noData) noData(data.length <= 0 ? 1 : 0);
   };
-
   return (
     <>
       <View
         style={[
           viewType ? styles.fields : styles.container,
-          viewType && Boolean(errText) && styles.errorField,
+          viewType
+            ? Boolean(errText) && styles.errorField
+            : Boolean(showErrText) && Boolean(errText) && styles.errorFieldView,
           customStyle,
         ]}>
         {viewType && <Spacer height={hp('0.8%')} />}
@@ -180,6 +181,7 @@ const DropDown: React.FC<DropDownProps> = ({
             styles.titleContainer,
             showDropdown && styles.oBottonBorderRadius,
             customTitleStyle,
+            Boolean(showErrText) && Boolean(errText) && styles.errorFieldView,
           ]}>
           <TextInput
             value={

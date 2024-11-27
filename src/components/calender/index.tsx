@@ -44,6 +44,23 @@ const CalenderComponent: React.FC<CalenderComponentProps> = ({
 
   const today = getTodayDate();
 
+  const generateDisabledDates = () => {
+    const disabledDates: { [key: string]: any } = {};
+    const todayDate = new Date(today);
+    let currentDay = new Date(todayDate);
+    
+    while (currentDay.getDate() > 1) {
+      currentDay.setDate(currentDay.getDate() - 1);
+      const formattedDate = currentDay.toISOString().split('T')[0];
+      disabledDates[formattedDate] = { disabled: true };
+    }
+    
+    return disabledDates;
+  };
+  
+  const disabledDates = generateDisabledDates();
+  
+
   const renderCustomHeader = (date: string | null): JSX.Element => {
     const currentMonthLabel = new Date(currentMonth).toLocaleDateString(
       'en-US',
@@ -118,8 +135,9 @@ const CalenderComponent: React.FC<CalenderComponentProps> = ({
             current={currentMonth}
             onDayPress={(day: any) => setDate(day.dateString)}
             markingType={'custom'}
+            isValidDate={disabledDates}
+            disabledDates={disabledDates}
             dayNamesShort={['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']}
-            // theme={styles.calendarThemeStyles}
             theme={{
               todayTextColor: colors.black_00,
               dayTextColor: colors.black_00,
@@ -136,6 +154,7 @@ const CalenderComponent: React.FC<CalenderComponentProps> = ({
             renderHeader={() => renderCustomHeader(date)}
             hideArrows={true}
             markedDates={{
+              ...disabledDates,  
               [today]: {
                 selected: true,
                 customStyles: {

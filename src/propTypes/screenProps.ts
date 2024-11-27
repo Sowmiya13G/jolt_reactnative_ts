@@ -67,6 +67,7 @@ export interface RegisterScreenFormData {
   dob?: string | null;
   email?: string;
   phoneNo?: string;
+  check?:boolean;
   [key: string]: any;
 }
 

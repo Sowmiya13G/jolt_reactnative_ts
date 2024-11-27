@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   FlatList,
   Platform,
@@ -9,19 +9,23 @@ import {
 } from 'react-native';
 
 // packages
-import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
+import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import { SvgProps } from 'react-native-svg';
 
 // components
 import CalenderComponent from '../calender';
 import Spacer from '../spacer';
 
 // constants
-import {baseStyle, colors, sizes} from '../../constant/theme';
+import { baseStyle, colors, sizes } from '../../constant/theme';
+
+// utils
+import { formatDateText } from '../../utils/helperFunctions';
 
 import ARROW from '../../assets/svg/arrow.svg';
+import CALENDAR_WHITE from '../../assets/svg/calender-white.svg';
 import CALENDAR from '../../assets/svg/calender.svg';
 import CANCEL from '../../assets/svg/cancel.svg';
-import {SvgProps} from 'react-native-svg';
 
 // styles
 interface DateItem {
@@ -65,13 +69,17 @@ const RenderDates: React.FC<RenderDatesProps> = ({
   const handleCalendarSelect = (selectedDate: string) => {
     setModalDate(selectedDate);
     setSelectedDate({date: selectedDate, label: selectedDate});
-    const updatedData = dataList.map(item => {
-      if (item.date === selectedDate) {
-        return {...item, date: selectedDate};
-      }
-      return item;
-    });
 
+    const updatedData = [...dataList];
+    const lastIndex = updatedData.length - 1;
+
+    if (updatedData[lastIndex]) {
+      updatedData[lastIndex] = {
+        ...updatedData[lastIndex],
+        date: selectedDate,
+        label: formatDateText(selectedDate, true),
+      };
+    }
     setDataList(updatedData);
   };
 
@@ -191,11 +199,11 @@ const RenderDates: React.FC<RenderDatesProps> = ({
           {isLastItem && (
             <>
               <TouchableOpacity onPress={() => setShowCalendar(true)}>
-                <CALENDAR
-                  width={wp('4%')}
-                  height={wp('4%')}
-                  fill={isSelected ? colors.white_FF : colors.black_00}
-                />
+                {Boolean(isSelected) ? (
+                  <CALENDAR_WHITE width={wp('4%')} height={wp('4%')} />
+                ) : (
+                  <CALENDAR width={wp('4%')} height={wp('4%')} />
+                )}
               </TouchableOpacity>
               <Spacer width={wp('2%')} />
             </>

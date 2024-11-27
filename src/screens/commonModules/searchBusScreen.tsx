@@ -34,6 +34,7 @@ import CANCEL from '../../assets/svg/cancel.svg';
 
 // styles
 import styles from '../styles/searchBusScreen';
+import CalenderComponent from '../../components/calender';
 
 const listData: ListItem[] = [
   {
@@ -117,6 +118,8 @@ const SearchBusScreen: React.FC<SearchBusScreenProps> = ({route}) => {
   // local states
   const [selectedFilters, setSelectedFilters] = useState<FilterListItem[]>([]);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const [showCalender, setShowCalender] = useState<boolean>(false);
+  const [selectedDate, setSelectedDate] = useState<string>(data?.date || '');
 
   // ---------------------------------------- Functionalities ----------------------------------------
 
@@ -124,6 +127,11 @@ const SearchBusScreen: React.FC<SearchBusScreenProps> = ({route}) => {
 
   const handleFilterSelect = (selectedItems: FilterListItem[]) => {
     setSelectedFilters(selectedItems);
+  };
+
+  const handleCalendarSelect = (date: string) => {
+    setSelectedDate(date);
+    setShowCalender(false);  
   };
 
   // ---------------------------------------- render ui ----------------------------------------
@@ -138,7 +146,7 @@ const SearchBusScreen: React.FC<SearchBusScreenProps> = ({route}) => {
               data: {
                 from: data?.from,
                 to: data?.to,
-                date: data?.date,
+                date: selectedDate,
                 item: item,
               },
             });
@@ -198,7 +206,8 @@ const SearchBusScreen: React.FC<SearchBusScreenProps> = ({route}) => {
         color={colors.black_00}
         isRightIcon={true}
         rightIcon={CALENDAR}
-        date={data?.date}
+        date={selectedDate}
+        rightIconPress={()=>setShowCalender(true)}
       />
       <Spacer height={hp('3%')} />
       <FilterList
@@ -214,6 +223,14 @@ const SearchBusScreen: React.FC<SearchBusScreenProps> = ({route}) => {
         showsVerticalScrollIndicator={false}
       />
       {renderReviewModal()}
+      {Boolean(showCalender) && (
+        <CalenderComponent
+          date={selectedDate || new Date().toISOString().split('T')[0]}
+          setDate={handleCalendarSelect}
+          showCalenderModal={showCalender}
+          setShowCalenderModal={setShowCalender}
+        />
+      )}
     </CustomSafeArea>
   );
 };

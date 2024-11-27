@@ -87,3 +87,24 @@ export const formatDateLabel = (
 
   return formattedDate;
 };
+
+export const formatDateText = (date: string, isShortFormat = false): string => {
+  const options: Intl.DateTimeFormatOptions = {
+    weekday: 'short',
+    month: 'short',
+    day: '2-digit',
+  };
+
+  const formattedDate = new Date(date)
+    .toLocaleDateString('en-US', options)
+    .replace(',', '')
+    .replace(' ', ',');
+
+  if (isShortFormat) {
+    const [weekday, monthDay] = formattedDate.split(',');
+    const [month, day] = monthDay.trim().split(' ');
+    return ` ${month} ${day}`;
+  }
+
+  return formattedDate;
+};

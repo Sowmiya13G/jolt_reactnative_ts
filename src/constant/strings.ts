@@ -132,6 +132,7 @@ const ERROR_HANDLER_TEXT: StringMap = {
   passwordsShouldBeSame: 'Passwords should be same',
   enterOtp: 'Please Enter OTP',
   enterValidPassword: 'Please enter valid password',
+  acceptTC:"Please accept terms and conditions"
 };
 
 export {strings, dashboard, tabBar, account, PLACEHOLDERS, ERROR_HANDLER_TEXT};
