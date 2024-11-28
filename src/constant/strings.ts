@@ -109,6 +109,13 @@ const account: StringMap = {
   suggestions: 'Suggestions for you',
 };
 
+const myTrip: StringMap = {
+  uhHo: 'Uh oh!',
+  noDataDisc: 'Looks like you do not have any trips',
+  bookTrip: 'Book a Trip',
+};
+
+
 const PLACEHOLDERS: StringMap = {
   yourCurrentLocation: 'Your current location',
   searchForDestination: 'Search for a destination',
@@ -135,4 +142,4 @@ const ERROR_HANDLER_TEXT: StringMap = {
   acceptTC:"Please accept terms and conditions"
 };
 
-export {strings, dashboard, tabBar, account, PLACEHOLDERS, ERROR_HANDLER_TEXT};
+export {strings, dashboard, tabBar, account, myTrip,PLACEHOLDERS, ERROR_HANDLER_TEXT};

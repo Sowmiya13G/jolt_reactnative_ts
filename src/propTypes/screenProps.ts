@@ -189,3 +189,9 @@ export type ProfileData = {
   gender: string;
   number: string;
 };
+
+export interface TabData {
+  id: number;
+  title: string;
+  count:number|null
+}

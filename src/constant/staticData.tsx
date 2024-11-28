@@ -1,11 +1,15 @@
-import { account, strings } from './strings';
+import {account, strings} from './strings';
 
 // packages
-import { widthPercentageToDP } from 'react-native-responsive-screen';
-import { SvgProps } from 'react-native-svg';
+import {widthPercentageToDP} from 'react-native-responsive-screen';
+import {SvgProps} from 'react-native-svg';
 
 // propTypes
-import { ProfileData, RegisterScreenFormData } from '../propTypes/screenProps';
+import {
+  ProfileData,
+  RegisterScreenFormData,
+  TabData,
+} from '../propTypes/screenProps';
 
 // SVG
 import ONBOARDING1 from '../assets/svg/onboarding1.svg';
@@ -121,3 +125,9 @@ export const profileData: ProfileData = {
   gender: account.genderValue,
   number: account.number,
 };
+
+export const tabData: TabData[] = [
+  {id: 0, title: 'UpComing', count: null},
+  {id: 1, title: 'Completed', count: null},
+  {id: 2, title: 'Cancelled', count: null},
+];
