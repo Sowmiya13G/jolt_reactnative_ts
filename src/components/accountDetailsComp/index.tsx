@@ -11,6 +11,8 @@ import TextInputComponent from '../textInput';
 // constant
 import {baseStyle, colors, sizes} from '../../constant/theme';
 
+import styles from './styles';
+
 // Props for the component
 type AccDetailsProps = {
   profileData: Record<string, string>;
@@ -39,10 +41,14 @@ const AccDetails: React.FC<AccDetailsProps> = ({
             </Text>
             <Spacer height={hp('1%')} />
             {enableEdit ? (
-              <TextInputComponent
-                value={profileData[typedKey]}
-                onChangeText={value => onChangeText(typedKey, value)}
-              />
+              <>
+                <TextInputComponent
+                  value={profileData[typedKey]}
+                  onChangeText={value => onChangeText(typedKey, value)}
+                  CustomStyle={styles.input}
+                />
+                <Spacer height={hp('0.5%')} />
+              </>
             ) : (
               <Text
                 style={[

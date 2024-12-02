@@ -1,7 +1,4 @@
-import { account } from "../constant/strings";
 // LOGIN
-
-
 // props
 export interface LoginScreenProps {
   route?: Record<string, unknown>;
@@ -67,7 +64,7 @@ export interface RegisterScreenFormData {
   dob?: string | null;
   email?: string;
   phoneNo?: string;
-  check?:boolean;
+  check?: boolean;
   [key: string]: any;
 }
 
@@ -190,8 +187,10 @@ export type ProfileData = {
   number: string;
 };
 
-export interface TabData {
-  id: number;
+// NOTIFICATION
+export interface notificationDataType {
   title: string;
-  count:number|null
+  time: string;
+  type: string;
+  message: string;
 }

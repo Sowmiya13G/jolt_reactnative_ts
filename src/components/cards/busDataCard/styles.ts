@@ -1,14 +1,17 @@
-import {StyleSheet} from 'react-native';
-import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
-import {baseStyle, colors} from '../../../constant/theme';
+import { StyleSheet } from 'react-native';
+import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import { baseStyle, colors } from '../../../constant/theme';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginHorizontal: wp('5%'),
     position: 'relative',
+    borderRadius: wp('3%'),
   },
   viewContainer: {
+    borderColor: colors.grey_5DD,
+    borderWidth: 1,
     backgroundColor: colors.white_FF,
     borderRadius: wp('5%'),
     paddingVertical: '4%',
@@ -25,94 +28,88 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: wp('4%'),
     borderBottomLeftRadius: wp('4%'),
   },
-
+  busName: {
+    display: 'flex',
+    paddingHorizontal: wp('4%'),
+    flexWrap: 'wrap',
+    width: '70%',
+    flex: 1,
+    alignSelf: 'flex-start',
+  },
   routeDetails: {
-    paddingHorizontal: wp('5%'),
     alignSelf: 'center',
     flex: 1,
     marginHorizontal: wp('5%'),
-  },
-  paddingHorizontal: {
-    paddingHorizontal: '4%',
   },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: '4%',
   },
-  imageIcon: {
-    padding: wp('5%'),
-    backgroundColor: colors.grey_E1,
-    borderRadius: wp('2%'),
+  paddingHorizontal: {
+    paddingHorizontal: '4%',
   },
-
-  smallEclipse: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    borderWidth: 1.5,
-    borderColor: colors.grey_D9,
+  horizontalLineView: {
+    borderColor: colors.grey_F1,
+    borderWidth: 1,
+    width: '90%',
   },
   horizontalLine1: {
     height: wp('0.4%'),
     width: '10%',
-    borderStyle: 'dashed',
     borderWidth: 0.8,
     borderColor: colors.grey_D9,
   },
-
   horizontalRow: {
     flexDirection: 'row',
     alignItems: 'center',
     width: '100%',
-    overflow: 'hidden',
+    justifyContent: 'space-between',
+    position: 'absolute',
+    zIndex:10,
   },
   circleView: {
-    backgroundColor: colors.grey_F1,
-    padding: wp('5%'),
+    backgroundColor:colors.white_FF,
+    padding: wp('3%'),
     borderRadius: wp('5%'),
   },
   leftCircle: {
+    borderLeftWidth: 1,
+    borderRightWidth:0,
     borderTopRightRadius: 0,
     borderBottomRightRadius: 0,
-    left: -15,
+    left: 15,
+    borderColor: colors.grey_5DD,
+
   },
   rightCircle: {
     borderTopLeftRadius: 0,
     borderBottomLeftRadius: 0,
     left: -15,
+    borderRightWidth: 1,
+    borderLeftWidth:0,
+    borderColor: colors.grey_5DD,
   },
+
   horizontalLineView1: {
     borderWidth: 1,
     width: '1.5%',
     left: -15,
     height: wp('0.3%'),
-    // borderStyle: 'dashed',
     borderColor: colors.grey_D9,
-    marginHorizontal:3
-  },
-
-  passengerData: {
-    paddingHorizontal: wp('6%'),
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    width: '100%',
+    marginHorizontal: 3,
   },
 
   footerContainer: {
     paddingHorizontal: wp('6%'),
     width: '100%',
   },
-  horizontalLineView: {
-    height: wp('0.5%'),
-    backgroundColor: colors.grey_F1,
-    width: '100%',
-  },
+
   footerView: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    alignSelf: 'flex-start',
+    paddingHorizontal: wp('6%'),
   },
   addReview: {
     backgroundColor: colors.orange_05,
@@ -152,6 +149,16 @@ const styles = StyleSheet.create({
     marginRight: wp('1%'),
     backgroundColor: colors.white_FB,
     borderColor: colors.grey_F1,
+  },
+  time: {
+    backgroundColor: colors.grey_F1,
+    padding: '2%',
+    borderRadius: wp('2%'),
+  },
+  seat: {
+    backgroundColor: colors.orange_05,
+    padding: '2%',
+    borderRadius: wp('2%'),
   },
 });
 

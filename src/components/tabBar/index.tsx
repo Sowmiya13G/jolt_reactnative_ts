@@ -25,6 +25,7 @@ interface StatusBarProps {
   containerStyles?: StyleProp<ViewStyle>;
   itemStyles?: StyleProp<ViewStyle>;
   backgroundColor?: string;
+  countTxtColor?: string;
 }
 
 const StatusBar: React.FC<StatusBarProps> = props => {
@@ -36,13 +37,16 @@ const StatusBar: React.FC<StatusBarProps> = props => {
     containerStyles,
     itemStyles,
     backgroundColor = 'transparent',
+    countTxtColor = colors.grey_32,
   } = props;
+  
+  const isSelected = data.some(item => item.title === selectedItemData.selectedItem);
 
   // Render single bar view
   const renderBar = ({
     item,
   }: {
-    item: {title: string; count?: number | null};
+    item: {title: string; count?: number | null; countColor?: string};
   }) => {
     const isSelected = selectedItemData.selectedItem === item.title;
 
@@ -54,11 +58,11 @@ const StatusBar: React.FC<StatusBarProps> = props => {
           }
         }}
         style={[
-          styles.barItemView,
+          item?.count ? styles.row : styles.barItemView,
           {
             borderBottomColor: isSelected
               ? colors.orange_05
-              : colors.transparent,
+              : colors.grey_DD,
             backgroundColor: backgroundColor,
           },
           itemStyles,
@@ -69,6 +73,22 @@ const StatusBar: React.FC<StatusBarProps> = props => {
           ]}>
           {item.title}
         </Text>
+        {item?.count && (
+          <>
+            <Spacer width={wp('2%')} />
+            <View style={[styles.count, {backgroundColor: item?.countColor}]}>
+              <Text
+                style={[
+                  baseStyle.txtStyleOutInterSemiBold(
+                    sizes.size11,
+                    countTxtColor,
+                  ),
+                ]}>
+                {item.count}
+              </Text>
+            </View>
+          </>
+        )}
       </TouchableOpacity>
     );
   };
@@ -80,6 +100,8 @@ const StatusBar: React.FC<StatusBarProps> = props => {
         containerStyles,
         {
           backgroundColor: backgroundColor,
+          // borderBottomColor: colors.grey_DD,
+          // borderBottomColor: isSelected ? colors.orange_05 : colors.grey_DD,
         },
       ]}>
       <FlatList
@@ -88,7 +110,7 @@ const StatusBar: React.FC<StatusBarProps> = props => {
         renderItem={renderBar}
         keyExtractor={(item, index) => `${name || 'statusBar'}${index}`}
         ListEmptyComponent={() => null}
-        ItemSeparatorComponent={() => <Spacer width={wp('2%')} />}
+        // ItemSeparatorComponent={() => <Spacer width={wp('2%')} />}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.columnWrapperStyle}
       />

@@ -1,25 +1,41 @@
 import {StyleSheet} from 'react-native';
 import {widthPercentageToDP as wp} from 'react-native-responsive-screen';
-import {colors} from '../../constant/theme';
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.white_FF,
     borderRadius: wp('1%'),
     width: '100%',
-    padding: wp('2%'),
     height: wp('18%'),
+    // borderBottomWidth: 3,
   },
   barItemView: {
     paddingHorizontal: wp('2%'),
     alignItems: 'center',
     justifyContent: 'center',
     flex: 1,
+    height: wp('19%'),
     borderBottomWidth: 3,
   },
   columnWrapperStyle: {
-    justifyContent: 'space-between',
     flexGrow: 1,
+  },
+  row: {
+    paddingHorizontal: wp('2%'),
+    alignItems: 'center',
+    justifyContent: 'center',
+    flex: 1,
+    flexDirection: 'row',
+    borderBottomWidth: 3,
+    // marginHorizontal:wp("2%")
+  },
+  count: {
+    borderRadius: 100 / 2,
+    marginVertical: wp('1%'),
+    height: wp('6%'),
+    width: wp('6%'),
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: wp('2%'),
   },
 });
 

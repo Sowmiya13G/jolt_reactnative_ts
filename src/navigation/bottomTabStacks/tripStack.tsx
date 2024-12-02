@@ -15,6 +15,14 @@ const TripStack: React.FC = () => {
       ScreenName: SCREENS.MY_TRIP,
       Component: ScreenName?.MyTripScreen,
     },
+    {
+      ScreenName: SCREENS.TICKET_DETAILS,
+      Component: ScreenName.TicketDetails,
+    },
+    {
+      ScreenName: SCREENS.NOTIFICATION_SCREEN,
+      Component: ScreenName.NotificationScreen,
+    },
   ];
 
   return (

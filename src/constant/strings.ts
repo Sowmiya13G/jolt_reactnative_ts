@@ -113,14 +113,39 @@ const myTrip: StringMap = {
   uhHo: 'Uh oh!',
   noDataDisc: 'Looks like you do not have any trips',
   bookTrip: 'Book a Trip',
+  addReview: 'Add Review',
+  weLovedFB: "We'd Love Your Feedback!",
+  feedBackTitle: 'Please rate your experience below',
+  stars: 'stars',
+  addFeedback: 'Additional feedback',
+  submitReview: 'Submit Review',
 };
 
+const ticketDetails: StringMap = {
+  ticketDetail: 'Ticket Detail ',
+  eTicket: 'E-Ticket',
+  code: 'Kode Booking',
+  scanCode:
+    'Scan the barcode or enter the booking code when getting on the bus.',
+  weLovedFB: "We'd Love Your Feedback!",
+  feedBackTitle: 'Please rate your experience below',
+  stars: 'stars',
+  addFeedback: 'Additional feedback',
+  submitReview: 'Submit Review',
+  journey:"Journey",
+  busArrival:"Bus Arrival",
+  trackBus:"Track Bus",
+ passengerInfo: "Passenger Information",
+ paymentDetails: 'Payment Details',
+
+};
 
 const PLACEHOLDERS: StringMap = {
   yourCurrentLocation: 'Your current location',
   searchForDestination: 'Search for a destination',
   fromCity: 'From City',
   toCity: 'To City',
+  myFeedBack: 'My feedback!!',
 };
 
 const ERROR_HANDLER_TEXT: StringMap = {
@@ -139,7 +164,16 @@ const ERROR_HANDLER_TEXT: StringMap = {
   passwordsShouldBeSame: 'Passwords should be same',
   enterOtp: 'Please Enter OTP',
   enterValidPassword: 'Please enter valid password',
-  acceptTC:"Please accept terms and conditions"
+  acceptTC: 'Please accept terms and conditions',
 };
 
-export {strings, dashboard, tabBar, account, myTrip,PLACEHOLDERS, ERROR_HANDLER_TEXT};
+export {
+  strings,
+  dashboard,
+  tabBar,
+  account,
+  myTrip,
+  PLACEHOLDERS,
+  ERROR_HANDLER_TEXT,
+  ticketDetails,
+};

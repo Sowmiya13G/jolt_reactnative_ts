@@ -16,9 +16,13 @@ import SearchScreen from '../screens/commonModules/searchScreen';
 import SelectBoardingPoint from '../screens/commonModules/selectBoardingPoints';
 import SelectSeat from '../screens/commonModules/selectSeat';
 
-import AccountScreen from '../screens/commonModules/account';
 import MyTripScreen from '../screens/commonModules/myTrip';
+import TicketDetails from '../screens/commonModules/ticketDetails';
+
+import AccountScreen from '../screens/commonModules/account';
 import WalletScreen from '../screens/commonModules/wallet';
+
+import NotificationScreen from '../screens/commonModules/notification';
 
 // Define the type for screen components
 interface ScreenComponents {
@@ -36,8 +40,12 @@ interface ScreenComponents {
   SelectSeat: React.ComponentType<any>;
 
   MyTripScreen: React.ComponentType<any>;
+  TicketDetails: React.ComponentType<any>;
+
   WalletScreen: React.ComponentType<any>;
   AccountScreen: React.ComponentType<any>;
+
+  NotificationScreen: React.ComponentType<any>;
 }
 
 // Exporting the screens as a typed object
@@ -48,16 +56,20 @@ const Screens: ScreenComponents = {
   ForgotPasswordScreen,
   OTPScreen,
   RegisterScreen,
-  
+
   HomeScreen,
   SelectBoardingPoint,
   SearchScreen,
   SearchBusScreen,
   SelectSeat,
-  
+
   MyTripScreen,
+  TicketDetails,
+
   WalletScreen,
   AccountScreen,
+
+  NotificationScreen,
 };
 
 export default Screens;

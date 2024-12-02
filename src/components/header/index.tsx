@@ -1,6 +1,9 @@
 import React from 'react';
 import { Text, TouchableOpacity, View, ViewStyle } from 'react-native';
 
+// navigation
+import navigationService from '../../navigation/navigationService';
+
 // packages
 import {
   heightPercentageToDP,
@@ -14,6 +17,7 @@ import styles from './styles';
 import Spacer from '../spacer';
 
 // constants
+import { SCREENS } from '../../constant';
 import { baseStyle, colors, sizes } from '../../constant/theme';
 
 // utils
@@ -145,7 +149,7 @@ const Header: React.FC<HeaderProps> = ({
                 {titleData?.user}
               </Text>
             </View>
-            <TouchableOpacity style={styles.notificationView}>
+            <TouchableOpacity style={styles.notificationView} onPress={()=>navigationService.navigate(SCREENS.NOTIFICATION_SCREEN)}>
               <NOTIFICATION />
             </TouchableOpacity>
           </View>

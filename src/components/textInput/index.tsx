@@ -49,7 +49,7 @@ interface TextInputComponentProps
   secureTextEntry?: boolean;
   editable?: boolean;
   CustomStyle?: object;
-  customIconStyle?:object;
+  customIconStyle?: object;
   textAlignVertical?: 'auto' | 'top' | 'bottom' | 'center' | undefined;
   suffix?: boolean;
   autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters' | undefined;
@@ -63,6 +63,7 @@ interface TextInputComponentProps
   onTypingEnd?: () => void;
   customInputStyle?: object;
   onFocus?: () => void;
+  multiLine?: boolean;
 }
 
 const TextInputComponent: React.FC<TextInputComponentProps> = props => {
@@ -99,6 +100,7 @@ const TextInputComponent: React.FC<TextInputComponentProps> = props => {
     onTypingEnd,
     customInputStyle,
     onFocus,
+    multiLine = false,
   } = props;
 
   const [show, setShow] = useState(secureTextEntry);
@@ -122,7 +124,7 @@ const TextInputComponent: React.FC<TextInputComponentProps> = props => {
       )}
       <View
         style={[
-          styles.textInputView,
+          multiLine ? styles.textInputViewMultiline : styles.textInputView,
           styles.ro_textInputView,
           {
             ...(Boolean(errText)
@@ -133,7 +135,9 @@ const TextInputComponent: React.FC<TextInputComponentProps> = props => {
           CustomStyle,
         ]}>
         {Boolean(Icon) && !suffix && (
-          <View style={[styles.icon]}>{Icon && <Icon style={customIconStyle}/>}</View>
+          <View style={[styles.icon]}>
+            {Icon && <Icon style={customIconStyle} />}
+          </View>
         )}
 
         <TextInput
@@ -159,6 +163,7 @@ const TextInputComponent: React.FC<TextInputComponentProps> = props => {
           editable={editable}
           autoCapitalize={autoCapitalize}
           onFocus={onFocus}
+          multiline={multiLine}
         />
         {Boolean(Icon) && suffix && (
           <View style={styles.icon}>{Icon && <Icon />}</View>

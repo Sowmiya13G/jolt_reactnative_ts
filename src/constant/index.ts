@@ -21,14 +21,16 @@ const SCREENS = {
 
   MY_TRIP_STACK: 'MyTripScreen',
   MY_TRIP: 'MyTripScreen',
+  TICKET_DETAILS: 'TicketDetailsScreen',
 
   ACCOUNT_SCREEN: 'AccountScreen',
 
   WALLET_STACK: 'WalletScreen',
   WALLET_SCREEN: 'WalletScreen',
-} as const; 
+
+  NOTIFICATION_SCREEN: 'NotificationScreen',
+} as const;
 
 type ScreenNames = keyof typeof SCREENS;
 
-export { SCREENS, iconPath, theme };
-
+export {SCREENS, iconPath, theme};

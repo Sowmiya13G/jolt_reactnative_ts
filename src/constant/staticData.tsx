@@ -5,11 +5,7 @@ import {widthPercentageToDP} from 'react-native-responsive-screen';
 import {SvgProps} from 'react-native-svg';
 
 // propTypes
-import {
-  ProfileData,
-  RegisterScreenFormData,
-  TabData,
-} from '../propTypes/screenProps';
+import {ProfileData, RegisterScreenFormData} from '../propTypes/screenProps';
 
 // SVG
 import ONBOARDING1 from '../assets/svg/onboarding1.svg';
@@ -21,6 +17,7 @@ import CALL from '../assets/svg/call.svg';
 import DROPDOWN from '../assets/svg/downArrow.svg';
 import EMAIL from '../assets/svg/mail.svg';
 import PERSON from '../assets/svg/person.svg';
+import {TabData} from '../propTypes/componentProps';
 
 export const onboardingData = [
   {
@@ -127,7 +124,12 @@ export const profileData: ProfileData = {
 };
 
 export const tabData: TabData[] = [
-  {id: 0, title: 'UpComing', count: null},
-  {id: 1, title: 'Completed', count: null},
-  {id: 2, title: 'Cancelled', count: null},
+  {id: 0, title: 'UpComing', count: null, countColor: ''},
+  {id: 1, title: 'Completed', count: null, countColor: ''},
+  {id: 2, title: 'Cancelled', count: null, countColor: ''},
+];
+
+export const notificationTab: TabData[] = [
+  {id: 0, title: 'Bus updates', count: null, countColor: ''},
+  {id: 1, title: 'Offers', count: null, countColor: ''},
 ];

@@ -53,7 +53,7 @@ const BottomNavigation: React.FC = () => {
   const routeName = useNavigationState(state => getFocusedRouteName(state));
 
   const isFocused = useIsFocused();
-  const noTabScreens: string[] = [SCREENS.SELECT_SEAT];
+  const noTabScreens: string[] = [SCREENS.SELECT_SEAT,SCREENS.TICKET_DETAILS];
   const shouldHideTabBar = isFocused && noTabScreens?.includes(routeName ?? '');
 
   // Tab items

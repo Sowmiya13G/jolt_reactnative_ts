@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import {Text, View,TouchableOpacity} from 'react-native';
 
 // packages
 import {
@@ -12,7 +12,7 @@ import Button from '../../button';
 import Spacer from '../../spacer';
 
 // constants
-import { baseStyle, colors, sizes } from '../../../constant/theme';
+import {baseStyle, colors, sizes} from '../../../constant/theme';
 
 // style
 import styles from './styles';
@@ -20,7 +20,6 @@ import styles from './styles';
 // SVG Imports
 import BUS from '../../../assets/svg/busIcon.svg';
 import STAR from '../../../assets/svg/star.svg';
-
 interface TripCardType {
   data: {
     name: string;
@@ -39,15 +38,19 @@ interface TripCardType {
   };
   bookAgain: () => void;
   addReview: () => void;
+  onClick: () => void;
+
 }
 
-const TripCard: React.FC<TripCardType> = ({data, bookAgain, addReview}) => {
+  const TripCard: React.FC<TripCardType> = ({data, bookAgain,
+  onClick,
+  addReview}) => {
   const isNotUpcoming = data?.status != 'Booked';
   const isCompleted = data?.status == 'Completed';
   const isUpcoming = data?.status == 'Booked';
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={onClick}>
       <View style={styles.viewContainer}>
         <View
           style={[
@@ -156,7 +159,13 @@ const TripCard: React.FC<TripCardType> = ({data, bookAgain, addReview}) => {
         <Spacer height={hp('2%')} />
         <View style={styles.horizontalRow}>
           <View style={[styles.circleView, styles.rightCircle]} />
-          <View style={styles.horizontalLineView1} />
+
+          {Array.from(
+            {length: widthPercentageToDP('7%')},
+            (_, index) => index + 1,
+          ).map((x, y) => {
+            return <View key={y} style={styles.horizontalLineView1} />;
+          })}
           <View style={[styles.circleView, styles.leftCircle]} />
         </View>
 
@@ -248,7 +257,7 @@ const TripCard: React.FC<TripCardType> = ({data, bookAgain, addReview}) => {
           </View>
         )}
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

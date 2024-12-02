@@ -57,6 +57,15 @@ const styles = StyleSheet.create({
   label: {
     marginHorizontal: wp('2%'),
   },
+  textInputViewMultiline: {
+    width: "90%",
+    flexDirection: "row",
+    borderRadius: wp("1%"),
+    alignSelf: "center",
+    height: hp("20%"),
+    padding: wp("2%"),
+    borderColor: colors.grey_DB,
+  },
 });
 
 export default styles;

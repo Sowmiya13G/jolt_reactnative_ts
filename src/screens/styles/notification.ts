@@ -8,7 +8,7 @@ import {baseStyle, colors, sizes} from '../../constant/theme';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.grey_F1,
+    backgroundColor: colors.white_FF,
   },
   iconView: {
     marginRight: wp('3%'),
@@ -19,6 +19,9 @@ const styles = StyleSheet.create({
   },
   statusBarView: {
     marginHorizontal: wp('2%'),
+  },
+  marginHorizontal: {
+    marginHorizontal: wp('5%'),
   },
   noDataContainer: {
     flex: 1,

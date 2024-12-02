@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
-import { FlatList, Modal, Text, TouchableOpacity, View } from 'react-native';
+import React, {useState} from 'react';
+import {
+  FlatList,
+  Modal,
+  ListRenderItemInfo,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 // navigation
 import navigationService from '../../navigation/navigationService';
 
 // packages
-import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 // components
 import ReviewCard from '../../components/cards/reviewCard';
@@ -16,9 +23,9 @@ import Header from '../../components/header';
 import Spacer from '../../components/spacer';
 
 // constant
-import { SCREENS } from '../../constant';
-import { filterData } from '../../constant/staticData';
-import { baseStyle, colors, sizes } from '../../constant/theme';
+import {SCREENS} from '../../constant';
+import {filterData} from '../../constant/staticData';
+import {baseStyle, colors, sizes} from '../../constant/theme';
 
 // prop types
 import {
@@ -131,11 +138,11 @@ const SearchBusScreen: React.FC<SearchBusScreenProps> = ({route}) => {
 
   const handleCalendarSelect = (date: string) => {
     setSelectedDate(date);
-    setShowCalender(false);  
+    setShowCalender(false);
   };
 
   // ---------------------------------------- render ui ----------------------------------------
-  const renderBody = ({item}: {item: ListItem}) => {
+  const renderBody = ({item}: ListRenderItemInfo<ListItem>) => {
     return (
       <View style={styles.subContainer}>
         <Spacer height={hp('3%')} />
@@ -152,6 +159,7 @@ const SearchBusScreen: React.FC<SearchBusScreenProps> = ({route}) => {
             });
           }}
           viewReview={() => setModalVisible(true)}
+          onClick={() => {}}
         />
       </View>
     );
@@ -207,7 +215,7 @@ const SearchBusScreen: React.FC<SearchBusScreenProps> = ({route}) => {
         isRightIcon={true}
         rightIcon={CALENDAR}
         date={selectedDate}
-        rightIconPress={()=>setShowCalender(true)}
+        rightIconPress={() => setShowCalender(true)}
       />
       <Spacer height={hp('3%')} />
       <FilterList
