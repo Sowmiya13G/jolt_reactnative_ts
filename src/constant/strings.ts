@@ -69,6 +69,14 @@ const tabBar: StringMap = {
   wallet: 'Wallet',
 };
 
+const BottomSheetTabs: StringMap = {
+  reviews: 'Reviews',
+  photos: 'Photos',
+  amenities: 'Amenities',
+  busStops: 'Bus Stops',
+  policies: 'Policies',
+};
+
 const dashboard: StringMap = {
   name: 'Olivia Rhye',
   availableDates: 'Available dates',
@@ -132,12 +140,42 @@ const ticketDetails: StringMap = {
   stars: 'stars',
   addFeedback: 'Additional feedback',
   submitReview: 'Submit Review',
-  journey:"Journey",
-  busArrival:"Bus Arrival",
-  trackBus:"Track Bus",
- passengerInfo: "Passenger Information",
- paymentDetails: 'Payment Details',
+  journey: 'Journey',
+  busArrival: 'Bus Arrival',
+  trackBus: 'Track Bus',
+  passengerInfo: 'Passenger Information',
+  paymentDetails: 'Payment Details',
+};
 
+const selectSeat: StringMap = {
+  policies: 'Policies',
+  photos: 'Photos',
+  cancellation: 'Cancellation & Refund',
+  pointOneCancellation:
+    'Cancellation requests must be made at least 24 hours before the scheduled departure time.',
+  pointTwoCancellation:
+    'Cancellations may incur a fee depending on the time remaining before departure.',
+  pointThreeCancellation:
+    'Refunds, if applicable, will be processed within 7-10 business days back to the original payment method.',
+  rescheduling: 'Rescheduling',
+  rescheduleReq:
+    'Rescheduling requests should be made at least 24 hours before the scheduled departure.',
+  rescheduleSub:
+    'Rescheduling is subject to seat availability and may incur additional charges.',
+  customerWallet: 'Customer Wallet',
+  forBooking:
+    'For booking assistance, cancellations, or other inquiries, contact customer Wallet at [insert contact info].',
+  walletAvailable: 'Wallet is available [days and hours of operation].',
+  amenities: 'Amenities',
+  waterBottle: 'Water Bottle',
+  readingLight: 'Reading Light',
+  deepCleaning: 'Deep Cleaning Bus',
+  blanket: 'Blankets',
+  waiting: 'Waiting lounge',
+  chargingPoint: 'Charging Point',
+  review:"Review & Reviews",
+  busStop:"Bus Stop",
+  reviewBooking:"Review Booking"
 };
 
 const PLACEHOLDERS: StringMap = {
@@ -176,4 +214,6 @@ export {
   PLACEHOLDERS,
   ERROR_HANDLER_TEXT,
   ticketDetails,
+  selectSeat,
+  BottomSheetTabs,
 };

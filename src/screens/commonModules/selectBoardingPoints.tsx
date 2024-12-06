@@ -29,7 +29,7 @@ import {
 } from '../../propTypes/screenProps';
 
 // styles
-import styles from '../styles/selectSeat';
+import styles from '../styles/selectBoardingPoints';
 
 // SVG imports
 import SELECTED from '../../assets/svg/selectedButton.svg';

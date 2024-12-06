@@ -39,8 +39,6 @@ const StatusBar: React.FC<StatusBarProps> = props => {
     backgroundColor = 'transparent',
     countTxtColor = colors.grey_32,
   } = props;
-  
-  const isSelected = data.some(item => item.title === selectedItemData.selectedItem);
 
   // Render single bar view
   const renderBar = ({
@@ -48,7 +46,7 @@ const StatusBar: React.FC<StatusBarProps> = props => {
   }: {
     item: {title: string; count?: number | null; countColor?: string};
   }) => {
-    const isSelected = selectedItemData.selectedItem === item.title;
+    const isSelected = selectedItemData?.selectedItem === item.title;
 
     return (
       <TouchableOpacity
@@ -60,9 +58,7 @@ const StatusBar: React.FC<StatusBarProps> = props => {
         style={[
           item?.count ? styles.row : styles.barItemView,
           {
-            borderBottomColor: isSelected
-              ? colors.orange_05
-              : colors.grey_DD,
+            borderBottomColor: isSelected ? colors.orange_05 : colors.grey_DD,
             backgroundColor: backgroundColor,
           },
           itemStyles,

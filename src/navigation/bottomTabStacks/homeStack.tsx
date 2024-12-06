@@ -35,6 +35,10 @@ const DashboardStack: React.FC = () => {
       ScreenName: SCREENS.NOTIFICATION_SCREEN,
       Component: ScreenName.NotificationScreen,
     },
+    {
+      ScreenName: SCREENS.REVIEW_BOOKING,
+      Component: ScreenName.ReviewBooking,
+    },
   ];
 
   return (

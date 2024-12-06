@@ -1,11 +1,9 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {
-  Animated,
-  PanResponder,
   StyleProp,
   TouchableOpacity,
   View,
-  ViewStyle,
+  ViewStyle
 } from 'react-native';
 
 // packages
@@ -18,7 +16,7 @@ import {
 import CLOSE from '../../assets/svg/cancel.svg';
 
 // contants
-import {baseStyle, colors} from '../../constant/theme';
+import { colors } from '../../constant/theme';
 
 // styles
 import styles from './styles';
@@ -40,33 +38,6 @@ const DraggableView: React.FC<DraggableViewProps> = ({
   onCancelPress,
   customStyle,
 }) => {
-  const pan = useState(new Animated.Value(0))[0];
-
-  const panResponder = PanResponder.create({
-    onStartShouldSetPanResponder: () => true,
-    onMoveShouldSetPanResponder: () => true,
-    onPanResponderMove: (_, gestureState) => {
-      let newHeight = Number(rbsheetHeight) - gestureState.dy;
-      if (newHeight < hp('20%')) newHeight = hp('20%');
-      if (newHeight > hp('85%')) newHeight = hp('85%');
-
-      setRbsheetHeight(newHeight);
-
-      if (newHeight > hp('50%')) {
-        setBorderRadius(wp('5%'));
-      } else {
-        setBorderRadius(wp('0%'));
-      }
-    },
-    onPanResponderRelease: () => {
-      if (Number(rbsheetHeight) > hp('30%')) {
-        setRbsheetHeight(hp('85%'));
-      } else {
-        setRbsheetHeight(hp('10%'));
-      }
-    },
-  });
-
   const handleCancelPress = () => {
     setRbsheetHeight(hp('10%'));
     setBorderRadius(wp('0%'));
@@ -76,7 +47,7 @@ const DraggableView: React.FC<DraggableViewProps> = ({
   };
 
   return (
-    <View style={{}}>
+    <View>
       {Number(rbsheetHeight) > hp('50%') && (
         <TouchableOpacity
           style={styles.closeIconView}
@@ -84,21 +55,20 @@ const DraggableView: React.FC<DraggableViewProps> = ({
           <CLOSE fill={colors.white_FF} height={wp('3%')} width={wp('3%')} />
         </TouchableOpacity>
       )}
-      <Animated.View
-        {...panResponder.panHandlers}
+      <View
         style={[
           {
             height: rbsheetHeight,
             borderTopLeftRadius:
-              Number(rbsheetHeight) > hp('50%') ? hp('5%') : 0,
+              Number(rbsheetHeight) > hp('50%') ? wp('7%') : 0,
             borderTopRightRadius:
-              Number(rbsheetHeight) > hp('50%') ? hp('5%') : 0,
+              Number(rbsheetHeight) > hp('50%') ? wp('7%') : 0,
           },
           customStyle,
           styles.container,
         ]}>
-        <View style={{flex: 1, padding: 10}}>{children}</View>
-      </Animated.View>
+        <View style={{flex: 1}}>{children}</View>
+      </View>
     </View>
   );
 };

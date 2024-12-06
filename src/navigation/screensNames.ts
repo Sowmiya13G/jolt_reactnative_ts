@@ -15,6 +15,7 @@ import SearchBusScreen from '../screens/commonModules/searchBusScreen';
 import SearchScreen from '../screens/commonModules/searchScreen';
 import SelectBoardingPoint from '../screens/commonModules/selectBoardingPoints';
 import SelectSeat from '../screens/commonModules/selectSeat';
+import ReviewBooking from '../screens/commonModules/reviewBookingScreen';
 
 import MyTripScreen from '../screens/commonModules/myTrip';
 import TicketDetails from '../screens/commonModules/ticketDetails';
@@ -38,6 +39,7 @@ interface ScreenComponents {
   SearchBusScreen: React.ComponentType<any>;
   SelectBoardingPoint: React.ComponentType<any>;
   SelectSeat: React.ComponentType<any>;
+  ReviewBooking: React.ComponentType<any>;
 
   MyTripScreen: React.ComponentType<any>;
   TicketDetails: React.ComponentType<any>;
@@ -62,6 +64,7 @@ const Screens: ScreenComponents = {
   SearchScreen,
   SearchBusScreen,
   SelectSeat,
+  ReviewBooking,
 
   MyTripScreen,
   TicketDetails,

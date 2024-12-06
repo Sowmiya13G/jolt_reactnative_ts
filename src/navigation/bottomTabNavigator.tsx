@@ -1,15 +1,15 @@
 import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 
-import { useIsFocused, useNavigationState } from '@react-navigation/native';
+import {useIsFocused, useNavigationState} from '@react-navigation/native';
 
 // package
-import { SvgProps } from 'react-native-svg';
+import {SvgProps} from 'react-native-svg';
 
 // constant
-import { SCREENS } from '../constant';
-import { tabBar } from '../constant/strings';
-import { baseStyle, colors, sizes } from '../constant/theme';
+import {SCREENS} from '../constant';
+import {tabBar} from '../constant/strings';
+import {baseStyle, colors, sizes} from '../constant/theme';
 import ScreenName from './screensNames';
 
 import HOME_ACTIVE from '../assets/svg/homeActive.svg';
@@ -53,7 +53,11 @@ const BottomNavigation: React.FC = () => {
   const routeName = useNavigationState(state => getFocusedRouteName(state));
 
   const isFocused = useIsFocused();
-  const noTabScreens: string[] = [SCREENS.SELECT_SEAT,SCREENS.TICKET_DETAILS];
+  const noTabScreens: string[] = [
+    SCREENS.SELECT_SEAT,
+    SCREENS.TICKET_DETAILS,
+    SCREENS.REVIEW_BOOKING,
+  ];
   const shouldHideTabBar = isFocused && noTabScreens?.includes(routeName ?? '');
 
   // Tab items

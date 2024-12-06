@@ -1,16 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-  Image,
   ScrollView,
+  StyleProp,
   Text,
   TextInput,
+  TextStyle,
   TouchableOpacity,
   View,
-  StyleProp,
-  TextStyle,
-  ViewStyle,
+  ViewStyle
 } from 'react-native';
-import {heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 // styles
 import styles from './styles';
@@ -19,10 +18,10 @@ import styles from './styles';
 import Spacer from '../spacer';
 
 // constants
-import {iconPathURL} from '../../constant/iconpath';
-import {baseStyle, colors, sizes} from '../../constant/theme';
+import { baseStyle, colors, sizes } from '../../constant/theme';
 
 import DROPDOWN from '../../assets/svg/downArrow.svg';
+import TICK from '../../assets/svg/tick.svg';
 
 interface DropdownItem {
   label: string;
@@ -243,12 +242,7 @@ const DropDown: React.FC<DropDownProps> = ({
                         }}
                         style={styles.dropdownTextContainer}>
                         <Text style={styles.placeholder}>{item.label}</Text>
-                        {isItemSelected && (
-                          <Image
-                            source={{uri: iconPathURL.tick}}
-                            style={styles.selectedIcon}
-                          />
-                        )}
+                        {isItemSelected && <TICK />}
                       </TouchableOpacity>
                     </View>
                   );

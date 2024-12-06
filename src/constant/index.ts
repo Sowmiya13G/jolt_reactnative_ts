@@ -1,4 +1,3 @@
-import * as iconPath from './iconpath';
 import * as theme from './theme';
 
 const SCREENS = {
@@ -18,6 +17,7 @@ const SCREENS = {
   SEARCH_BUS_SCREEN: 'SearchBusScreen',
   SELECT_BOARDING_POINT: 'SelectBoardingPoint',
   SELECT_SEAT: 'SelectSeat',
+  REVIEW_BOOKING: 'ReviewBooking',
 
   MY_TRIP_STACK: 'MyTripScreen',
   MY_TRIP: 'MyTripScreen',
@@ -33,4 +33,4 @@ const SCREENS = {
 
 type ScreenNames = keyof typeof SCREENS;
 
-export {SCREENS, iconPath, theme};
+export {SCREENS, theme};

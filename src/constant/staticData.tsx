@@ -1,11 +1,14 @@
-import {account, strings} from './strings';
+import {account, selectSeat, strings} from './strings';
 
 // packages
 import {widthPercentageToDP} from 'react-native-responsive-screen';
 import {SvgProps} from 'react-native-svg';
 
 // propTypes
+import {TabData} from '../propTypes/componentProps';
 import {ProfileData, RegisterScreenFormData} from '../propTypes/screenProps';
+
+// constants
 
 // SVG
 import ONBOARDING1 from '../assets/svg/onboarding1.svg';
@@ -17,7 +20,6 @@ import CALL from '../assets/svg/call.svg';
 import DROPDOWN from '../assets/svg/downArrow.svg';
 import EMAIL from '../assets/svg/mail.svg';
 import PERSON from '../assets/svg/person.svg';
-import {TabData} from '../propTypes/componentProps';
 
 export const onboardingData = [
   {
@@ -132,4 +134,26 @@ export const tabData: TabData[] = [
 export const notificationTab: TabData[] = [
   {id: 0, title: 'Bus updates', count: null, countColor: ''},
   {id: 1, title: 'Offers', count: null, countColor: ''},
+];
+
+export const policiesData = [
+  {
+    id: 0,
+    title: selectSeat.cancellation,
+    points: [
+      selectSeat.pointOneCancellation,
+      selectSeat.pointTwoCancellation,
+      selectSeat.pointThreeCancellation,
+    ],
+  },
+  {
+    id: 1,
+    title: selectSeat.rescheduling,
+    points: [selectSeat.rescheduleReq, selectSeat.rescheduleSub],
+  },
+  {
+    id: 2,
+    title: selectSeat.customerWallet,
+    points: [selectSeat.forBooking, selectSeat.walletAvailable],
+  },
 ];

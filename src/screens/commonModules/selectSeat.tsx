@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Animated, FlatList, ViewStyle} from 'react-native';
+import {Animated, FlatList, Text, View, ViewStyle} from 'react-native';
 
 // navigation
 import navigationService from '../../navigation/navigationService';
@@ -11,13 +11,16 @@ import {
 } from 'react-native-responsive-screen';
 
 // components
+import Button from '../../components/button';
 import CustomSafeArea from '../../components/customSafeArea';
-import DraggableView from '../../components/draggableView';
 import Header from '../../components/header';
+import BottomSheetView from '../../components/reviewSheetView';
 import Spacer from '../../components/spacer';
 
 // constants
-import {colors} from '../../constant/theme';
+import {SCREENS} from '../../constant';
+import {strings} from '../../constant/strings';
+import {baseStyle, colors, sizes} from '../../constant/theme';
 
 // prop types
 import {BoardingPointRouteParams} from '../../propTypes/screenProps';
@@ -40,66 +43,49 @@ const SelectSeat: React.FC<BoardingPointRouteParams> = props => {
   const disc = `${name} - ${timePeriod[0]}, ${formattedDate}`;
 
   // use state
-  const [rbsheetHeight, setRbsheetHeight] = useState<string | number>(
-    hp('10%'),
-  );
+  const [rbsheetHeight, setRbsheetHeight] = useState<string | number>(hp('9%'));
   const [borderRadius, setBorderRadius] = useState<string | number>(wp('0%'));
+  const [activeTab, setActiveTab] = React.useState<string>(SCREENS.DASHBOARD);
+  const [showFooter, setShowFooter] = useState<boolean>(true);
+  const [selectedSeats, setSelectedSeats] = React.useState([{selectedSeat: 1}]);
+  // const [selectedSeats, setSelectedSeats] = React.useState([]);
 
   const shadowOpacity = useState(new Animated.Value(0))[0];
   const shadowOpacitySafeArea = useState(new Animated.Value(1))[0];
-  // ---------------------------------------- render ui ----------------------------------------
 
-  const renderBody = () => {
-    return <></>;
-  };
-
-  // const updateShadowOpacity = (height: string | number) => {
-  //   if (Number(height) > hp('50%')) {
-  //     Animated.timing(shadowOpacity, {
-  //       toValue: 0.4,
-  //       duration: 300,
-  //       useNativeDriver: true,
-  //     }).start();
-  //     Animated.timing(shadowOpacitySafeArea, {
-  //       toValue: 0.3,
-  //       duration: 300,
-  //       useNativeDriver: true,
-  //     }).start();
-  //   } else {
-  //     Animated.timing(shadowOpacity, {
-  //       toValue: 0,
-  //       duration: 300,
-  //       useNativeDriver: true,
-  //     }).start();
-  //     Animated.timing(shadowOpacitySafeArea, {
-  //       toValue: 1,
-  //       duration: 300,
-  //       useNativeDriver: true,
-  //     }).start();
-  //   }
-  // };
-
+  // ---------------------------------------- functionalities ----------------------------------------
   const updateShadowOpacity = (height: string | number) => {
     const opacityValue = Number(height) > hp('50%') ? 0.4 : 0;
     const safeAreaOpacityValue = Number(height) > hp('50%') ? 0.3 : 1;
-  
+
     Animated.timing(shadowOpacity, {
       toValue: opacityValue,
       duration: 300,
-      useNativeDriver: true, 
+      useNativeDriver: true,
     }).start();
-  
+
     Animated.timing(shadowOpacitySafeArea, {
       toValue: safeAreaOpacityValue,
       duration: 300,
-      useNativeDriver: true, 
+      useNativeDriver: true,
     }).start();
   };
-  
+
+  // ---------------------------------------- use effects ----------------------------------------
 
   React.useEffect(() => {
     updateShadowOpacity(rbsheetHeight);
   }, [rbsheetHeight]);
+
+  // ---------------------------------------- render ui ----------------------------------------
+
+  const renderBody = () => {
+    return (
+      <View>
+        <></>
+      </View>
+    );
+  };
 
   return (
     <CustomSafeArea
@@ -133,11 +119,55 @@ const SelectSeat: React.FC<BoardingPointRouteParams> = props => {
           },
         ]}
       />
-      <DraggableView
+      <BottomSheetView
         rbsheetHeight={rbsheetHeight}
         setRbsheetHeight={setRbsheetHeight}
-        customStyle={[styles.dragView]}
-        setBorderRadius={setBorderRadius}></DraggableView>
+        activeTab={activeTab}
+        setActiveTab={setActiveTab}
+        setBorderRadius={setBorderRadius}
+      />
+
+      {showFooter && selectedSeats?.length > 0 && (
+        <View style={styles.priceDetails}>
+          <View>
+            <Text
+              style={[
+                baseStyle.txtStyleOutInterSemiBold(
+                  sizes.size2,
+                  colors.white_FF,
+                ),
+              ]}>
+              ₹ 1820
+            </Text>
+            <Spacer height={hp('1%')} />
+            <Text
+              style={[
+                baseStyle.txtStyleOutInterRegular(
+                  sizes.size02,
+                  colors.white_FF,
+                ),
+              ]}>
+              For 4 Seats
+            </Text>
+          </View>
+          <View style={styles.offers}>
+            <Text
+              style={[
+                baseStyle.txtStyleOutInterRegular(sizes.size2, colors.white_FF),
+              ]}>
+              Offers
+            </Text>
+          </View>
+          <Button
+            onPress={() =>
+              navigationService.navigate(SCREENS.REVIEW_BOOKING, {data: data})
+            }
+            text={strings.next}
+            buttonStyle={styles.submitButton}
+            textStyle={styles.submitButtonTextStyle}
+          />
+        </View>
+      )}
     </CustomSafeArea>
   );
 };

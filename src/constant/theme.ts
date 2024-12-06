@@ -111,12 +111,16 @@ const colors = {
   white_FF: '#FFFFFF',
   white_FB: '#F9FAFB',
   white_F8: '#F8F8F8',
-  white_F3:"#F0F1F3",
+  white_F3: '#F0F1F3',
+  white_FAED:"#FAFAFAED",
 
   orange_05: '#FD6905',
   orange_27: '#E75527',
+  orange_20: '#EF6820',
+  orange_29: '#EF682029',
   red: '#D92D20',
-  red_00:"#E70000",
+  red_00: '#E70000',
+  red_18:"#B42318",
 
   // grey variants
   grey_AB: '#ABABAB',

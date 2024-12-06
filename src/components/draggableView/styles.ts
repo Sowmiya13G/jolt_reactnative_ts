@@ -10,11 +10,11 @@ const styles = StyleSheet.create({
     right: 0,
     zIndex: 100,
     ...baseStyle.cardElevationStyle(),
-    backgroundColor: 'lightblue',
+    backgroundColor: colors.white_FF,
   },
   closeIconView: {
     position: 'absolute',
-    top: -40,
+    top: -48,
     left: '45%',
     zIndex: 100,
     padding: wp('2%'),
