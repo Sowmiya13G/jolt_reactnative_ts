@@ -1,64 +1,62 @@
 // Wallet Screen Styles
-import {StyleSheet} from 'react-native';
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from 'react-native-responsive-screen';
-import {baseStyle, colors} from '../../constant/theme';
+import { StyleSheet } from 'react-native';
+import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import { colors } from '../../constant/theme';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.white_FF,
+    backgroundColor: colors.grey_F1,
   },
-  subContainer: {
-    marginHorizontal: wp('5%'),
-    flex: 1,
-    backgroundColor: colors.white_FF,
-  },
-  texAlign: {
-    textAlign: 'center',
-  },
-  button: {
-    backgroundColor: colors.orange_05,
-    borderRadius: wp('3%'),
-    paddingVertical: wp('4%'),
-    alignItems: 'center',
-  },
-  input: {
-    backgroundColor: colors.white_FB,
-    borderColor: colors.grey_DB,
-  },
-  inputStyle: {
-    paddingLeft: wp('5%'),
-  },
-  signInWithContainer: {
+  amountView: {
+    backgroundColor: colors.blue_f5,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    marginVertical: hp('2%'),
+    paddingVertical: wp('4%'),
+    paddingHorizontal: wp('4%'),
+    justifyContent: 'space-between',
   },
-  line: {
-    flex: 1,
-    height: wp('0.1%'),
-    backgroundColor: colors.grey_32,
-    marginHorizontal: wp('2%'),
+  bankCard: {
+    backgroundColor: colors.white_FF,
+    marginHorizontal: wp('5%'),
+    paddingVertical: wp('4%'),
+    paddingHorizontal: wp('4%'),
+    borderRadius: wp('3%'),
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
   },
-  check: {
-    ...baseStyle.iconStyle('4%'),
-    resizeMode: 'cover',
+  margin: {
+    marginHorizontal: wp('5%'),
   },
-  unCheck: {
-    ...baseStyle.iconStyle('4%'),
-    resizeMode: 'contain',
+  searchInput: {
+    backgroundColor: colors.white_FF,
   },
-  dropDown: {
-    backgroundColor: colors.white_FB,
-    borderColor: colors.grey_DB,
+  icon: {
+    alignSelf: 'center',
+  },
+  cardContainer: {
+    marginHorizontal: wp('5%'),
+  },
+  button: {
+    borderColor: colors.orange_05,
+    borderWidth: wp('0.3%'),
+    borderRadius: wp('3%'),
+    paddingVertical: wp('4%'),
+    paddingHorizontal: wp('4%'),
+    backgroundColor: colors.white_FF,
+  },
+  input: {
+    width: '45%',
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
 });
 

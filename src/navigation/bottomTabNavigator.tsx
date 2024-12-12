@@ -1,6 +1,7 @@
 import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 
+// navigation
 import {useIsFocused, useNavigationState} from '@react-navigation/native';
 
 // package
@@ -12,22 +13,24 @@ import {tabBar} from '../constant/strings';
 import {baseStyle, colors, sizes} from '../constant/theme';
 import ScreenName from './screensNames';
 
+// svg imports
 import HOME_ACTIVE from '../assets/svg/homeActive.svg';
 import HOME_IN_ACTIVE from '../assets/svg/homeInActive.svg';
 import PERSON_IN_ACTIVE from '../assets/svg/person.svg';
 import PERSON_ACTIVE from '../assets/svg/personActive.svg';
 import TRIP_ACTIVE from '../assets/svg/tripActive.svg';
 import TRIP_IN_ACTIVE from '../assets/svg/tripInActive.svg';
-import {
-  default as WALLET_ACTIVE,
-  default as WALLET_IN_ACTIVE,
-} from '../assets/svg/walletInActive.svg';
+import WALLET_ACTIVE from '../assets/svg/walletActive.svg';
+import WALLET_IN_ACTIVE from '../assets/svg/walletInActive.svg';
+
+// stacks
 import DashboardStack from './bottomTabStacks/homeStack';
 import TripStack from './bottomTabStacks/tripStack';
 import WalletStack from './bottomTabStacks/walletStack';
+
+// styles
 import styles from './styles';
 
-// Define types for screen item
 interface ScreenItem {
   id: number;
   name: string;
