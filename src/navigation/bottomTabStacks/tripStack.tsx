@@ -23,6 +23,10 @@ const TripStack: React.FC = () => {
       ScreenName: SCREENS.NOTIFICATION_SCREEN,
       Component: ScreenName.NotificationScreen,
     },
+    {
+      ScreenName: SCREENS.TRACK_BUS,
+      Component: ScreenName.TrackBus,
+    },
   ];
 
   return (

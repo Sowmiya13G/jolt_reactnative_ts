@@ -22,6 +22,7 @@ const SCREENS = {
   MY_TRIP_STACK: 'MyTripScreen',
   MY_TRIP: 'MyTripScreen',
   TICKET_DETAILS: 'TicketDetailsScreen',
+  TRACK_BUS: 'TrackBus',
 
   ACCOUNT_SCREEN: 'AccountScreen',
 

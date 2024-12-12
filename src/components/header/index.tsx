@@ -35,7 +35,8 @@ type HeaderProps = {
   isCommonHeader?: boolean;
   titleData?: {session?: string; user?: string};
   sessionColor?: string;
-
+  containerStyle?:  ViewStyle;
+  
   // Left icon props
   isLeftIcon?: boolean;
   leftIcon1?: React.ElementType<SvgProps>;
@@ -64,6 +65,7 @@ const Header: React.FC<HeaderProps> = ({
   isCommonHeader = true,
   titleData,
   sessionColor = colors.black_00,
+  containerStyle,
 
   // Left icon props
   isLeftIcon = true,
@@ -84,7 +86,7 @@ const Header: React.FC<HeaderProps> = ({
   date = null,
 }) => {
   return (
-    <View style={styles.rootContainer}>
+    <View style={[styles.rootContainer,containerStyle]}>
       {/* ---------------------------- LEFT ICON ---------------------------- */}
       {Boolean(isLeftIcon) && (
         <TouchableOpacity

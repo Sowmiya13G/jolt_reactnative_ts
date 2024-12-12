@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     marginVertical: hp('2%'),
   },
   mapView: {
-    marginHorizontal: wp('5%'),
+    // marginHorizontal: wp('5%'),
     borderRadius: wp('5%'),
     resizeMode: 'cover',
     alignSelf:"center"

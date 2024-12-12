@@ -27,6 +27,8 @@ import {BoardingPointRouteParams} from '../../propTypes/screenProps';
 
 // styles
 import styles from '../styles/selectSeat';
+import SleepSeat from '../../components/dynamicSVG/sleepSeat';
+import SingleSeat from '../../components/dynamicSVG/singleSeat';
 
 const SelectSeat: React.FC<BoardingPointRouteParams> = props => {
   // props
@@ -81,8 +83,10 @@ const SelectSeat: React.FC<BoardingPointRouteParams> = props => {
 
   const renderBody = () => {
     return (
-      <View>
-        <></>
+      <View style={styles.paddingHorizontal}>
+        <SleepSeat fillColor={colors.pink_AD} strokeColor={colors.pink_636} />
+        <Spacer height={hp('3%')} />
+        <SingleSeat fillColor={colors.pink_AD} borderColor={colors.pink_636} />
       </View>
     );
   };
@@ -105,7 +109,7 @@ const SelectSeat: React.FC<BoardingPointRouteParams> = props => {
       />
       <Spacer height={hp('3%')} />
       <FlatList
-        data={[]}
+        data={['SEATS']}
         renderItem={renderBody}
         keyExtractor={item => item}
         showsVerticalScrollIndicator={false}

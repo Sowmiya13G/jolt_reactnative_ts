@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, ListRenderItemInfo, Text, View } from 'react-native';
+import {FlatList, ListRenderItemInfo, Text, View} from 'react-native';
 
 // navigation
 import navigationService from '../../navigation/navigationService';
@@ -20,8 +20,8 @@ import Header from '../../components/header';
 import Spacer from '../../components/spacer';
 
 // constants
-import { ticketDetails } from '../../constant/strings';
-import { baseStyle, colors, sizes } from '../../constant/theme';
+import {ticketDetails} from '../../constant/strings';
+import {baseStyle, colors, sizes} from '../../constant/theme';
 
 // styles
 import styles from '../styles/ticketDetails';
@@ -32,7 +32,8 @@ import CHAT from '../../assets/svg/chat.svg';
 import MAP from '../../assets/svg/map.svg';
 import OPTIONS from '../../assets/svg/options.svg';
 import QR from '../../assets/svg/qr.svg';
-
+import {TouchableOpacity} from 'react-native';
+import {SCREENS} from '../../constant';
 
 interface RouteDetails {
   from: string;
@@ -162,8 +163,11 @@ const TicketDetails: React.FC<TicketDetailsProps> = ({route}) => {
           {ticketDetails.trackBus}
         </Text>
         <Spacer height={hp('2%')} />
-
-        <MAP style={styles.mapView} />
+        <TouchableOpacity
+          onPress={() => navigationService.navigate(SCREENS.TRACK_BUS)}
+          style={styles.mapView}>
+          <MAP />
+        </TouchableOpacity>
         <View style={styles.horizontalLine} />
         <Text
           style={[
@@ -362,7 +366,7 @@ const TicketDetails: React.FC<TicketDetailsProps> = ({route}) => {
         <Text
           style={[
             baseStyle.txtStyleOutInterSemiBold(sizes.size1, colors.black_28),
-            styles.texAlign
+            styles.texAlign,
           ]}>
           Happy Journey!
         </Text>
@@ -370,7 +374,7 @@ const TicketDetails: React.FC<TicketDetailsProps> = ({route}) => {
         <Text
           style={[
             baseStyle.txtStyleOutInterSemiBold(sizes.size1, colors.black_28),
-            styles.texAlign
+            styles.texAlign,
           ]}>
           All rights reserved by JoltBus®
         </Text>

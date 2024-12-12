@@ -112,7 +112,8 @@ const colors = {
   white_FB: '#F9FAFB',
   white_F8: '#F8F8F8',
   white_F3: '#F0F1F3',
-  white_FAED:"#FAFAFAED",
+  white_FAED: '#FAFAFAED',
+  white_F7: '#F2F4F7',
 
   orange_05: '#FD6905',
   orange_27: '#E75527',
@@ -120,7 +121,11 @@ const colors = {
   orange_29: '#EF682029',
   red: '#D92D20',
   red_00: '#E70000',
-  red_18:"#B42318",
+  red_18: '#B42318',
+
+  // pink variants
+  pink_636: '#B10A63',
+  pink_AD: '#FF4FAD66',
 
   // grey variants
   grey_AB: '#ABABAB',
@@ -155,6 +160,7 @@ const colors = {
   green_63C: '#20463C',
   green_38: '#129C38',
   green_C1: '#BEE0C1',
+  green_34: '#158634',
 
   // blue variants
   blue_F4: '#0056F4',

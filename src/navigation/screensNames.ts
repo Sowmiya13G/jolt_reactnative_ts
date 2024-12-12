@@ -11,14 +11,15 @@ import SplashScreen from '../screens/authModules/splash';
 // common modules
 // dashboard stack
 import HomeScreen from '../screens/commonModules/homeScreen';
+import ReviewBooking from '../screens/commonModules/reviewBookingScreen';
 import SearchBusScreen from '../screens/commonModules/searchBusScreen';
 import SearchScreen from '../screens/commonModules/searchScreen';
 import SelectBoardingPoint from '../screens/commonModules/selectBoardingPoints';
 import SelectSeat from '../screens/commonModules/selectSeat';
-import ReviewBooking from '../screens/commonModules/reviewBookingScreen';
 
 import MyTripScreen from '../screens/commonModules/myTrip';
 import TicketDetails from '../screens/commonModules/ticketDetails';
+import TrackBus from '../screens/commonModules/trackBus';
 
 import AccountScreen from '../screens/commonModules/account';
 import WalletScreen from '../screens/commonModules/wallet';
@@ -43,6 +44,7 @@ interface ScreenComponents {
 
   MyTripScreen: React.ComponentType<any>;
   TicketDetails: React.ComponentType<any>;
+  TrackBus: React.ComponentType<any>;
 
   WalletScreen: React.ComponentType<any>;
   AccountScreen: React.ComponentType<any>;
@@ -68,7 +70,8 @@ const Screens: ScreenComponents = {
 
   MyTripScreen,
   TicketDetails,
-
+  TrackBus,
+  
   WalletScreen,
   AccountScreen,
 
